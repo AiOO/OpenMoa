@@ -9,7 +9,7 @@
     <!-- First Line -->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tildeKey"
         style="@style/KeyStyle"
         android:text="~"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -17,218 +17,218 @@
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintVertical_weight="0.7"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/caretKey"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView2" />
+        app:layout_constraintRight_toLeftOf="@+id/ssangbieupKey" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/ssangbieupKey"
         style="@style/KeyStyle"
         android:text="ㅃ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView"
-        app:layout_constraintRight_toLeftOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/tildeKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangjieutKey" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/ssangjieutKey"
         style="@style/KeyStyle"
         android:text="ㅉ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView2"
-        app:layout_constraintRight_toLeftOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangbieupKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangdigeutKey" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/ssangdigeutKey"
         style="@style/KeyStyle"
         android:text="ㄸ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView3"
-        app:layout_constraintRight_toLeftOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangjieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssanggiyeokKey" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/ssanggiyeokKey"
         style="@style/KeyStyle"
         android:text="ㄲ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView4"
-        app:layout_constraintRight_toLeftOf="@+id/textView6" />
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangdigeutKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangsiotKey" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/ssangsiotKey"
         style="@style/KeyStyle"
         android:text="ㅆ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView5"
-        app:layout_constraintRight_toLeftOf="@+id/textView7" />
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssanggiyeokKey"
+        app:layout_constraintRight_toLeftOf="@+id/emojiKey" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/emojiKey"
         style="@style/KeyStyle"
         android:text="😀"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintLeft_toRightOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangsiotKey"
         app:layout_constraintRight_toRightOf="parent" />
 
     <!-- Second Line -->
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/caretKey"
         style="@style/KeyStyle"
         android:text="^"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView9" />
+        app:layout_constraintRight_toLeftOf="@+id/bieupKey" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/bieupKey"
         style="@style/KeyStyle"
         android:text="ㅂ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintLeft_toRightOf="@+id/textView8"
-        app:layout_constraintRight_toLeftOf="@+id/textView10" />
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/caretKey"
+        app:layout_constraintRight_toLeftOf="@+id/jieutKey" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/jieutKey"
         style="@style/KeyStyle"
         android:text="ㅈ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintLeft_toRightOf="@+id/textView9"
-        app:layout_constraintRight_toLeftOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/bieupKey"
+        app:layout_constraintRight_toLeftOf="@+id/digeutKey" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/digeutKey"
         style="@style/KeyStyle"
         android:text="ㄷ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintLeft_toRightOf="@+id/textView10"
-        app:layout_constraintRight_toLeftOf="@+id/textView12" />
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/jieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/giyeokKey" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/giyeokKey"
         style="@style/KeyStyle"
         android:text="ㄱ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintLeft_toRightOf="@+id/textView11"
-        app:layout_constraintRight_toLeftOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/digeutKey"
+        app:layout_constraintRight_toLeftOf="@+id/siotKey" />
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/siotKey"
         style="@style/KeyStyle"
         android:text="ㅅ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView12"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintLeft_toRightOf="@+id/textView12"
-        app:layout_constraintRight_toLeftOf="@+id/textView14" />
+        app:layout_constraintTop_toTopOf="@+id/giyeokKey"
+        app:layout_constraintBottom_toBottomOf="@+id/backspaceKey"
+        app:layout_constraintLeft_toRightOf="@+id/giyeokKey"
+        app:layout_constraintRight_toLeftOf="@+id/backspaceKey" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/backspaceKey"
         style="@style/KeyStyle"
         android:text="←"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView8"
-        app:layout_constraintBottom_toBottomOf="@+id/textView8"
-        app:layout_constraintLeft_toRightOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/siotKey"
         app:layout_constraintRight_toRightOf="parent" />
 
     <!-- Third Line -->
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/semicolonKey"
         style="@style/KeyStyle"
         android:text=";"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/caretKey"
+        app:layout_constraintBottom_toTopOf="@+id/asteriskKey"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView9" />
+        app:layout_constraintRight_toLeftOf="@+id/bieupKey" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/mieumKey"
         style="@style/KeyStyle"
         android:text="ㅁ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView15"
-        app:layout_constraintRight_toLeftOf="@+id/textView17" />
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/semicolonKey"
+        app:layout_constraintRight_toLeftOf="@+id/nieunKey" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/nieunKey"
         style="@style/KeyStyle"
         android:text="ㄴ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView16"
-        app:layout_constraintRight_toLeftOf="@+id/textView18" />
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/mieumKey"
+        app:layout_constraintRight_toLeftOf="@+id/ieungKey" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/ieungKey"
         style="@style/KeyStyle"
         android:text="ㅇ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView17"
-        app:layout_constraintRight_toLeftOf="@+id/textView19" />
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/nieunKey"
+        app:layout_constraintRight_toLeftOf="@+id/rieulKey" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/rieulKey"
         style="@style/KeyStyle"
         android:text="ㄹ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView18"
-        app:layout_constraintRight_toLeftOf="@+id/textView20" />
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/ieungKey"
+        app:layout_constraintRight_toLeftOf="@+id/hieutKey" />
 
     <TextView
-        android:id="@+id/textView20"
+        android:id="@+id/hieutKey"
         style="@style/KeyStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -238,160 +238,163 @@
         android:gravity="center"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView19"
-        app:layout_constraintRight_toLeftOf="@+id/textView21" />
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/rieulKey"
+        app:layout_constraintRight_toLeftOf="@+id/iKey" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/iKey"
         style="@style/KeyStyle"
         android:text="ㅣ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView15"
-        app:layout_constraintBottom_toBottomOf="@+id/textView15"
-        app:layout_constraintLeft_toRightOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/hieutKey"
         app:layout_constraintRight_toRightOf="parent" />
 
     <!-- Fourth Line -->
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/asteriskKey"
         style="@style/KeyStyle"
         android:text="*"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="0.5"
         app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
-        app:layout_constraintBottom_toTopOf="@+id/textView29"
+        app:layout_constraintTop_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toTopOf="@+id/languageKey"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView23" />
+        app:layout_constraintRight_toLeftOf="@+id/kieukKey" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/kieukKey"
         style="@style/KeyStyle"
         android:text="ㅋ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView22"
-        app:layout_constraintRight_toLeftOf="@+id/textView24" />
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/asteriskKey"
+        app:layout_constraintRight_toLeftOf="@+id/tieutKey" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/tieutKey"
         style="@style/KeyStyle"
         android:text="ㅌ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView23"
-        app:layout_constraintRight_toLeftOf="@+id/textView25" />
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/kieukKey"
+        app:layout_constraintRight_toLeftOf="@+id/chieutKey" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/chieutKey"
         style="@style/KeyStyle"
         android:text="ㅊ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView24"
-        app:layout_constraintRight_toLeftOf="@+id/textView26" />
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/tieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/pieupKey" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/pieupKey"
         style="@style/KeyStyle"
         android:text="ㅍ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView25"
-        app:layout_constraintRight_toLeftOf="@+id/textView27" />
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/chieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/euKey" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/euKey"
         style="@style/KeyStyle"
         android:text="ㅡ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView26"
-        app:layout_constraintRight_toLeftOf="@+id/textView28" />
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/pieupKey"
+        app:layout_constraintRight_toLeftOf="@+id/araeaKey" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/araeaKey"
         style="@style/KeyStyle"
         android:text="ㆍ"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView22"
-        app:layout_constraintBottom_toBottomOf="@+id/textView22"
-        app:layout_constraintLeft_toRightOf="@+id/textView27"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/euKey"
         app:layout_constraintRight_toRightOf="parent" />
 
     <!-- Fifth Line -->
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/languageKey"
         style="@style/KeyStyle"
         android:text="한/영"
+        android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintVertical_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/textView22"
+        app:layout_constraintTop_toBottomOf="@+id/asteriskKey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textView30" />
+        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey" />
 
     <TextView
-        android:id="@+id/textView30"
+        android:id="@+id/hanjaNumberPunctuationKey"
         style="@style/KeyStyle"
         android:text="漢\n12/기"
+        android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView29"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintLeft_toRightOf="@+id/textView29"
-        app:layout_constraintRight_toLeftOf="@+id/textView31" />
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/languageKey"
+        app:layout_constraintRight_toLeftOf="@+id/spaceKey" />
 
     <TextView
-        android:id="@+id/textView31"
+        android:id="@+id/spaceKey"
         style="@style/KeyStyle"
         android:text="⎵"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="2.5"
-        app:layout_constraintTop_toTopOf="@+id/textView29"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintLeft_toRightOf="@+id/textView30"
-        app:layout_constraintRight_toLeftOf="@+id/textView32" />
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/hanjaNumberPunctuationKey"
+        app:layout_constraintRight_toLeftOf="@+id/commaQuestionDotExclamationKey" />
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/commaQuestionDotExclamationKey"
         style="@style/KeyStyle"
-        android:text=",\n? !\n."
+        android:text=",\n? . !"
+        android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView29"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintLeft_toRightOf="@+id/textView31"
-        app:layout_constraintRight_toLeftOf="@+id/textView33" />
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/spaceKey"
+        app:layout_constraintRight_toLeftOf="@+id/enterKey" />
 
     <TextView
-        android:id="@+id/textView33"
+        android:id="@+id/enterKey"
         style="@style/KeyStyle"
         android:text="⏎"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintTop_toTopOf="@+id/textView29"
-        app:layout_constraintBottom_toBottomOf="@+id/textView29"
-        app:layout_constraintLeft_toRightOf="@+id/textView32"
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/commaQuestionDotExclamationKey"
         app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
