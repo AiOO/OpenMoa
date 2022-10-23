@@ -2,14 +2,24 @@ package pe.aioo.openmoa
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 
-class OpenMoaView : View {
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+class OpenMoaView : ConstraintLayout {
+    constructor(context: Context) : super(context) {
+        init()
+    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init()
+    }
     constructor(context: Context, attrs: AttributeSet, defStyle: Int) : super(
         context,
         attrs,
         defStyle
-    )
+    ) {
+        init()
+    }
+
+    private fun init() {
+        inflate(context, R.layout.open_moa_view, this)
+    }
 }

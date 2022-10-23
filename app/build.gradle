@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "pe.aioo.openmoa"
-        minSdk 29
+        minSdk 30
         targetSdk 33
         versionCode 1
         versionName "1.0"

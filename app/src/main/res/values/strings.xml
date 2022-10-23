@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">OpenMoa</string>
+
+    <string name="app_name">오픈모아</string>
     <string name="subtype_ko_KR">한국어</string>
     <string name="subtype_en_US">영어</string>
+
 </resources>
