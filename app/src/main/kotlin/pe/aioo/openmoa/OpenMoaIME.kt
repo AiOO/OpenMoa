@@ -20,20 +20,24 @@ class OpenMoaIME : InputMethodService() {
     override fun onCreate() {
         super.onCreate()
         broadcastReceiver = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val key = intent?.getStringExtra("key") ?: return
+            override fun onReceive(context: Context, intent: Intent) {
+                val key = intent.getStringExtra(EXTRA_NAME) ?: return
                 if (key.length == 1) {
                     currentInputConnection.commitText(key, 1)
                 } else {
                     when (key) {
-                        "BS" -> currentInputConnection.deleteSurroundingText(1, 0)
-                        "GO" -> currentInputConnection.performEditorAction(EditorInfo.IME_ACTION_GO)
+                        SpecialKey.BACKSPACE.value -> currentInputConnection.deleteSurroundingText(
+                            1, 0
+                        )
+                        SpecialKey.ENTER.value -> currentInputConnection.performEditorAction(
+                            EditorInfo.IME_ACTION_GO
+                        )
                     }
                 }
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(
-            broadcastReceiver, IntentFilter("keyInput")
+            broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
     }
 
@@ -65,6 +69,11 @@ class OpenMoaIME : InputMethodService() {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
         }
         super.onDestroy()
+    }
+
+    companion object {
+        const val INTENT_ACTION = "keyInput"
+        const val EXTRA_NAME = "key"
     }
 
 }
