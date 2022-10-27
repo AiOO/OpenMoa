@@ -48,7 +48,7 @@ class OpenMoaIME : InputMethodService() {
                     return
                 }
                 // Process for non-Hangul key
-                if (!key.matches(Regex("^[ㄱ-ㅎㅏ-ㅣ]$"))) {
+                if (!key.matches(Regex("^[ㄱ-ㅎㅏ-ㅣㆍ]$"))) {
                     if (jamoList.size > 0) {
                         val assembled = try {
                             HangulParser.assemble(jamoList)
@@ -62,10 +62,131 @@ class OpenMoaIME : InputMethodService() {
                     return
                 }
                 // Process for Hangul key
-                jamoList.add(key)
-                if (jamoList.size == 1) {
+                if (jamoList.isEmpty()) {
+                    jamoList.add(key)
                     currentInputConnection.setComposingText(key, 1)
                     return
+                }
+                when (key) {
+                    "ㆍ" -> {
+                        when (jamoList.last()) {
+                            "ㅏ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅑ"
+                            }
+                            "ㅐ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅒ"
+                            }
+                            "ㅓ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅕ"
+                            }
+                            "ㅔ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅖ"
+                            }
+                            "ㅗ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅛ"
+                            }
+                            "ㅚ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅘ"
+                            }
+                            "ㅜ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅠ"
+                            }
+                            "ㅡ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅜ"
+                            }
+                            "ㅣ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅏ"
+                            }
+                            else -> {
+                                if (jamoList.last() == "ㆍ") {
+                                    jamoList[jamoList.lastIndex] = "⠒"
+                                    currentInputConnection.setComposingText(
+                                        jamoList.joinToString(""), 1
+                                    )
+                                    return
+                                } else if (jamoList.last().matches(Regex("^[ㄱ-ㅎ]$"))) {
+                                    val prevJamoList = jamoList.subList(0, jamoList.size - 1)
+                                    val assembled = try {
+                                        HangulParser.assemble(prevJamoList)
+                                    } catch (_: HangulParserException) {
+                                        prevJamoList.joinToString("")
+                                    }
+                                    for (i in 0 until prevJamoList.size) {
+                                        jamoList.removeFirst()
+                                    }
+                                    currentInputConnection.commitText(assembled, 1)
+                                    jamoList.add(key)
+                                    currentInputConnection.setComposingText(
+                                        jamoList.joinToString(""), 1
+                                    )
+                                    return
+                                }
+                                jamoList.add(key)
+                            }
+                        }
+                    }
+                    "ㅡ" -> {
+                        when (jamoList.last()) {
+                            "ㆍ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅗ"
+                            }
+                            "⠒" -> {
+                                jamoList[jamoList.lastIndex] = "ㅛ"
+                            }
+                            else -> {
+                                jamoList.add(key)
+                            }
+                        }
+                    }
+                    "ㅣ" -> {
+                        when (jamoList.last()) {
+                            "ㆍ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅓ"
+                            }
+                            "⠒" -> {
+                                jamoList[jamoList.lastIndex] = "ㅕ"
+                            }
+                            "ㅏ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅐ"
+                            }
+                            "ㅑ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅒ"
+                            }
+                            "ㅓ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅔ"
+                            }
+                            "ㅕ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅖ"
+                            }
+                            "ㅗ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅚ"
+                            }
+                            "ㅘ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅙ"
+                            }
+                            "ㅛ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅘ"
+                            }
+                            "ㅜ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅟ"
+                            }
+                            "ㅝ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅞ"
+                            }
+                            "ㅠ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅝ"
+                            }
+                            "ㅡ" -> {
+                                jamoList[jamoList.lastIndex] = "ㅢ"
+                            }
+                            else -> {
+                                jamoList.add(key)
+                            }
+                        }
+                    }
+                    else -> {
+                        jamoList.add(key)
+                    }
                 }
                 try {
                     val assembled = HangulParser.assemble(jamoList)
