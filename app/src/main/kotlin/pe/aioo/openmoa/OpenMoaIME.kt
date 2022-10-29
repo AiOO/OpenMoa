@@ -67,6 +67,25 @@ class OpenMoaIME : InputMethodService() {
                     currentInputConnection.setComposingText(key, 1)
                     return
                 }
+                if (key.matches(Regex("^[ㅏ-ㅣㆍ]$"))) {
+                    val lastJamo = jamoList.removeLast()
+                    jamoList.addAll(
+                        when (lastJamo) {
+                            "ㄳ" -> listOf("ㄱ", "ㅅ")
+                            "ㄵ" -> listOf("ㄴ", "ㅈ")
+                            "ㄶ" -> listOf("ㄴ", "ㅎ")
+                            "ㄺ" -> listOf("ㄹ", "ㄱ")
+                            "ㄻ" -> listOf("ㄹ", "ㅁ")
+                            "ㄼ" -> listOf("ㄹ", "ㅂ")
+                            "ㄽ" -> listOf("ㄹ", "ㅅ")
+                            "ㄾ" -> listOf("ㄹ", "ㅌ")
+                            "ㄿ" -> listOf("ㄹ", "ㅍ")
+                            "ㅀ" -> listOf("ㄹ", "ㅎ")
+                            "ㅄ" -> listOf("ㅂ", "ㅅ")
+                            else -> listOf(lastJamo)
+                        }
+                    )
+                }
                 when (key) {
                     "ㆍ" -> {
                         when (jamoList.last()) {
