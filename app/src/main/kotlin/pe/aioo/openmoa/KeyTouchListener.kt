@@ -46,7 +46,7 @@ class KeyTouchListener(
                 val distance = sqrt(
                     (currentX - startX).pow(2) + (currentY - startY).pow(2)
                 )
-                if (distance > 25f) {
+                if (distance > 50f) {
                     val degree = (atan2(currentY - startY, currentX - startX) * 180f) / PI
                     startX = currentX
                     startY = currentY
