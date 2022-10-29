@@ -305,6 +305,11 @@ class OpenMoaIME : InputMethodService() {
         return layoutInflater.inflate(R.layout.open_moa_ime, null)
     }
 
+    override fun onWindowHidden() {
+        jamoList.clear()
+        super.onWindowHidden()
+    }
+
     override fun onDestroy() {
         if (this::broadcastReceiver.isInitialized) {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
