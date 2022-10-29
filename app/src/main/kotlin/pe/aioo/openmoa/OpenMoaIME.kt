@@ -18,7 +18,7 @@ import com.github.kimkevin.hangulparser.HangulParserException
 class OpenMoaIME : InputMethodService() {
 
     private lateinit var broadcastReceiver: BroadcastReceiver
-    private val jamoList: ArrayList<String> = arrayListOf()
+    private val jamoList = arrayListOf<String>()
 
     override fun onCreate() {
         super.onCreate()
@@ -185,9 +185,69 @@ class OpenMoaIME : InputMethodService() {
                         }
                     }
                     else -> {
-                        jamoList.add(key)
+                        if (jamoList.size == 3) {
+                            when (jamoList.last()) {
+                                "ㄱ" -> {
+                                    when (key) {
+                                        "ㅅ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄳ"
+                                        }
+                                        else -> jamoList.add(key)
+                                    }
+                                }
+                                "ㄴ" -> {
+                                    when (key) {
+                                        "ㅈ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄵ"
+                                        }
+                                        "ㅎ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄶ"
+                                        }
+                                        else -> jamoList.add(key)
+                                    }
+                                }
+                                "ㄹ" -> {
+                                    when (key) {
+                                        "ㄱ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄺ"
+                                        }
+                                        "ㅁ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄻ"
+                                        }
+                                        "ㅂ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄼ"
+                                        }
+                                        "ㅅ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄽ"
+                                        }
+                                        "ㅌ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄾ"
+                                        }
+                                        "ㅍ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㄿ"
+                                        }
+                                        "ㅎ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㅀ"
+                                        }
+                                        else -> jamoList.add(key)
+                                    }
+                                }
+                                "ㅂ" -> {
+                                    when (key) {
+                                        "ㅅ" -> {
+                                            jamoList[jamoList.lastIndex] = "ㅄ"
+                                        }
+                                        else -> jamoList.add(key)
+                                    }
+                                }
+                                else -> jamoList.add(key)
+                            }
+                        } else {
+                            jamoList.add(key)
+                        }
                     }
                 }
+                // Assemble jamoList
                 try {
                     val assembled = HangulParser.assemble(jamoList)
                     if (assembled.length > 1) {
