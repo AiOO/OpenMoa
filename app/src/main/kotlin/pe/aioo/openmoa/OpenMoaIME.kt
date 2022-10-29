@@ -99,7 +99,7 @@ class OpenMoaIME : InputMethodService() {
                             }
                             else -> {
                                 if (jamoList.last() == "ㆍ") {
-                                    jamoList[jamoList.lastIndex] = "⠒"
+                                    jamoList[jamoList.lastIndex] = "ᆢ"
                                     currentInputConnection.setComposingText(
                                         jamoList.joinToString(""), 1
                                     )
@@ -130,7 +130,7 @@ class OpenMoaIME : InputMethodService() {
                             "ㆍ" -> {
                                 jamoList[jamoList.lastIndex] = "ㅗ"
                             }
-                            "⠒" -> {
+                            "ᆢ" -> {
                                 jamoList[jamoList.lastIndex] = "ㅛ"
                             }
                             else -> {
@@ -143,7 +143,7 @@ class OpenMoaIME : InputMethodService() {
                             "ㆍ" -> {
                                 jamoList[jamoList.lastIndex] = "ㅓ"
                             }
-                            "⠒" -> {
+                            "ᆢ" -> {
                                 jamoList[jamoList.lastIndex] = "ㅕ"
                             }
                             "ㅏ" -> {
