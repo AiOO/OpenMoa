@@ -4,31 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.view.MotionEvent
 import android.view.View
-import android.view.View.OnTouchListener
-import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.OpenMoaIME
-import pe.aioo.openmoa.R
 import kotlin.math.*
 
 class JaumKeyTouchListener(
     context: Context,
     private val key: String,
-) : OnTouchListener {
+) : BaseKeyTouchListener(context) {
 
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
-    private val backgrounds = listOf(
-        ResourcesCompat.getDrawable(
-            context.resources,
-            R.drawable.key_background_pressed,
-            context.theme,
-        ),
-        ResourcesCompat.getDrawable(
-            context.resources,
-            R.drawable.key_background,
-            context.theme,
-        ),
-    )
 
     private var startX: Float = 0f
     private var startY: Float = 0f
@@ -37,7 +22,6 @@ class JaumKeyTouchListener(
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
-                view.background = backgrounds[0]
                 startX = motionEvent.x
                 startY = motionEvent.y
                 moeumList.clear()
@@ -130,11 +114,10 @@ class JaumKeyTouchListener(
                     }
                 }
                 moeum?.let { sendKey(it) }
-                view.background = backgrounds[1]
-                view.performClick()
             }
         }
-        return true;
+        super.onTouch(view, motionEvent)
+        return true
     }
 
     private fun sendKey(key: String) {
