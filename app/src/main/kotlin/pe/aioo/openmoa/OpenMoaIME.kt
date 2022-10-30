@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
-import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
@@ -135,7 +134,7 @@ class OpenMoaIME : InputMethodService() {
     }
 
     override fun onFinishInputView(finishingInput: Boolean) {
-        hangulAssembler.clear()
+        finishComposing()
         super.onFinishInputView(finishingInput)
     }
 
