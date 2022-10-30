@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
@@ -15,11 +16,18 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.misc.SpecialKey
 
+
 class OpenMoaIME : InputMethodService() {
 
     private lateinit var broadcastReceiver: BroadcastReceiver
     private val hangulAssembler = HangulAssembler()
     private var composingText = ""
+
+    private fun finishComposing() {
+        currentInputConnection.finishComposingText()
+        hangulAssembler.clear()
+        composingText = ""
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -33,9 +41,12 @@ class OpenMoaIME : InputMethodService() {
                             val unresolved = hangulAssembler.getUnresolved()
                             if (unresolved != null) {
                                 composingText = composingText.substring(
-                                    0, composingText.length - unresolved.length + 1
+                                    0, composingText.length - unresolved.length
                                 )
                                 hangulAssembler.removeLastJamo()
+                                hangulAssembler.getUnresolved()?.let {
+                                    composingText += it
+                                }
                             } else {
                                 if (composingText.isEmpty()) {
                                     currentInputConnection.deleteSurroundingText(1, 0)
@@ -47,12 +58,7 @@ class OpenMoaIME : InputMethodService() {
                             }
                         }
                         SpecialKey.ENTER.value -> {
-                            hangulAssembler.getUnresolved()?.let {
-                                composingText += it
-                                hangulAssembler.clear()
-                            }
-                            currentInputConnection.commitText(composingText, 1)
-                            composingText = ""
+                            finishComposing()
                             currentInputConnection.performEditorAction(
                                 EditorInfo.IME_ACTION_GO
                             )
@@ -60,22 +66,23 @@ class OpenMoaIME : InputMethodService() {
                     }
                 } else if (!key.matches(HangulAssembler.JAMO_REGEX)) {
                     // Process for non-Jamo key
-                    hangulAssembler.getUnresolved()?.let {
-                        composingText += it
-                        hangulAssembler.clear()
-                    }
-                    currentInputConnection.commitText(composingText, 1)
-                    composingText = ""
+                    finishComposing()
                     currentInputConnection.commitText(key, 1)
                 } else {
                     // Process for Jamo key
+                    hangulAssembler.getUnresolved()?.let {
+                        composingText = composingText.substring(
+                            0, composingText.length - it.length
+                        )
+                    }
                     hangulAssembler.appendJamo(key)?.let {
                         composingText += it
                     }
+                    hangulAssembler.getUnresolved()?.let {
+                        composingText += it
+                    }
                 }
-                currentInputConnection.setComposingText(
-                    composingText + (hangulAssembler.getUnresolved() ?: ""), 1
-                )
+                currentInputConnection.setComposingText(composingText, 1)
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(
@@ -104,6 +111,27 @@ class OpenMoaIME : InputMethodService() {
             }
         }
         return layoutInflater.inflate(R.layout.open_moa_ime, null)
+    }
+
+    override fun onUpdateSelection(
+        oldSelStart: Int,
+        oldSelEnd: Int,
+        newSelStart: Int,
+        newSelEnd: Int,
+        candidatesStart: Int,
+        candidatesEnd: Int
+    ) {
+        super.onUpdateSelection(
+            oldSelStart,
+            oldSelEnd,
+            newSelStart,
+            newSelEnd,
+            candidatesStart,
+            candidatesEnd
+        )
+        if (composingText.isNotEmpty() && (newSelStart != candidatesEnd || newSelEnd != candidatesEnd)) {
+            finishComposing()
+        }
     }
 
     override fun onFinishInputView(finishingInput: Boolean) {
