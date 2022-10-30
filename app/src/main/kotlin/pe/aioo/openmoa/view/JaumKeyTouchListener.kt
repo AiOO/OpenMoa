@@ -1,5 +1,6 @@
 package pe.aioo.openmoa.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
@@ -14,6 +15,7 @@ class JaumKeyTouchListener(
     private var startY: Float = 0f
     private val moeumList = arrayListOf<String>()
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -111,8 +113,7 @@ class JaumKeyTouchListener(
                 moeum?.let { sendKey(it) }
             }
         }
-        super.onTouch(view, motionEvent)
-        return true
+        return super.onTouch(view, motionEvent)
     }
 
 }

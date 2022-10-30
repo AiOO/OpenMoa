@@ -1,5 +1,6 @@
 package pe.aioo.openmoa.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
@@ -29,6 +30,7 @@ class RepeatKeyTouchListener(
         elapsed = 0
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -38,8 +40,7 @@ class RepeatKeyTouchListener(
                 endTimer()
             }
         }
-        super.onTouch(view, motionEvent)
-        return true
+        return super.onTouch(view, motionEvent)
     }
 
     companion object {
