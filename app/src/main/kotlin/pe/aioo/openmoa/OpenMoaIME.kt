@@ -18,53 +18,63 @@ class OpenMoaIME : InputMethodService() {
 
     private lateinit var broadcastReceiver: BroadcastReceiver
     private val hangulAssembler = HangulAssembler()
+    private var composingText = ""
 
     override fun onCreate() {
         super.onCreate()
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 val key = intent.getStringExtra(EXTRA_NAME) ?: return
-                // Process for special key
                 if (key.length > 1) {
+                    // Process for special key
                     when (key) {
                         SpecialKey.BACKSPACE.value -> {
-                            if (hangulAssembler.getUnresolved() != null) {
-                                hangulAssembler.removeLastJamo()
-                                currentInputConnection.setComposingText(
-                                    hangulAssembler.getUnresolved() ?: "", 1
+                            val unresolved = hangulAssembler.getUnresolved()
+                            if (unresolved != null) {
+                                composingText = composingText.substring(
+                                    0, composingText.length - unresolved.length + 1
                                 )
+                                hangulAssembler.removeLastJamo()
                             } else {
-                                currentInputConnection.deleteSurroundingText(1, 0)
+                                if (composingText.isEmpty()) {
+                                    currentInputConnection.deleteSurroundingText(1, 0)
+                                } else {
+                                    composingText = composingText.substring(
+                                        0, composingText.lastIndex
+                                    )
+                                }
                             }
                         }
                         SpecialKey.ENTER.value -> {
                             hangulAssembler.getUnresolved()?.let {
-                                currentInputConnection.commitText(it, 1)
+                                composingText += it
                                 hangulAssembler.clear()
                             }
+                            currentInputConnection.commitText(composingText, 1)
+                            composingText = ""
                             currentInputConnection.performEditorAction(
                                 EditorInfo.IME_ACTION_GO
                             )
                         }
                     }
-                    return
-                }
-                // Process for non-Jamo key
-                if (!key.matches(HangulAssembler.JAMO_REGEX)) {
+                } else if (!key.matches(HangulAssembler.JAMO_REGEX)) {
+                    // Process for non-Jamo key
                     hangulAssembler.getUnresolved()?.let {
-                        currentInputConnection.commitText(it, 1)
+                        composingText += it
                         hangulAssembler.clear()
                     }
+                    currentInputConnection.commitText(composingText, 1)
+                    composingText = ""
                     currentInputConnection.commitText(key, 1)
-                    return
+                } else {
+                    // Process for Jamo key
+                    hangulAssembler.appendJamo(key)?.let {
+                        composingText += it
+                    }
                 }
-                // Process for Jamo key
-                hangulAssembler.appendJamo(key)?.let {
-                    currentInputConnection.commitText(it, 1)
-                }
-                hangulAssembler.getUnresolved()?.let {
-                    currentInputConnection.setComposingText(it, 1)
-                }
+                currentInputConnection.setComposingText(
+                    composingText + (hangulAssembler.getUnresolved() ?: ""), 1
+                )
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(
