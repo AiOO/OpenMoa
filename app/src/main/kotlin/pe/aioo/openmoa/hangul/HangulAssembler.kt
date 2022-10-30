@@ -4,6 +4,7 @@ import com.github.kimkevin.hangulparser.HangulParser
 import com.github.kimkevin.hangulparser.HangulParserException
 
 class HangulAssembler {
+
     private val jamoList = arrayListOf<String>()
 
     private fun assembleLastJongseongIfCan(jamo: String): Boolean {
@@ -228,4 +229,5 @@ class HangulAssembler {
         private val MOEUM_REGEX = Regex("^[ㅏ-ㅣㆍᆢ]$")
         private val ARAEA_REGEX = Regex("^[ㆍᆢ]$")
     }
+
 }

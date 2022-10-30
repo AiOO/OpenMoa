@@ -9,7 +9,7 @@
         <item name="android:textColor">@color/key_foreground</item>
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/selector_key_background</item>
+        <item name="android:background">@drawable/key_background</item>
         <item name="android:clickable">true</item>
     </style>
 
