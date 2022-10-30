@@ -1,10 +1,13 @@
-package pe.aioo.openmoa
+package pe.aioo.openmoa.view
 
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import pe.aioo.openmoa.OpenMoaIME
+import pe.aioo.openmoa.R
+import pe.aioo.openmoa.SpecialKey
 import pe.aioo.openmoa.databinding.OpenMoaViewBinding
 
 class OpenMoaView : ConstraintLayout {
@@ -30,31 +33,31 @@ class OpenMoaView : ConstraintLayout {
 
     private fun setOnTouchListeners(binding: OpenMoaViewBinding) {
         binding.tildeKey.setOnClickListener { sendKey("~") }
-        binding.ssangbieupKey.setOnTouchListener(KeyTouchListener(context, "ㅃ"))
-        binding.ssangjieutKey.setOnTouchListener(KeyTouchListener(context, "ㅉ"))
-        binding.ssangdigeutKey.setOnTouchListener(KeyTouchListener(context, "ㄸ"))
-        binding.ssanggiyeokKey.setOnTouchListener(KeyTouchListener(context, "ㄲ"))
-        binding.ssangsiotKey.setOnTouchListener(KeyTouchListener(context, "ㅆ"))
+        binding.ssangbieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅃ"))
+        binding.ssangjieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅉ"))
+        binding.ssangdigeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄸ"))
+        binding.ssanggiyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄲ"))
+        binding.ssangsiotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅆ"))
         binding.emojiKey.setOnClickListener { sendKey(SpecialKey.EMOJI.value) }
         binding.caretKey.setOnClickListener { sendKey("^") }
-        binding.bieupKey.setOnTouchListener(KeyTouchListener(context, "ㅂ"))
-        binding.jieutKey.setOnTouchListener(KeyTouchListener(context, "ㅈ"))
-        binding.digeutKey.setOnTouchListener(KeyTouchListener(context, "ㄷ"))
-        binding.giyeokKey.setOnTouchListener(KeyTouchListener(context, "ㄱ"))
-        binding.siotKey.setOnTouchListener(KeyTouchListener(context, "ㅅ"))
+        binding.bieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅂ"))
+        binding.jieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅈ"))
+        binding.digeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄷ"))
+        binding.giyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄱ"))
+        binding.siotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅅ"))
         binding.backspaceKey.setOnClickListener { sendKey(SpecialKey.BACKSPACE.value) }
         binding.semicolonKey.setOnClickListener { sendKey(";") }
-        binding.mieumKey.setOnTouchListener(KeyTouchListener(context, "ㅁ"))
-        binding.nieunKey.setOnTouchListener(KeyTouchListener(context, "ㄴ"))
-        binding.ieungKey.setOnTouchListener(KeyTouchListener(context, "ㅇ"))
-        binding.rieulKey.setOnTouchListener(KeyTouchListener(context, "ㄹ"))
-        binding.hieutKey.setOnTouchListener(KeyTouchListener(context, "ㅎ"))
+        binding.mieumKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅁ"))
+        binding.nieunKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄴ"))
+        binding.ieungKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅇ"))
+        binding.rieulKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄹ"))
+        binding.hieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅎ"))
         binding.iKey.setOnClickListener { sendKey("ㅣ") }
         binding.asteriskKey.setOnClickListener { sendKey("*") }
-        binding.kieukKey.setOnTouchListener(KeyTouchListener(context, "ㅋ"))
-        binding.tieutKey.setOnTouchListener(KeyTouchListener(context, "ㅌ"))
-        binding.chieutKey.setOnTouchListener(KeyTouchListener(context, "ㅊ"))
-        binding.pieupKey.setOnTouchListener(KeyTouchListener(context, "ㅍ"))
+        binding.kieukKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅋ"))
+        binding.tieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅌ"))
+        binding.chieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅊ"))
+        binding.pieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅍ"))
         binding.euKey.setOnClickListener { sendKey("ㅡ") }
         binding.araeaKey.setOnClickListener { sendKey("ㆍ") }
         binding.languageKey.setOnClickListener { sendKey(SpecialKey.LANGUAGE.value) }

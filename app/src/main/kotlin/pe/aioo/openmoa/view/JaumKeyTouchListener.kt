@@ -1,4 +1,4 @@
-package pe.aioo.openmoa
+package pe.aioo.openmoa.view
 
 import android.content.Context
 import android.content.Intent
@@ -7,9 +7,11 @@ import android.view.View
 import android.view.View.OnTouchListener
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import pe.aioo.openmoa.OpenMoaIME
+import pe.aioo.openmoa.R
 import kotlin.math.*
 
-class KeyTouchListener(
+class JaumKeyTouchListener(
     context: Context,
     private val key: String,
 ) : OnTouchListener {
