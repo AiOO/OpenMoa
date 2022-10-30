@@ -69,7 +69,7 @@ class OpenMoaView : ConstraintLayout {
         )
         binding.spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, " "))
         binding.commaQuestionDotExclamationKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, ".")
+            CrossKeyTouchListener(context, listOf(",", "!", ".", "?"))
         )
         binding.enterKey.setOnTouchListener(
             SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
