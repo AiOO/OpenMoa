@@ -4,12 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
-import java.util.*
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pe.aioo.openmoa.config.Config
+import java.util.Timer
 
 class RepeatKeyTouchListener(
     context: Context,
     private val key: String,
-) : BaseKeyTouchListener(context) {
+) : BaseKeyTouchListener(context), KoinComponent {
+
+    private val config: Config by inject()
 
     private var elapsed = 0L
     private lateinit var timer: Timer
@@ -17,9 +22,9 @@ class RepeatKeyTouchListener(
     private fun startTimer() {
         elapsed = 0L
         sendKey(key)
-        timer = kotlin.concurrent.timer(period = REPEAT_TIME) {
-            elapsed += REPEAT_TIME
-            if (elapsed >= THRESHOLD_TIME) {
+        timer = kotlin.concurrent.timer(period = config.longPressRepeatTime) {
+            elapsed += config.longPressRepeatTime
+            if (elapsed >= config.longPressThresholdTime) {
                 sendKey(key)
             }
         }
@@ -41,11 +46,6 @@ class RepeatKeyTouchListener(
             }
         }
         return super.onTouch(view, motionEvent)
-    }
-
-    companion object {
-        private const val THRESHOLD_TIME = 500L
-        private const val REPEAT_TIME = 50L
     }
 
 }

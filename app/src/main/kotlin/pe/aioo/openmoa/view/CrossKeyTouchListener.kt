@@ -4,12 +4,17 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pe.aioo.openmoa.config.Config
 import kotlin.math.*
 
 class CrossKeyTouchListener(
     context: Context,
     private val keyList: List<String>,
-) : BaseKeyTouchListener(context) {
+) : BaseKeyTouchListener(context), KoinComponent {
+
+    private val config: Config by inject()
 
     private var startX: Float = 0f
     private var startY: Float = 0f
@@ -27,7 +32,7 @@ class CrossKeyTouchListener(
                 val distance = sqrt(
                     (currentX - startX).pow(2) + (currentY - startY).pow(2)
                 )
-                if (distance > 50f) {
+                if (distance > config.gestureThreshold) {
                     val degree = (atan2(currentY - startY, currentX - startX) * 180f) / PI
                     startX = currentX
                     startY = currentY
