@@ -95,9 +95,9 @@ class OpenMoaIME : InputMethodService() {
         return layoutInflater.inflate(R.layout.open_moa_ime, null)
     }
 
-    override fun onWindowHidden() {
+    override fun onFinishInputView(finishingInput: Boolean) {
         hangulAssembler.clear()
-        super.onWindowHidden()
+        super.onFinishInputView(finishingInput)
     }
 
     override fun onDestroy() {
