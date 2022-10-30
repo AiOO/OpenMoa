@@ -45,7 +45,7 @@ class OpenMoaView : ConstraintLayout {
         binding.giyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄱ"))
         binding.siotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅅ"))
         binding.backspaceKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.BACKSPACE.value)
+            RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
         )
         binding.semicolonKey.setOnTouchListener(SimpleKeyTouchListener(context, ";"))
         binding.mieumKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅁ"))
