@@ -13,6 +13,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.hangul.HangulAssembler
+import pe.aioo.openmoa.view.misc.SpecialKey
 
 class OpenMoaIME : InputMethodService() {
 

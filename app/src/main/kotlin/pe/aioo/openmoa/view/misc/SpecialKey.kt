@@ -1,4 +1,4 @@
-package pe.aioo.openmoa
+package pe.aioo.openmoa.view.misc
 
 enum class SpecialKey(val value: String) {
     EMOJI("EM"),

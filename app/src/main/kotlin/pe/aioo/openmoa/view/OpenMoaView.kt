@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import pe.aioo.openmoa.R
-import pe.aioo.openmoa.SpecialKey
+import pe.aioo.openmoa.view.misc.SpecialKey
 import pe.aioo.openmoa.databinding.OpenMoaViewBinding
 
 class OpenMoaView : ConstraintLayout {
