@@ -156,7 +156,7 @@ class HangulAssembler {
         return jamoList.last() != lastJamo
     }
 
-    private fun resolveJamoList(): String? {
+    private fun resolveJamoList(forceResolve: Boolean = false): String? {
         try {
             val assembled = HangulParser.assemble(jamoList)
             if (assembled.length > 1) {
@@ -164,6 +164,10 @@ class HangulAssembler {
                     jamoList.removeFirst()
                 }
                 return assembled.substring(0, 1)
+            }
+            if (forceResolve) {
+                jamoList.clear()
+                return assembled
             }
             return null
         } catch (e: HangulParserException) {
@@ -195,8 +199,9 @@ class HangulAssembler {
             return null
         }
         if (jamo.matches(ARAEA_REGEX) && jamoList.last().matches(JAEUM_REGEX)) {
-            val resolved = resolveJamoList()
-            jamoList.add(jamo)
+            val lastJamo = jamoList.removeLast()
+            val resolved = if (jamoList.isEmpty()) null else resolveJamoList(true)
+            jamoList.addAll(listOf(lastJamo, jamo))
             return resolved
         }
         jamoList.add(jamo)
