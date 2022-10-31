@@ -1,14 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <input-method xmlns:android="http://schemas.android.com/apk/res/android"
-    android:icon="@mipmap/ic_launcher"
-    android:supportsSwitchingToNextInputMethod="true">
-
-    <subtype android:label="@string/subtype_ko_KR"
-        android:imeSubtypeLocale="ko_KR"
-        android:imeSubtypeMode="keyboard" />
-
-    <subtype android:label="@string/subtype_en_US"
-        android:imeSubtypeLocale="en_US"
-        android:imeSubtypeMode="keyboard" />
-
-</input-method>
+    android:icon="@mipmap/ic_launcher" />

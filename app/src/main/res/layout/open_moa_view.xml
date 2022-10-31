@@ -160,7 +160,7 @@
     <TextView
         android:id="@+id/backspaceKey"
         style="@style/KeyStyle"
-        android:text="←"
+        android:text="⇦"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="@+id/caretKey"
