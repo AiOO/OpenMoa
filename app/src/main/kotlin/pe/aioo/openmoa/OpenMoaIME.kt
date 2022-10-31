@@ -12,12 +12,15 @@ import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
+import pe.aioo.openmoa.view.OpenMoaView
 import pe.aioo.openmoa.view.misc.SpecialKey
 
 
 class OpenMoaIME : InputMethodService() {
 
+    private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
     private val hangulAssembler = HangulAssembler()
     private var composingText = ""
@@ -109,7 +112,10 @@ class OpenMoaIME : InputMethodService() {
                 }
             }
         }
-        return layoutInflater.inflate(R.layout.open_moa_ime, null)
+        val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
+        binding = OpenMoaImeBinding.bind(view)
+        binding.keyboardFrameLayout.setKeybooardView(OpenMoaView(this))
+        return view
     }
 
     override fun onUpdateSelection(
@@ -133,9 +139,9 @@ class OpenMoaIME : InputMethodService() {
         }
     }
 
-    override fun onFinishInputView(finishingInput: Boolean) {
+    override fun onFinishInput() {
         finishComposing()
-        super.onFinishInputView(finishingInput)
+        super.onFinishInput()
     }
 
     override fun onDestroy() {

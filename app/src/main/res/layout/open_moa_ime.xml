@@ -5,7 +5,8 @@
     android:paddingHorizontal="4dp"
     style="@style/KeyboardStyle">
 
-    <pe.aioo.openmoa.view.OpenMoaView
+    <pe.aioo.openmoa.view.KeyboardFrameLayout
+        android:id="@+id/keyboardFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="240dp" />
 
