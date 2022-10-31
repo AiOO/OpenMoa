@@ -16,6 +16,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.OpenMoaView
+import pe.aioo.openmoa.view.QuertyView
 import pe.aioo.openmoa.view.misc.SpecialKey
 
 
@@ -23,6 +24,8 @@ class OpenMoaIME : InputMethodService() {
 
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
+    private lateinit var imeMode: IMEMode
+    private lateinit var keyboardViews: Map<IMEMode, View>
     private val hangulAssembler = HangulAssembler()
     private var composingText = ""
 
@@ -80,12 +83,16 @@ class OpenMoaIME : InputMethodService() {
                                 }
                             }
                         }
+                        SpecialKey.LANGUAGE.value -> {
+                            setKeyboard(
+                                if (imeMode == IMEMode.IME_KO) IMEMode.IME_EN else IMEMode.IME_KO
+                            )
+                        }
                     }
-                } else if (!key.matches(HangulAssembler.JAMO_REGEX)) {
-                    // Process for non-Jamo key
-                    finishComposing()
-                    currentInputConnection.commitText(key, 1)
-                } else {
+                } else if (key.matches(Regex("^[A-Za-z]$"))) {
+                    // Process for Alphabet key
+                    composingText += key
+                } else if (key.matches(HangulAssembler.JAMO_REGEX)) {
                     // Process for Jamo key
                     hangulAssembler.getUnresolved()?.let {
                         composingText = composingText.substring(
@@ -98,6 +105,10 @@ class OpenMoaIME : InputMethodService() {
                     hangulAssembler.getUnresolved()?.let {
                         composingText += it
                     }
+                } else {
+                    // Process for another key
+                    finishComposing()
+                    currentInputConnection.commitText(key, 1)
                 }
                 currentInputConnection.setComposingText(composingText, 1)
             }
@@ -105,6 +116,14 @@ class OpenMoaIME : InputMethodService() {
         LocalBroadcastManager.getInstance(this).registerReceiver(
             broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
+    }
+
+    fun setKeyboard(mode: IMEMode) {
+        finishComposing()
+        keyboardViews[mode]?.let {
+            binding.keyboardFrameLayout.setKeybooardView(it)
+        }
+        imeMode = mode
     }
 
     @SuppressLint("InflateParams")
@@ -129,7 +148,11 @@ class OpenMoaIME : InputMethodService() {
         }
         val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
         binding = OpenMoaImeBinding.bind(view)
-        binding.keyboardFrameLayout.setKeybooardView(OpenMoaView(this))
+        keyboardViews = mapOf(
+            IMEMode.IME_KO to OpenMoaView(this),
+            IMEMode.IME_EN to QuertyView(this),
+        )
+        setKeyboard(IMEMode.IME_KO)
         return view
     }
 
