@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
+import android.view.KeyEvent
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
@@ -61,9 +62,23 @@ class OpenMoaIME : InputMethodService() {
                         }
                         SpecialKey.ENTER.value -> {
                             finishComposing()
-                            currentInputConnection.performEditorAction(
-                                EditorInfo.IME_ACTION_GO
+                            val action = currentInputEditorInfo.imeOptions and (
+                                EditorInfo.IME_MASK_ACTION or EditorInfo.IME_FLAG_NO_ENTER_ACTION
                             )
+                            when (action) {
+                                EditorInfo.IME_ACTION_GO,
+                                EditorInfo.IME_ACTION_NEXT,
+                                EditorInfo.IME_ACTION_SEARCH,
+                                EditorInfo.IME_ACTION_SEND,
+                                EditorInfo.IME_ACTION_DONE -> {
+                                    currentInputConnection.performEditorAction(action)
+                                }
+                                else -> {
+                                    currentInputConnection.sendKeyEvent(
+                                        KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)
+                                    )
+                                }
+                            }
                         }
                     }
                 } else if (!key.matches(HangulAssembler.JAMO_REGEX)) {
