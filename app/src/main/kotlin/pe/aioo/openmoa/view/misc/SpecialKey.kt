@@ -6,4 +6,5 @@ enum class SpecialKey(val value: String) {
     LANGUAGE("LA"),
     HANJA_NUMBER_PUNCTUATION("HNP"),
     ENTER("EN"),
+    SHIFT("SH"),
 }
