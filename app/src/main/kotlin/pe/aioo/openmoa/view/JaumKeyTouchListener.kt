@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
-import pe.aioo.openmoa.config.Config
 import kotlin.math.*
 
 class JaumKeyTouchListener(

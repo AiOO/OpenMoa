@@ -19,7 +19,6 @@ import pe.aioo.openmoa.view.OpenMoaView
 import pe.aioo.openmoa.view.QuertyView
 import pe.aioo.openmoa.view.misc.SpecialKey
 
-
 class OpenMoaIME : InputMethodService() {
 
     private lateinit var binding: OpenMoaImeBinding
