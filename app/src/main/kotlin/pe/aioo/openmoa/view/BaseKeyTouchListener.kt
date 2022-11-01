@@ -2,6 +2,7 @@ package pe.aioo.openmoa.view
 
 import android.content.Context
 import android.content.Intent
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
@@ -35,6 +36,9 @@ open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinCompone
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
                 view.background = backgrounds[0]
+                if (config.hapticFeedback) {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_PRESS)
+                }
             }
             MotionEvent.ACTION_UP -> {
                 view.background = backgrounds[1]

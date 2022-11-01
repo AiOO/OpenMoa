@@ -11,6 +11,7 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/key_background</item>
         <item name="android:clickable">true</item>
+        <item name="android:hapticFeedbackEnabled">true</item>
     </style>
 
     <style name="KeyboardStyle">
