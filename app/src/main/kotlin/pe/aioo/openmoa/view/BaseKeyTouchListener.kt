@@ -7,10 +7,15 @@ import android.view.View
 import android.view.View.OnTouchListener
 import androidx.core.content.res.ResourcesCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
+import pe.aioo.openmoa.config.Config
 
-open class BaseKeyTouchListener(context: Context) : OnTouchListener {
+open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinComponent {
+
+    protected val config: Config by inject()
 
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
     private val backgrounds = listOf(

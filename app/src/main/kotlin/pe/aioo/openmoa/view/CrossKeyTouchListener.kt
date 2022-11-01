@@ -12,9 +12,7 @@ import kotlin.math.*
 class CrossKeyTouchListener(
     context: Context,
     private val keyList: List<String>,
-) : BaseKeyTouchListener(context), KoinComponent {
-
-    private val config: Config by inject()
+) : BaseKeyTouchListener(context) {
 
     private var startX: Float = 0f
     private var startY: Float = 0f

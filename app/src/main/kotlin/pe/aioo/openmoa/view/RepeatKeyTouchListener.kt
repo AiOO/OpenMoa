@@ -12,9 +12,7 @@ import java.util.Timer
 class RepeatKeyTouchListener(
     context: Context,
     private val key: String,
-) : BaseKeyTouchListener(context), KoinComponent {
-
-    private val config: Config by inject()
+) : BaseKeyTouchListener(context) {
 
     private var elapsed = 0L
     private lateinit var timer: Timer
