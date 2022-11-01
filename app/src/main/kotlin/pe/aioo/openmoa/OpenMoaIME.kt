@@ -181,6 +181,11 @@ class OpenMoaIME : InputMethodService() {
         super.onFinishInput()
     }
 
+    override fun updateInputViewShown() {
+        finishComposing()
+        super.updateInputViewShown()
+    }
+
     override fun onDestroy() {
         if (this::broadcastReceiver.isInitialized) {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
