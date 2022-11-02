@@ -176,11 +176,6 @@ class OpenMoaIME : InputMethodService() {
         }
     }
 
-    override fun onFinishInput() {
-        finishComposing()
-        super.onFinishInput()
-    }
-
     override fun updateInputViewShown() {
         finishComposing()
         super.updateInputViewShown()
