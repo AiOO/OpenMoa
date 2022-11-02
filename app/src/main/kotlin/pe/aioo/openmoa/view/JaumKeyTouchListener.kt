@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
+import pe.aioo.openmoa.hangul.MoeumGestureProcessor
 import kotlin.math.*
 
 class JaumKeyTouchListener(
@@ -13,7 +14,7 @@ class JaumKeyTouchListener(
 
     private var startX: Float = 0f
     private var startY: Float = 0f
-    private val moeumList = arrayListOf<String>()
+    private val moeumGestureProcessor = MoeumGestureProcessor()
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
@@ -21,7 +22,7 @@ class JaumKeyTouchListener(
             MotionEvent.ACTION_DOWN -> {
                 startX = motionEvent.x
                 startY = motionEvent.y
-                moeumList.clear()
+                moeumGestureProcessor.clear()
             }
             MotionEvent.ACTION_MOVE -> {
                 val currentX = motionEvent.x
@@ -34,136 +35,23 @@ class JaumKeyTouchListener(
                     startX = currentX
                     startY = currentY
                     if (abs(degree) < 22.5f) {
-                        moeumList.add("ㅏ")
+                        moeumGestureProcessor.appendMoeum("ㅏ")
                     } else if (abs(degree) < 67.5f) {
-                        moeumList.add(if (degree > 0) "ㅡR" else "ㅣR")
+                        moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅡR" else "ㅣR")
                     } else if (abs(degree) < 112.5f) {
-                        moeumList.add(if (degree > 0) "ㅜ" else "ㅗ")
+                        moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅜ" else "ㅗ")
                     } else if (abs(degree) < 157.5f) {
-                        moeumList.add(if (degree > 0) "ㅡL" else "ㅣL")
+                        moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅡL" else "ㅣL")
                     } else {
-                        moeumList.add("ㅓ")
+                        moeumGestureProcessor.appendMoeum("ㅓ")
                     }
                 }
             }
             MotionEvent.ACTION_UP -> {
                 sendKey(key)
-                var moeum: String? = null
-                for (nextMoeum in moeumList) {
-                    moeum = when (moeum) {
-                        "ㅏ" -> when (nextMoeum) {
-                            "ㅓ" -> "ㅐ"
-                            else -> moeum
-                        }
-                        "ㅐ" -> when (nextMoeum) {
-                            "ㅏ" -> "ㅑ"
-                            else -> moeum
-                        }
-                        "ㅑ" -> when (nextMoeum) {
-                            "ㅓ" -> "ㅒ"
-                            else -> moeum
-                        }
-                        "ㅓ" -> when (nextMoeum) {
-                            "ㅏ" -> "ㅔ"
-                            else -> moeum
-                        }
-                        "ㅔ" -> when (nextMoeum) {
-                            "ㅓ" -> "ㅕ"
-                            else -> moeum
-                        }
-                        "ㅕ" -> when (nextMoeum) {
-                            "ㅏ" -> "ㅖ"
-                            else -> moeum
-                        }
-                        "ㅗ" -> when (nextMoeum) {
-                            "ㅏ" -> "ㅘ"
-                            "ㅜ" -> "ㅚ"
-                            else -> moeum
-                        }
-                        "ㅘ" -> when (nextMoeum) {
-                            "ㅓ" -> "ㅙ"
-                            else -> moeum
-                        }
-                        "ㅚ" -> when (nextMoeum) {
-                            "ㅗ" -> "ㅛ"
-                            else -> moeum
-                        }
-                        "ㅜ" -> when (nextMoeum) {
-                            "ㅓ" -> "ㅝ"
-                            "ㅗ" -> "ㅟ"
-                            else -> moeum
-                        }
-                        "ㅝ" -> when (nextMoeum) {
-                            "ㅏ" -> "ㅞ"
-                            else -> moeum
-                        }
-                        "ㅟ" -> when (nextMoeum) {
-                            "ㅜ" -> "ㅠ"
-                            else -> moeum
-                        }
-                        "ㅡL" -> when (nextMoeum) {
-                            "ㅏ", "ㅜ" -> "ㅡLㅜ"
-                            "ㅓ", "ㅗ" -> "ㅡLㅓ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅡLㅓ" -> when (nextMoeum) {
-                            "ㅓ", "ㅗ" -> "ㅓ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅡLㅜ" -> when (nextMoeum) {
-                            "ㅏ", "ㅜ" -> "ㅜ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅡR" -> when (nextMoeum) {
-                            "ㅏ", "ㅗ" -> "ㅡRㅏ"
-                            "ㅓ", "ㅜ" -> "ㅡRㅜ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅡRㅏ" -> when (nextMoeum) {
-                            "ㅏ", "ㅗ" -> "ㅏ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅡRㅜ" -> when (nextMoeum) {
-                            "ㅓ", "ㅜ" -> "ㅜ"
-                            "ㅣL", "ㅣR" -> "ㅢ"
-                            else -> moeum
-                        }
-                        "ㅣL" -> when (nextMoeum) {
-                            "ㅏ", "ㅗ" -> "ㅣLㅗ"
-                            "ㅓ", "ㅜ" -> "ㅣLㅓ"
-                            else -> moeum
-                        }
-                        "ㅣLㅓ" -> when (nextMoeum) {
-                            "ㅓ", "ㅜ" -> "ㅓ"
-                            else -> moeum
-                        }
-                        "ㅣLㅗ" -> when (nextMoeum) {
-                            "ㅏ", "ㅗ" -> "ㅗ"
-                            else -> moeum
-                        }
-                        "ㅣR" -> when (nextMoeum) {
-                            "ㅏ", "ㅜ" -> "ㅣRㅏ"
-                            "ㅓ", "ㅗ" -> "ㅣRㅗ"
-                            else -> moeum
-                        }
-                        "ㅣRㅏ" -> when (nextMoeum) {
-                            "ㅏ", "ㅜ" -> "ㅏ"
-                            else -> moeum
-                        }
-                        "ㅣRㅗ" -> when (nextMoeum) {
-                            "ㅓ", "ㅗ" -> "ㅗ"
-                            else -> moeum
-                        }
-                        null -> nextMoeum
-                        else -> moeum
-                    }
+                moeumGestureProcessor.resolveMoeumList()?.let {
+                    sendKey(it)
                 }
-                moeum?.let { sendKey(it.substring(0, 1)) }
             }
         }
         return super.onTouch(view, motionEvent)
