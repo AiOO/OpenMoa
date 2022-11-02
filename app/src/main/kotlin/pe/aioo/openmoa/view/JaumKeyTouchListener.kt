@@ -34,7 +34,7 @@ class JaumKeyTouchListener(
                     val degree = (atan2(currentY - startY, currentX - startX) * 180f) / PI
                     startX = currentX
                     startY = currentY
-                    if (abs(degree) < 22.5f) {
+                    if (0.001f <= abs(degree) && abs(degree) < 22.5f) {
                         moeumGestureProcessor.appendMoeum("ㅏ")
                     } else if (abs(degree) < 67.5f) {
                         moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅡR" else "ㅣR")
@@ -42,7 +42,7 @@ class JaumKeyTouchListener(
                         moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅜ" else "ㅗ")
                     } else if (abs(degree) < 157.5f) {
                         moeumGestureProcessor.appendMoeum(if (degree > 0) "ㅡL" else "ㅣL")
-                    } else {
+                    } else if (abs(degree) <= 179.999f) {
                         moeumGestureProcessor.appendMoeum("ㅓ")
                     }
                 }
