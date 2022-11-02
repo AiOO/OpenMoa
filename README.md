@@ -1,3 +1,5 @@
+![Android CI][101]
+
 # OpenMoa Project
 
 이 프로젝트는 모아키를 오픈 소스로 재구현하는 프로젝트입니다.
@@ -55,3 +57,4 @@
 [1]: https://www.youtube.com/watch?v=Mcz0sSz1Ky4
 [2]: https://doi.org/10.8080/1020110078022
 [3]: https://developer.android.com/studio
+[101]: https://github.com/AiOO/OpenMoa/actions/workflows/test.yml/badge.svg
