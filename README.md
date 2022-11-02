@@ -28,7 +28,7 @@
 특허로 등록되어 보호되고 있습니다. 이 저장소를 공개하는 행위와 저장소에
 [MIT 라이선스](LICENSE.md)를 적용하는 행위는 명시적으로든 암시적으로든 특허의
 실시권을 가지지 않은 자의 특허 실시가 가능함을 의미하지 않습니다. 코드를
-빌드하여 사용하실 분은 **개인의 책임 하에 특허법을 반드시 준수**해주시기
+빌드하여 사용하실 분은 **개인의 책임 하에 [특허법][3]을 반드시 준수**해주시기
 바랍니다.
 
 ## 프로젝트에 대해
@@ -41,7 +41,7 @@
 
 ### 어떻게 사용할 수 있나요?
 
-[Android Studio][3]를 설치하신 후 이 프로젝트를 직접 빌드하여 사용하실 수
+[Android Studio][4]를 설치하신 후 이 프로젝트를 직접 빌드하여 사용하실 수
 있습니다. 빌드 또는 사용하시기 전에 [특허에 대하여](#특허에-대하여) 섹션을
 반드시 읽어주세요.
 
@@ -56,5 +56,6 @@
 
 [1]: https://www.youtube.com/watch?v=Mcz0sSz1Ky4
 [2]: https://doi.org/10.8080/1020110078022
-[3]: https://developer.android.com/studio
+[3]: https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%ED%8A%B9%ED%97%88%EB%B2%95
+[4]: https://developer.android.com/studio
 [101]: https://github.com/AiOO/OpenMoa/actions/workflows/test.yml/badge.svg
