@@ -36,11 +36,11 @@ class JaumKeyTouchListener(
                     if (abs(degree) < 22.5f) {
                         moeumList.add("ㅏ")
                     } else if (abs(degree) < 67.5f) {
-                        moeumList.add(if (degree > 0) "ㅡ" else "ㅣ")
+                        moeumList.add(if (degree > 0) "ㅡR" else "ㅣR")
                     } else if (abs(degree) < 112.5f) {
                         moeumList.add(if (degree > 0) "ㅜ" else "ㅗ")
                     } else if (abs(degree) < 157.5f) {
-                        moeumList.add(if (degree > 0) "ㅡ" else "ㅣ")
+                        moeumList.add(if (degree > 0) "ㅡL" else "ㅣL")
                     } else {
                         moeumList.add("ㅓ")
                     }
@@ -101,16 +101,69 @@ class JaumKeyTouchListener(
                             "ㅜ" -> "ㅠ"
                             else -> moeum
                         }
-                        "ㅡ" -> when (nextMoeum) {
-                            "ㅣ" -> "ㅢ"
-                            else -> "ㅡ"
+                        "ㅡL" -> when (nextMoeum) {
+                            "ㅏ", "ㅜ" -> "ㅡLㅜ"
+                            "ㅓ", "ㅗ" -> "ㅡLㅓ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
                         }
-                        "ㅣ" -> "ㅣ"
+                        "ㅡLㅓ" -> when (nextMoeum) {
+                            "ㅓ", "ㅗ" -> "ㅓ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
+                        }
+                        "ㅡLㅜ" -> when (nextMoeum) {
+                            "ㅏ", "ㅜ" -> "ㅜ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
+                        }
+                        "ㅡR" -> when (nextMoeum) {
+                            "ㅏ", "ㅗ" -> "ㅡRㅏ"
+                            "ㅓ", "ㅜ" -> "ㅡRㅜ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
+                        }
+                        "ㅡRㅏ" -> when (nextMoeum) {
+                            "ㅏ", "ㅗ" -> "ㅏ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
+                        }
+                        "ㅡRㅜ" -> when (nextMoeum) {
+                            "ㅓ", "ㅜ" -> "ㅜ"
+                            "ㅣL", "ㅣR" -> "ㅢ"
+                            else -> moeum
+                        }
+                        "ㅣL" -> when (nextMoeum) {
+                            "ㅏ", "ㅗ" -> "ㅣLㅗ"
+                            "ㅓ", "ㅜ" -> "ㅣLㅓ"
+                            else -> moeum
+                        }
+                        "ㅣLㅓ" -> when (nextMoeum) {
+                            "ㅓ", "ㅜ" -> "ㅓ"
+                            else -> moeum
+                        }
+                        "ㅣLㅗ" -> when (nextMoeum) {
+                            "ㅏ", "ㅗ" -> "ㅗ"
+                            else -> moeum
+                        }
+                        "ㅣR" -> when (nextMoeum) {
+                            "ㅏ", "ㅜ" -> "ㅣRㅏ"
+                            "ㅓ", "ㅗ" -> "ㅣRㅗ"
+                            else -> moeum
+                        }
+                        "ㅣRㅏ" -> when (nextMoeum) {
+                            "ㅏ", "ㅜ" -> "ㅏ"
+                            else -> moeum
+                        }
+                        "ㅣRㅗ" -> when (nextMoeum) {
+                            "ㅓ", "ㅗ" -> "ㅗ"
+                            else -> moeum
+                        }
                         null -> nextMoeum
                         else -> moeum
                     }
                 }
-                moeum?.let { sendKey(it) }
+                moeum?.let { sendKey(it.substring(0, 1)) }
             }
         }
         return super.onTouch(view, motionEvent)
