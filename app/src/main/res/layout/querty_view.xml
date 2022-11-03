@@ -393,7 +393,7 @@
     <TextView
         android:id="@+id/shiftKey"
         style="@style/KeyStyle"
-        android:text="⬆︎"
+        android:text="⇧︎"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1.5"

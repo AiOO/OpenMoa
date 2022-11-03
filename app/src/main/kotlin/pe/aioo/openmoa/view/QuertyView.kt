@@ -2,8 +2,11 @@ package pe.aioo.openmoa.view
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.view.misc.SpecialKey
 import pe.aioo.openmoa.databinding.QuertyViewBinding
@@ -24,52 +27,60 @@ class QuertyView : ConstraintLayout {
         init()
     }
 
+    private var isShiftEnabled = false
+    private val broadcastManager = LocalBroadcastManager.getInstance(context)
+
     private fun init() {
         inflate(context, R.layout.querty_view, this)
         setOnTouchListeners(QuertyViewBinding.bind(this))
     }
 
+    private fun setShiftEnabled(binding: QuertyViewBinding, isEnabled: Boolean) {
+        if (isShiftEnabled == isEnabled) {
+            return
+        }
+        listOf(
+            binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
+            binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
+            binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
+            binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
+            binding.nKey, binding.mKey,
+        ).map {
+            it.apply {
+                text = if (isEnabled) text.toString().uppercase() else text.toString().lowercase()
+            }
+        }
+        binding.shiftKey.apply {
+            text = if(isEnabled) "⬆︎" else "⇧"
+        }
+        isShiftEnabled = isEnabled
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners(binding: QuertyViewBinding) {
-        binding.oneKey.setOnTouchListener(SimpleKeyTouchListener(context, "1"))
-        binding.twoKey.setOnTouchListener(SimpleKeyTouchListener(context, "2"))
-        binding.threeKey.setOnTouchListener(SimpleKeyTouchListener(context, "3"))
-        binding.fourKey.setOnTouchListener(SimpleKeyTouchListener(context, "4"))
-        binding.fiveKey.setOnTouchListener(SimpleKeyTouchListener(context, "5"))
-        binding.sixKey.setOnTouchListener(SimpleKeyTouchListener(context, "6"))
-        binding.sevenKey.setOnTouchListener(SimpleKeyTouchListener(context, "7"))
-        binding.eightKey.setOnTouchListener(SimpleKeyTouchListener(context, "8"))
-        binding.nineKey.setOnTouchListener(SimpleKeyTouchListener(context, "9"))
-        binding.zeroKey.setOnTouchListener(SimpleKeyTouchListener(context, "0"))
-        binding.qKey.setOnTouchListener(SimpleKeyTouchListener(context, "q"))
-        binding.wKey.setOnTouchListener(SimpleKeyTouchListener(context, "w"))
-        binding.eKey.setOnTouchListener(SimpleKeyTouchListener(context, "e"))
-        binding.rKey.setOnTouchListener(SimpleKeyTouchListener(context, "r"))
-        binding.tKey.setOnTouchListener(SimpleKeyTouchListener(context, "t"))
-        binding.yKey.setOnTouchListener(SimpleKeyTouchListener(context, "y"))
-        binding.uKey.setOnTouchListener(SimpleKeyTouchListener(context, "u"))
-        binding.iKey.setOnTouchListener(SimpleKeyTouchListener(context, "i"))
-        binding.oKey.setOnTouchListener(SimpleKeyTouchListener(context, "o"))
-        binding.pKey.setOnTouchListener(SimpleKeyTouchListener(context, "p"))
-        binding.aKey.setOnTouchListener(SimpleKeyTouchListener(context, "a"))
-        binding.sKey.setOnTouchListener(SimpleKeyTouchListener(context, "s"))
-        binding.dKey.setOnTouchListener(SimpleKeyTouchListener(context, "d"))
-        binding.fKey.setOnTouchListener(SimpleKeyTouchListener(context, "f"))
-        binding.gKey.setOnTouchListener(SimpleKeyTouchListener(context, "g"))
-        binding.hKey.setOnTouchListener(SimpleKeyTouchListener(context, "h"))
-        binding.jKey.setOnTouchListener(SimpleKeyTouchListener(context, "j"))
-        binding.kKey.setOnTouchListener(SimpleKeyTouchListener(context, "k"))
-        binding.lKey.setOnTouchListener(SimpleKeyTouchListener(context, "l"))
+        listOf(
+            binding.oneKey, binding.twoKey, binding.threeKey, binding.fourKey, binding.fiveKey,
+            binding.sixKey, binding.sevenKey, binding.eightKey, binding.nineKey, binding.zeroKey,
+            binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
+            binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
+            binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
+            binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
+            binding.nKey, binding.mKey,
+        ).map {
+            it.apply {
+                setOnTouchListener(FunctionalKeyTouchListener(context) {
+                    sendKey(text.toString())
+                    if (isShiftEnabled) {
+                        setShiftEnabled(binding, false)
+                    }
+                })
+            }
+        }
         binding.shiftKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.SHIFT.value)
+            FunctionalKeyTouchListener(context, false) {
+                setShiftEnabled(binding, !isShiftEnabled)
+            }
         )
-        binding.zKey.setOnTouchListener(SimpleKeyTouchListener(context, "z"))
-        binding.xKey.setOnTouchListener(SimpleKeyTouchListener(context, "x"))
-        binding.cKey.setOnTouchListener(SimpleKeyTouchListener(context, "c"))
-        binding.vKey.setOnTouchListener(SimpleKeyTouchListener(context, "v"))
-        binding.bKey.setOnTouchListener(SimpleKeyTouchListener(context, "b"))
-        binding.nKey.setOnTouchListener(SimpleKeyTouchListener(context, "n"))
-        binding.mKey.setOnTouchListener(SimpleKeyTouchListener(context, "m"))
         binding.backspaceKey.setOnTouchListener(
             RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
         )
@@ -85,6 +96,14 @@ class QuertyView : ConstraintLayout {
         )
         binding.enterKey.setOnTouchListener(
             SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
+        )
+    }
+
+    private fun sendKey(key: String) {
+        broadcastManager.sendBroadcast(
+            Intent(OpenMoaIME.INTENT_ACTION).apply {
+                putExtra(OpenMoaIME.EXTRA_NAME, key)
+            }
         )
     }
 
