@@ -1,5 +1,6 @@
 package pe.aioo.openmoa.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +29,7 @@ class OpenMoaView : ConstraintLayout {
         setOnTouchListeners(OpenMoaViewBinding.bind(this))
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners(binding: OpenMoaViewBinding) {
         binding.tildeKey.setOnTouchListener(SimpleKeyTouchListener(context, "~"))
         binding.ssangbieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅃ"))

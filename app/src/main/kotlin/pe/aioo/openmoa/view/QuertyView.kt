@@ -1,5 +1,6 @@
 package pe.aioo.openmoa.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +29,7 @@ class QuertyView : ConstraintLayout {
         setOnTouchListeners(QuertyViewBinding.bind(this))
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners(binding: QuertyViewBinding) {
         binding.oneKey.setOnTouchListener(SimpleKeyTouchListener(context, "1"))
         binding.twoKey.setOnTouchListener(SimpleKeyTouchListener(context, "2"))
