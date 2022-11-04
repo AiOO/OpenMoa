@@ -23,9 +23,9 @@ class OpenMoaIME : InputMethodService() {
 
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
-    private lateinit var imeMode: IMEMode
     private lateinit var keyboardViews: Map<IMEMode, View>
     private val hangulAssembler = HangulAssembler()
+    private var imeMode = IMEMode.IME_KO
     private var composingText = ""
 
     private fun finishComposing() {
@@ -110,19 +110,34 @@ class OpenMoaIME : InputMethodService() {
                     currentInputConnection.commitText(key, 1)
                 }
                 currentInputConnection.setComposingText(composingText, 1)
+                setShiftModeAutomatically()
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(
             broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
+        keyboardViews = mapOf(
+            IMEMode.IME_KO to OpenMoaView(this),
+            IMEMode.IME_EN to QuertyView(this),
+        )
     }
 
-    fun setKeyboard(mode: IMEMode) {
+    private fun setKeyboard(mode: IMEMode) {
         finishComposing()
         keyboardViews[mode]?.let {
             binding.keyboardFrameLayout.setKeybooardView(it)
         }
         imeMode = mode
+    }
+
+    private fun setShiftModeAutomatically() {
+        keyboardViews[imeMode].let {
+            if (it is QuertyView) {
+                it.setShiftEnabled(
+                    currentInputConnection.getCursorCapsMode(currentInputEditorInfo.inputType) != 0
+                )
+            }
+        }
     }
 
     @SuppressLint("InflateParams")
@@ -147,11 +162,7 @@ class OpenMoaIME : InputMethodService() {
         }
         val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
         binding = OpenMoaImeBinding.bind(view)
-        keyboardViews = mapOf(
-            IMEMode.IME_KO to OpenMoaView(this),
-            IMEMode.IME_EN to QuertyView(this),
-        )
-        setKeyboard(IMEMode.IME_KO)
+        setKeyboard(imeMode)
         return view
     }
 
@@ -171,13 +182,16 @@ class OpenMoaIME : InputMethodService() {
             candidatesStart,
             candidatesEnd
         )
-        if (composingText.isNotEmpty() && (newSelStart != candidatesEnd || newSelEnd != candidatesEnd)) {
+        if (composingText.isNotEmpty() &&
+            (newSelStart != candidatesEnd || newSelEnd != candidatesEnd)
+        ) {
             finishComposing()
         }
     }
 
     override fun updateInputViewShown() {
         finishComposing()
+        setShiftModeAutomatically()
         super.updateInputViewShown()
     }
 

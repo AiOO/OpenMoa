@@ -33,14 +33,16 @@ class QuertyView : ConstraintLayout {
     }
 
     private var shiftKeyStatus = ShiftKeyStatus.DISABLED
+    private lateinit var binding: QuertyViewBinding
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
 
     private fun init() {
         inflate(context, R.layout.querty_view, this)
-        setOnTouchListeners(QuertyViewBinding.bind(this))
+        binding = QuertyViewBinding.bind(this)
+        setOnTouchListeners()
     }
 
-    private fun setShiftStatus(binding: QuertyViewBinding, status: ShiftKeyStatus) {
+    private fun setShiftStatus(status: ShiftKeyStatus) {
         if (shiftKeyStatus == status) {
             return
         }
@@ -77,8 +79,14 @@ class QuertyView : ConstraintLayout {
         shiftKeyStatus = status
     }
 
+    fun setShiftEnabled(isEnabled: Boolean) {
+        if (shiftKeyStatus != ShiftKeyStatus.LOCKED) {
+            setShiftStatus(if (isEnabled) ShiftKeyStatus.ENABLED else ShiftKeyStatus.DISABLED)
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    private fun setOnTouchListeners(binding: QuertyViewBinding) {
+    private fun setOnTouchListeners() {
         listOf(
             binding.oneKey, binding.twoKey, binding.threeKey, binding.fourKey, binding.fiveKey,
             binding.sixKey, binding.sevenKey, binding.eightKey, binding.nineKey, binding.zeroKey,
@@ -92,7 +100,6 @@ class QuertyView : ConstraintLayout {
                 setOnTouchListener(FunctionalKeyTouchListener(context) {
                     sendKey(text.toString())
                     setShiftStatus(
-                        binding,
                         when (shiftKeyStatus) {
                             ShiftKeyStatus.ENABLED -> ShiftKeyStatus.DISABLED
                             else -> shiftKeyStatus
@@ -104,7 +111,6 @@ class QuertyView : ConstraintLayout {
         binding.shiftKey.setOnTouchListener(
             FunctionalKeyTouchListener(context, false) {
                 setShiftStatus(
-                    binding,
                     when (shiftKeyStatus) {
                         ShiftKeyStatus.DISABLED -> ShiftKeyStatus.ENABLED
                         ShiftKeyStatus.ENABLED -> ShiftKeyStatus.LOCKED
