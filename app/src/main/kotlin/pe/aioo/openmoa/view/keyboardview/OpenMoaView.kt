@@ -1,4 +1,4 @@
-package pe.aioo.openmoa.view
+package pe.aioo.openmoa.view.keyboardview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,6 +7,10 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.view.misc.SpecialKey
 import pe.aioo.openmoa.databinding.OpenMoaViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.CrossKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.JaumKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
 
 class OpenMoaView : ConstraintLayout {
 

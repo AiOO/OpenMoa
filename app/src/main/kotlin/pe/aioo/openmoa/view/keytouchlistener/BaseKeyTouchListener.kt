@@ -1,4 +1,4 @@
-package pe.aioo.openmoa.view
+package pe.aioo.openmoa.view.keytouchlistener
 
 import android.content.Context
 import android.content.Intent

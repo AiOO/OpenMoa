@@ -1,4 +1,4 @@
-package pe.aioo.openmoa.view
+package pe.aioo.openmoa.view.keyboardview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,6 +10,10 @@ import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.view.misc.SpecialKey
 import pe.aioo.openmoa.databinding.QuertyViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.CrossKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
 
 class QuertyView : ConstraintLayout {
 

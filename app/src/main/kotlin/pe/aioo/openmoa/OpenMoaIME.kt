@@ -15,8 +15,8 @@ import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
-import pe.aioo.openmoa.view.OpenMoaView
-import pe.aioo.openmoa.view.QuertyView
+import pe.aioo.openmoa.view.keyboardview.OpenMoaView
+import pe.aioo.openmoa.view.keyboardview.QuertyView
 import pe.aioo.openmoa.view.misc.SpecialKey
 
 class OpenMoaIME : InputMethodService() {

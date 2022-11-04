@@ -1,4 +1,4 @@
-package pe.aioo.openmoa.view
+package pe.aioo.openmoa.view.keytouchlistener
 
 import android.annotation.SuppressLint
 import android.content.Context
