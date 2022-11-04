@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
@@ -31,7 +32,7 @@ class QuertyView : ConstraintLayout {
         init()
     }
 
-    private var isShiftEnabled = false
+    private var shiftKeyStatus = ShiftKeyStatus.DISABLED
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
 
     private fun init() {
@@ -39,25 +40,41 @@ class QuertyView : ConstraintLayout {
         setOnTouchListeners(QuertyViewBinding.bind(this))
     }
 
-    private fun setShiftEnabled(binding: QuertyViewBinding, isEnabled: Boolean) {
-        if (isShiftEnabled == isEnabled) {
+    private fun setShiftStatus(binding: QuertyViewBinding, status: ShiftKeyStatus) {
+        if (shiftKeyStatus == status) {
             return
         }
-        listOf(
-            binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
-            binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
-            binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
-            binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
-            binding.nKey, binding.mKey,
-        ).map {
-            it.apply {
-                text = if (isEnabled) text.toString().uppercase() else text.toString().lowercase()
+        val prevShiftEnabled = shiftKeyStatus != ShiftKeyStatus.DISABLED
+        val isShiftEnabled = status != ShiftKeyStatus.DISABLED
+        if (prevShiftEnabled != isShiftEnabled) {
+            listOf(
+                binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
+                binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
+                binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
+                binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
+                binding.nKey, binding.mKey,
+            ).map {
+                it.apply {
+                    text = if (isShiftEnabled) {
+                        text.toString().uppercase()
+                    } else {
+                        text.toString().lowercase()
+                    }
+                }
             }
+            binding.shiftKey.text = if (isShiftEnabled) "⬆︎" else "⇧"
         }
-        binding.shiftKey.apply {
-            text = if(isEnabled) "⬆︎" else "⇧"
-        }
-        isShiftEnabled = isEnabled
+        binding.shiftKey.setTextColor(
+            ContextCompat.getColor(
+                context,
+                if (status == ShiftKeyStatus.LOCKED) {
+                    R.color.shift_key_foreground_locked
+                } else {
+                    R.color.key_foreground
+                },
+            )
+        )
+        shiftKeyStatus = status
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -74,15 +91,26 @@ class QuertyView : ConstraintLayout {
             it.apply {
                 setOnTouchListener(FunctionalKeyTouchListener(context) {
                     sendKey(text.toString())
-                    if (isShiftEnabled) {
-                        setShiftEnabled(binding, false)
-                    }
+                    setShiftStatus(
+                        binding,
+                        when (shiftKeyStatus) {
+                            ShiftKeyStatus.ENABLED -> ShiftKeyStatus.DISABLED
+                            else -> shiftKeyStatus
+                        }
+                    )
                 })
             }
         }
         binding.shiftKey.setOnTouchListener(
             FunctionalKeyTouchListener(context, false) {
-                setShiftEnabled(binding, !isShiftEnabled)
+                setShiftStatus(
+                    binding,
+                    when (shiftKeyStatus) {
+                        ShiftKeyStatus.DISABLED -> ShiftKeyStatus.ENABLED
+                        ShiftKeyStatus.ENABLED -> ShiftKeyStatus.LOCKED
+                        ShiftKeyStatus.LOCKED -> ShiftKeyStatus.DISABLED
+                    }
+                )
             }
         )
         binding.backspaceKey.setOnTouchListener(
