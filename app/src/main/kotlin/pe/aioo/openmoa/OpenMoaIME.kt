@@ -110,7 +110,7 @@ class OpenMoaIME : InputMethodService() {
                     currentInputConnection.commitText(key, 1)
                 }
                 currentInputConnection.setComposingText(composingText, 1)
-                setShiftModeAutomatically()
+                setShiftAutomatically()
             }
         }
         LocalBroadcastManager.getInstance(this).registerReceiver(
@@ -130,10 +130,10 @@ class OpenMoaIME : InputMethodService() {
         imeMode = mode
     }
 
-    private fun setShiftModeAutomatically() {
+    private fun setShiftAutomatically() {
         keyboardViews[imeMode].let {
             if (it is QuertyView) {
-                it.setShiftEnabled(
+                it.setShiftEnabledAutomatically(
                     currentInputConnection.getCursorCapsMode(currentInputEditorInfo.inputType) != 0
                 )
             }
@@ -191,7 +191,7 @@ class OpenMoaIME : InputMethodService() {
 
     override fun updateInputViewShown() {
         finishComposing()
-        setShiftModeAutomatically()
+        setShiftAutomatically()
         super.updateInputViewShown()
     }
 

@@ -79,9 +79,9 @@ class QuertyView : ConstraintLayout {
         shiftKeyStatus = status
     }
 
-    fun setShiftEnabled(isEnabled: Boolean) {
+    fun setShiftEnabledAutomatically(isEnabled: Boolean) {
         if (shiftKeyStatus != ShiftKeyStatus.LOCKED) {
-            setShiftStatus(if (isEnabled) ShiftKeyStatus.ENABLED else ShiftKeyStatus.DISABLED)
+            setShiftStatus(if (isEnabled) ShiftKeyStatus.AUTO_ENABLED else ShiftKeyStatus.DISABLED)
         }
     }
 
@@ -114,6 +114,7 @@ class QuertyView : ConstraintLayout {
                     when (shiftKeyStatus) {
                         ShiftKeyStatus.DISABLED -> ShiftKeyStatus.ENABLED
                         ShiftKeyStatus.ENABLED -> ShiftKeyStatus.LOCKED
+                        ShiftKeyStatus.AUTO_ENABLED,
                         ShiftKeyStatus.LOCKED -> ShiftKeyStatus.DISABLED
                     }
                 )
