@@ -64,18 +64,18 @@ class QuertyView : ConstraintLayout {
                     }
                 }
             }
-            binding.shiftKey.text = if (isShiftEnabled) "⬆︎" else "⇧"
-        }
-        binding.shiftKey.setTextColor(
-            ContextCompat.getColor(
-                context,
-                if (status == ShiftKeyStatus.LOCKED) {
-                    R.color.shift_key_foreground_locked
-                } else {
-                    R.color.key_foreground
-                },
+            binding.shiftKey.setTextColor(
+                ContextCompat.getColor(
+                    context,
+                    if (isShiftEnabled) {
+                        R.color.shift_key_foreground_locked
+                    } else {
+                        R.color.key_foreground
+                    },
+                )
             )
-        )
+        }
+        binding.shiftKey.text = if (status == ShiftKeyStatus.LOCKED) "⬆︎" else "⇧"
         shiftKeyStatus = status
     }
 
