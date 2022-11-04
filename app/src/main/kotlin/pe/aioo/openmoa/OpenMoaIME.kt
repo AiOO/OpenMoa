@@ -16,6 +16,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.keyboardview.OpenMoaView
+import pe.aioo.openmoa.view.keyboardview.PunctuationView
 import pe.aioo.openmoa.view.keyboardview.QuertyView
 import pe.aioo.openmoa.view.misc.SpecialKey
 
@@ -84,7 +85,22 @@ class OpenMoaIME : InputMethodService() {
                         }
                         SpecialKey.LANGUAGE.value -> {
                             setKeyboard(
-                                if (imeMode == IMEMode.IME_KO) IMEMode.IME_EN else IMEMode.IME_KO
+                                when (imeMode) {
+                                    IMEMode.IME_KO -> IMEMode.IME_EN
+                                    IMEMode.IME_EN -> IMEMode.IME_KO
+                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO
+                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN
+                                }
+                            )
+                        }
+                        SpecialKey.HANJA_NUMBER_PUNCTUATION.value -> {
+                            setKeyboard(
+                                when (imeMode) {
+                                    IMEMode.IME_KO -> IMEMode.IME_KO_PUNCTUATION
+                                    IMEMode.IME_EN -> IMEMode.IME_EN_PUNCTUATION
+                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO
+                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN
+                                }
                             )
                         }
                     }
@@ -116,9 +132,12 @@ class OpenMoaIME : InputMethodService() {
         LocalBroadcastManager.getInstance(this).registerReceiver(
             broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
+        val punctuationView = PunctuationView(this)
         keyboardViews = mapOf(
             IMEMode.IME_KO to OpenMoaView(this),
             IMEMode.IME_EN to QuertyView(this),
+            IMEMode.IME_KO_PUNCTUATION to punctuationView,
+            IMEMode.IME_EN_PUNCTUATION to punctuationView,
         )
     }
 
