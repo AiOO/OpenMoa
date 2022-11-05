@@ -161,7 +161,7 @@
     <TextView
         android:id="@+id/sKey"
         style="@style/KeyStyle"
-        tools:text="@"
+        tools:text="\@"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -344,7 +344,7 @@
     <TextView
         android:id="@+id/nKey"
         style="@style/KeyStyle"
-        tools:text="?"
+        tools:text="\?"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -368,7 +368,7 @@
     <TextView
         android:id="@+id/backspaceKey"
         style="@style/KeyStyle"
-        android:text="⇦"
+        android:text="@string/key_backspace"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1.5"
@@ -382,7 +382,7 @@
     <TextView
         android:id="@+id/languageKey"
         style="@style/KeyStyle"
-        android:text="한/영"
+        android:text="@string/key_language"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
@@ -396,7 +396,7 @@
     <TextView
         android:id="@+id/hanjaNumberPunctuationKey"
         style="@style/KeyStyle"
-        android:text="漢\n12/기"
+        android:text="@string/key_hanja_number_punctuation"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -408,7 +408,7 @@
     <TextView
         android:id="@+id/spaceKey"
         style="@style/KeyStyle"
-        android:text="⎵"
+        android:text="@string/key_space"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="2.5"
         app:layout_constraintTop_toTopOf="@+id/languageKey"
@@ -419,7 +419,7 @@
     <TextView
         android:id="@+id/commaQuestionDotExclamationKey"
         style="@style/KeyStyle"
-        android:text=",\n? . !"
+        android:text="@string/key_comma_question_dot_exclamation"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -431,7 +431,7 @@
     <TextView
         android:id="@+id/enterKey"
         style="@style/KeyStyle"
-        android:text="⏎"
+        android:text="@string/key_enter"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="@+id/languageKey"

@@ -1,6 +1,49 @@
 <resources>
 
     <string name="app_name">오픈모아</string>
-    <string name="subtype">한영 입력기</string>
+    <string name="key_araea">ㆍ</string>
+    <string name="key_asterisk">*</string>
+    <string name="key_backspace">⇦</string>
+    <string name="key_bieup">ㅂ</string>
+    <string name="key_caret">^</string>
+    <string name="key_chieut">ㅊ</string>
+    <string name="key_comma_question_dot_exclamation">,\n? . !</string>
+    <string name="key_digeut">ㄷ</string>
+    <string name="key_eight">8</string>
+    <string name="key_eu">ㅡ</string>
+    <string name="key_emoji">😀</string>
+    <string name="key_enter">⏎</string>
+    <string name="key_five">5</string>
+    <string name="key_four">4</string>
+    <string name="key_giyeok">ㄱ</string>
+    <string name="key_hanja_number_punctuation">漢\n12/기</string>
+    <string name="key_hieut">ㅎ</string>
+    <string name="key_i">ㅣ</string>
+    <string name="key_ieung">ㅇ</string>
+    <string name="key_jieut">ㅈ</string>
+    <string name="key_kieuk">ㅋ</string>
+    <string name="key_language">한/영</string>
+    <string name="key_mieum">ㅁ</string>
+    <string name="key_next_format">%d/%d</string>
+    <string name="key_nieun">ㄴ</string>
+    <string name="key_nine">9</string>
+    <string name="key_one">1</string>
+    <string name="key_pieup">ㅍ</string>
+    <string name="key_rieul">ㄹ</string>
+    <string name="key_semicolon">;</string>
+    <string name="key_seven">7</string>
+    <string name="key_siot">ㅅ</string>
+    <string name="key_six">6</string>
+    <string name="key_space">⎵</string>
+    <string name="key_ssangbieup">ㅃ</string>
+    <string name="key_ssangdigeut">ㄸ</string>
+    <string name="key_ssanggiyeok">ㄲ</string>
+    <string name="key_ssangjieut">ㅃ</string>
+    <string name="key_ssangsiot">ㅆ</string>
+    <string name="key_three">3</string>
+    <string name="key_tieut">ㅌ</string>
+    <string name="key_tilde">~</string>
+    <string name="key_two">2</string>
+    <string name="key_zero">0</string>
 
 </resources>

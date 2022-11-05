@@ -12,7 +12,7 @@
     <TextView
         android:id="@+id/oneKey"
         style="@style/KeyStyle"
-        android:text="1"
+        android:text="@string/key_one"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -25,7 +25,7 @@
     <TextView
         android:id="@+id/twoKey"
         style="@style/KeyStyle"
-        android:text="2"
+        android:text="@string/key_two"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -37,7 +37,7 @@
     <TextView
         android:id="@+id/threeKey"
         style="@style/KeyStyle"
-        android:text="3"
+        android:text="@string/key_three"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -49,7 +49,7 @@
     <TextView
         android:id="@+id/fourKey"
         style="@style/KeyStyle"
-        android:text="4"
+        android:text="@string/key_four"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -61,7 +61,7 @@
     <TextView
         android:id="@+id/fiveKey"
         style="@style/KeyStyle"
-        android:text="5"
+        android:text="@string/key_five"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -73,7 +73,7 @@
     <TextView
         android:id="@+id/sixKey"
         style="@style/KeyStyle"
-        android:text="6"
+        android:text="@string/key_six"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -85,7 +85,7 @@
     <TextView
         android:id="@+id/sevenKey"
         style="@style/KeyStyle"
-        android:text="7"
+        android:text="@string/key_seven"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -97,7 +97,7 @@
     <TextView
         android:id="@+id/eightKey"
         style="@style/KeyStyle"
-        android:text="8"
+        android:text="@string/key_eight"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -109,7 +109,7 @@
     <TextView
         android:id="@+id/nineKey"
         style="@style/KeyStyle"
-        android:text="9"
+        android:text="@string/key_nine"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -121,7 +121,7 @@
     <TextView
         android:id="@+id/zeroKey"
         style="@style/KeyStyle"
-        android:text="0"
+        android:text="@string/key_zero"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -389,12 +389,12 @@
         app:layout_constraintLeft_toRightOf="@+id/lKey"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Forth Line -->
+    <!-- Fourth Line -->
 
     <TextView
         android:id="@+id/shiftKey"
         style="@style/KeyStyle"
-        android:text="⇧︎"
+        tools:text="⇧"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1.5"
@@ -491,7 +491,7 @@
     <TextView
         android:id="@+id/backspaceKey"
         style="@style/KeyStyle"
-        android:text="⇦"
+        android:text="@string/key_backspace"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1.5"
@@ -505,7 +505,7 @@
     <TextView
         android:id="@+id/languageKey"
         style="@style/KeyStyle"
-        android:text="한/영"
+        android:text="@string/key_language"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
@@ -519,7 +519,7 @@
     <TextView
         android:id="@+id/hanjaNumberPunctuationKey"
         style="@style/KeyStyle"
-        android:text="漢\n12/기"
+        android:text="@string/key_hanja_number_punctuation"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -531,7 +531,7 @@
     <TextView
         android:id="@+id/spaceKey"
         style="@style/KeyStyle"
-        android:text="⎵"
+        android:text="@string/key_space"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="2.5"
         app:layout_constraintTop_toTopOf="@+id/languageKey"
@@ -542,7 +542,7 @@
     <TextView
         android:id="@+id/commaQuestionDotExclamationKey"
         style="@style/KeyStyle"
-        android:text=",\n? . !"
+        android:text="@string/key_comma_question_dot_exclamation"
         android:textSize="14sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -554,7 +554,7 @@
     <TextView
         android:id="@+id/enterKey"
         style="@style/KeyStyle"
-        android:text="⏎"
+        android:text="@string/key_enter"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintTop_toTopOf="@+id/languageKey"

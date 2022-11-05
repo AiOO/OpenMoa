@@ -56,7 +56,9 @@ class PunctuationView : ConstraintLayout {
         ).mapIndexed { index, view ->
             view.text = PUNCTUATION_LIST[page][index]
         }
-        binding.nextKey.text = "${page + 1}/${PUNCTUATION_LIST.size}"
+        binding.nextKey.text = resources.getString(
+            R.string.key_next_format, page + 1, PUNCTUATION_LIST.size
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")
