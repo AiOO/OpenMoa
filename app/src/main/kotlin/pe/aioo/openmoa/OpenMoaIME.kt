@@ -30,7 +30,7 @@ class OpenMoaIME : InputMethodService() {
     private var composingText = ""
 
     private fun finishComposing() {
-        currentInputConnection.finishComposingText()
+        currentInputConnection?.finishComposingText()
         hangulAssembler.clear()
         composingText = ""
     }
