@@ -42,11 +42,11 @@ class PunctuationView : ConstraintLayout {
         setOnTouchListeners()
     }
 
-    fun setPageOrNextPage(index: Int? = null, isInitialize: Boolean = false) {
-        if (page == index && !isInitialize) {
+    fun setPageOrNextPage(newPage: Int? = null, isInitialize: Boolean = false) {
+        if (page == newPage && !isInitialize) {
             return
         }
-        page = index ?: ((page + 1) % PUNCTUATION_LIST.size)
+        page = newPage ?: ((page + 1) % PUNCTUATION_LIST.size)
         listOf(
             binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
             binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
