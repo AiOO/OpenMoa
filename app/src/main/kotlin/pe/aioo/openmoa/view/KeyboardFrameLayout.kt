@@ -3,6 +3,7 @@ package pe.aioo.openmoa.view
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.view.ViewGroup
 import android.widget.FrameLayout
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.KeyboardFrameLayoutBinding
@@ -30,7 +31,12 @@ class KeyboardFrameLayout : FrameLayout {
         binding = KeyboardFrameLayoutBinding.bind(this)
     }
 
-    fun setKeybooardView(view: View) {
+    fun setKeyboardView(view: View) {
+        view.parent?.let {
+            if (it is ViewGroup) {
+                it.removeView(view)
+            }
+        }
         binding.keyboardLayout.removeAllViews()
         binding.keyboardLayout.addView(view)
     }

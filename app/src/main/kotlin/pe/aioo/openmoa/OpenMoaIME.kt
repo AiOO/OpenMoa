@@ -147,7 +147,7 @@ class OpenMoaIME : InputMethodService() {
             if (it is PunctuationView) {
                 it.setPageOrNextPage(0)
             }
-            binding.keyboardFrameLayout.setKeybooardView(it)
+            binding.keyboardFrameLayout.setKeyboardView(it)
         }
         imeMode = mode
     }
