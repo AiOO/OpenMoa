@@ -130,7 +130,6 @@
         app:layout_constraintLeft_toRightOf="@+id/oKey"
         app:layout_constraintRight_toRightOf="parent" />
 
-
     <!-- Second Line -->
 
     <Space

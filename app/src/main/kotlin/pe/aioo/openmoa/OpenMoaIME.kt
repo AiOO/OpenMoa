@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
+import pe.aioo.openmoa.view.keyboardview.NumberView
 import pe.aioo.openmoa.view.keyboardview.OpenMoaView
 import pe.aioo.openmoa.view.keyboardview.PunctuationView
 import pe.aioo.openmoa.view.keyboardview.QuertyView
@@ -88,8 +89,10 @@ class OpenMoaIME : InputMethodService() {
                                 when (imeMode) {
                                     IMEMode.IME_KO -> IMEMode.IME_EN
                                     IMEMode.IME_EN -> IMEMode.IME_KO
-                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO
-                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN
+                                    IMEMode.IME_KO_PUNCTUATION, IMEMode.IME_KO_NUMBER ->
+                                        IMEMode.IME_KO
+                                    IMEMode.IME_EN_PUNCTUATION, IMEMode.IME_EN_NUMBER ->
+                                        IMEMode.IME_EN
                                 }
                             )
                         }
@@ -98,8 +101,10 @@ class OpenMoaIME : InputMethodService() {
                                 when (imeMode) {
                                     IMEMode.IME_KO -> IMEMode.IME_KO_PUNCTUATION
                                     IMEMode.IME_EN -> IMEMode.IME_EN_PUNCTUATION
-                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO
-                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN
+                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
+                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
+                                    IMEMode.IME_KO_NUMBER -> IMEMode.IME_KO
+                                    IMEMode.IME_EN_NUMBER -> IMEMode.IME_EN
                                 }
                             )
                         }
@@ -133,11 +138,14 @@ class OpenMoaIME : InputMethodService() {
             broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
         val punctuationView = PunctuationView(this)
+        val numberView = NumberView(this)
         keyboardViews = mapOf(
             IMEMode.IME_KO to OpenMoaView(this),
             IMEMode.IME_EN to QuertyView(this),
             IMEMode.IME_KO_PUNCTUATION to punctuationView,
             IMEMode.IME_EN_PUNCTUATION to punctuationView,
+            IMEMode.IME_KO_NUMBER to numberView,
+            IMEMode.IME_EN_NUMBER to numberView,
         )
     }
 
@@ -164,8 +172,8 @@ class OpenMoaIME : InputMethodService() {
 
     private fun returnFromPunctuationKeyboard() {
         when (imeMode) {
-            IMEMode.IME_KO_PUNCTUATION -> setKeyboard(IMEMode.IME_KO)
-            IMEMode.IME_EN_PUNCTUATION -> setKeyboard(IMEMode.IME_EN)
+            IMEMode.IME_KO_PUNCTUATION, IMEMode.IME_KO_NUMBER -> setKeyboard(IMEMode.IME_KO)
+            IMEMode.IME_EN_PUNCTUATION, IMEMode.IME_EN_NUMBER -> setKeyboard(IMEMode.IME_EN)
             else -> Unit
         }
     }

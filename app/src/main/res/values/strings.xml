@@ -10,6 +10,7 @@
     <string name="key_chieut">ㅊ</string>
     <string name="key_comma_question_dot_exclamation">,\n? . !</string>
     <string name="key_digeut">ㄷ</string>
+    <string name="key_dot">.</string>
     <string name="key_eight">8</string>
     <string name="key_eu">ㅡ</string>
     <string name="key_emoji">😀</string>
@@ -25,16 +26,19 @@
     <string name="key_kieuk">ㅋ</string>
     <string name="key_language">한/영</string>
     <string name="key_mieum">ㅁ</string>
+    <string name="key_minus">-</string>
     <string name="key_next_format">%d/%d</string>
     <string name="key_nieun">ㄴ</string>
     <string name="key_nine">9</string>
     <string name="key_one">1</string>
     <string name="key_pieup">ㅍ</string>
+    <string name="key_plus">+</string>
     <string name="key_rieul">ㄹ</string>
     <string name="key_semicolon">;</string>
     <string name="key_seven">7</string>
     <string name="key_siot">ㅅ</string>
     <string name="key_six">6</string>
+    <string name="key_slash︎">/</string>
     <string name="key_space">⎵</string>
     <string name="key_ssangbieup">ㅃ</string>
     <string name="key_ssangdigeut">ㄸ</string>
