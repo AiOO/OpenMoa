@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -11,7 +12,7 @@
     <TextView
         android:id="@+id/qKey"
         style="@style/KeyStyle"
-        android:text="1"
+        tools:text="1"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -24,7 +25,7 @@
     <TextView
         android:id="@+id/wKey"
         style="@style/KeyStyle"
-        android:text="2"
+        tools:text="2"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -36,7 +37,7 @@
     <TextView
         android:id="@+id/eKey"
         style="@style/KeyStyle"
-        android:text="3"
+        tools:text="3"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -48,7 +49,7 @@
     <TextView
         android:id="@+id/rKey"
         style="@style/KeyStyle"
-        android:text="4"
+        tools:text="4"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -60,7 +61,7 @@
     <TextView
         android:id="@+id/tKey"
         style="@style/KeyStyle"
-        android:text="5"
+        tools:text="5"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -72,7 +73,7 @@
     <TextView
         android:id="@+id/yKey"
         style="@style/KeyStyle"
-        android:text="6"
+        tools:text="6"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -84,7 +85,7 @@
     <TextView
         android:id="@+id/uKey"
         style="@style/KeyStyle"
-        android:text="7"
+        tools:text="7"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -96,7 +97,7 @@
     <TextView
         android:id="@+id/iKey"
         style="@style/KeyStyle"
-        android:text="8"
+        tools:text="8"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -108,7 +109,7 @@
     <TextView
         android:id="@+id/oKey"
         style="@style/KeyStyle"
-        android:text="9"
+        tools:text="9"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -120,7 +121,7 @@
     <TextView
         android:id="@+id/pKey"
         style="@style/KeyStyle"
-        android:text="0"
+        tools:text="0"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -148,7 +149,7 @@
     <TextView
         android:id="@+id/aKey"
         style="@style/KeyStyle"
-        android:text="-"
+        tools:text="-"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -160,7 +161,7 @@
     <TextView
         android:id="@+id/sKey"
         style="@style/KeyStyle"
-        android:text="@"
+        tools:text="@"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -172,7 +173,7 @@
     <TextView
         android:id="@+id/dKey"
         style="@style/KeyStyle"
-        android:text="*"
+        tools:text="*"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -184,7 +185,7 @@
     <TextView
         android:id="@+id/fKey"
         style="@style/KeyStyle"
-        android:text="^"
+        tools:text="^"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -196,7 +197,7 @@
     <TextView
         android:id="@+id/gKey"
         style="@style/KeyStyle"
-        android:text=":"
+        tools:text=":"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -208,7 +209,7 @@
     <TextView
         android:id="@+id/hKey"
         style="@style/KeyStyle"
-        android:text=";"
+        tools:text=";"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -220,7 +221,7 @@
     <TextView
         android:id="@+id/jKey"
         style="@style/KeyStyle"
-        android:text="("
+        tools:text="("
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -232,7 +233,7 @@
     <TextView
         android:id="@+id/kKey"
         style="@style/KeyStyle"
-        android:text=")"
+        tools:text=")"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -244,7 +245,7 @@
     <TextView
         android:id="@+id/lKey"
         style="@style/KeyStyle"
-        android:text="~"
+        tools:text="~"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -270,7 +271,7 @@
     <TextView
         android:id="@+id/nextKey"
         style="@style/KeyStyle"
-        android:text="1/5︎"
+        tools:text="1/5︎"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1.5"
@@ -283,7 +284,7 @@
     <TextView
         android:id="@+id/zKey"
         style="@style/KeyStyle"
-        android:text="/"
+        tools:text="/"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -295,7 +296,7 @@
     <TextView
         android:id="@+id/xKey"
         style="@style/KeyStyle"
-        android:text="'"
+        tools:text="'"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -307,7 +308,7 @@
     <TextView
         android:id="@+id/cKey"
         style="@style/KeyStyle"
-        android:text='"'
+        tools:text='"'
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -319,7 +320,7 @@
     <TextView
         android:id="@+id/vKey"
         style="@style/KeyStyle"
-        android:text="."
+        tools:text="."
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -331,7 +332,7 @@
     <TextView
         android:id="@+id/bKey"
         style="@style/KeyStyle"
-        android:text=","
+        tools:text=","
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -343,7 +344,7 @@
     <TextView
         android:id="@+id/nKey"
         style="@style/KeyStyle"
-        android:text="?"
+        tools:text="?"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -355,7 +356,7 @@
     <TextView
         android:id="@+id/mKey"
         style="@style/KeyStyle"
-        android:text="!"
+        tools:text="!"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"

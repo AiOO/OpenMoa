@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.OpenMoaIME
@@ -33,11 +34,30 @@ class PunctuationView : ConstraintLayout {
 
     private lateinit var binding: PunctuationViewBinding
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
+    private var page = -1
 
     private fun init() {
         inflate(context, R.layout.punctuation_view, this)
         binding = PunctuationViewBinding.bind(this)
+        nextPage(0)
         setOnTouchListeners()
+    }
+
+    fun nextPage(index: Int? = null) {
+        if (page == index) {
+            return
+        }
+        page = index ?: ((page + 1) % PUNCTUATION_LIST.size)
+        listOf(
+            binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
+            binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
+            binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
+            binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
+            binding.nKey, binding.mKey,
+        ).mapIndexed { index, view ->
+            view.text = PUNCTUATION_LIST[page][index]
+        }
+        binding.nextKey.text = "${page + 1}/${PUNCTUATION_LIST.size}"
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -55,6 +75,11 @@ class PunctuationView : ConstraintLayout {
                 })
             }
         }
+        binding.nextKey.setOnTouchListener(
+            FunctionalKeyTouchListener(context) {
+                nextPage()
+            }
+        )
         binding.backspaceKey.setOnTouchListener(
             RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
         )
@@ -78,6 +103,36 @@ class PunctuationView : ConstraintLayout {
             Intent(OpenMoaIME.INTENT_ACTION).apply {
                 putExtra(OpenMoaIME.EXTRA_NAME, key)
             }
+        )
+    }
+
+    companion object {
+        private val PUNCTUATION_LIST = listOf(
+            listOf(
+                "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+                "-", "@", "*", "^", ":", ";", "(", ")", "~",
+                "/", "'", "\"", ".", ",", "?", "!",
+            ),
+            listOf(
+                "#", "&", "%", "+", "=", "_", "\\", "|", "<", ">",
+                "{", "}", "[", "]", "$", "￡", "¥", "€", "₩",
+                "¢", "`", "˚", "•", "®", "©", "¿",
+            ),
+            listOf(
+                "♥", "♡", "◎", "♩", "♬", "♨", "♀", "♂", "☞", "☜",
+                "≠", "※", "≒", "♠", "♤", "★", "☆", "♣", "♧",
+                "◐", "◆", "◇", "■", "□", "×", "÷",
+            ),
+            listOf(
+                "Ψ", "Ω", "α", "β", "γ", "δ", "ε", "ζ", "η", "θ",
+                "∀", "∂", "∃", "∇", "∈", "∋", "∏", "∑", "∝",
+                "∞", "∧", "∨", "∩", "∪", "∫", "∬",
+            ),
+            listOf(
+                "←", "↑", "→", "↓", "↔", "↕", "↖", "↗", "↘", "↙",
+                "∮", "∴", "∵", "≡", "≤", "≥", "≪", "≫", "⌒",
+                "⊂", "⊃", "⊆", "⊇", "℃", "℉", "™",
+            ),
         )
     }
 
