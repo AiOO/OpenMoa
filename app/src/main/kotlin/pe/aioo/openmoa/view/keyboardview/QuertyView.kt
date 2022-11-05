@@ -39,11 +39,12 @@ class QuertyView : ConstraintLayout {
     private fun init() {
         inflate(context, R.layout.querty_view, this)
         binding = QuertyViewBinding.bind(this)
+        setShiftStatus(ShiftKeyStatus.DISABLED, true)
         setOnTouchListeners()
     }
 
-    private fun setShiftStatus(status: ShiftKeyStatus) {
-        if (shiftKeyStatus == status) {
+    private fun setShiftStatus(status: ShiftKeyStatus, isInitialize: Boolean = false) {
+        if (shiftKeyStatus == status && !isInitialize) {
             return
         }
         val prevShiftEnabled = shiftKeyStatus != ShiftKeyStatus.DISABLED
@@ -55,14 +56,8 @@ class QuertyView : ConstraintLayout {
                 binding.dKey, binding.fKey, binding.gKey, binding.hKey, binding.jKey, binding.kKey,
                 binding.lKey, binding.zKey, binding.xKey, binding.cKey, binding.vKey, binding.bKey,
                 binding.nKey, binding.mKey,
-            ).map {
-                it.apply {
-                    text = if (isShiftEnabled) {
-                        text.toString().uppercase()
-                    } else {
-                        text.toString().lowercase()
-                    }
-                }
+            ).mapIndexed { index, view ->
+                view.text = KEY_LIST[if (isShiftEnabled) 1 else 0][index]
             }
             binding.shiftKey.setTextColor(
                 ContextCompat.getColor(
@@ -143,6 +138,21 @@ class QuertyView : ConstraintLayout {
             Intent(OpenMoaIME.INTENT_ACTION).apply {
                 putExtra(OpenMoaIME.EXTRA_NAME, key)
             }
+        )
+    }
+
+    companion object {
+        private val KEY_LIST = listOf(
+            listOf(
+                "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+                "a", "s", "d", "f", "g", "h", "j", "k", "l",
+                "z", "x", "c", "v", "b", "n", "m",
+            ),
+            listOf(
+                "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+                "A", "S", "D", "F", "G", "H", "J", "K", "L",
+                "Z", "X", "C", "V", "B", "N", "M",
+            ),
         )
     }
 

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.AttributeSet
-import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.OpenMoaIME
@@ -34,17 +33,17 @@ class PunctuationView : ConstraintLayout {
 
     private lateinit var binding: PunctuationViewBinding
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
-    private var page = -1
+    private var page = 0
 
     private fun init() {
         inflate(context, R.layout.punctuation_view, this)
         binding = PunctuationViewBinding.bind(this)
-        nextPage(0)
+        setPageOrNextPage(0, true)
         setOnTouchListeners()
     }
 
-    fun nextPage(index: Int? = null) {
-        if (page == index) {
+    fun setPageOrNextPage(index: Int? = null, isInitialize: Boolean = false) {
+        if (page == index && !isInitialize) {
             return
         }
         page = index ?: ((page + 1) % PUNCTUATION_LIST.size)
@@ -77,7 +76,7 @@ class PunctuationView : ConstraintLayout {
         }
         binding.nextKey.setOnTouchListener(
             FunctionalKeyTouchListener(context) {
-                nextPage()
+                setPageOrNextPage()
             }
         )
         binding.backspaceKey.setOnTouchListener(
