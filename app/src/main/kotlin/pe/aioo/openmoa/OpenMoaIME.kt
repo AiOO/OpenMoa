@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
+import android.text.InputType
 import android.view.KeyEvent
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
@@ -170,7 +171,7 @@ class OpenMoaIME : InputMethodService() {
         }
     }
 
-    private fun returnFromPunctuationKeyboard() {
+    private fun returnFromPunctuationOrNumberKeyboard() {
         when (imeMode) {
             IMEMode.IME_KO_PUNCTUATION, IMEMode.IME_KO_NUMBER -> setKeyboard(IMEMode.IME_KO)
             IMEMode.IME_EN_PUNCTUATION, IMEMode.IME_EN_NUMBER -> setKeyboard(IMEMode.IME_EN)
@@ -204,6 +205,23 @@ class OpenMoaIME : InputMethodService() {
         return view
     }
 
+    override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
+        super.onStartInputView(info, restarting)
+        finishComposing()
+        if (info != null && info.inputType and InputType.TYPE_CLASS_NUMBER != 0) {
+            setKeyboard(
+                when(imeMode) {
+                    IMEMode.IME_KO, IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
+                    IMEMode.IME_EN, IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
+                    else -> imeMode
+                }
+            )
+        } else {
+            setShiftAutomatically()
+            returnFromPunctuationOrNumberKeyboard()
+        }
+    }
+
     override fun onUpdateSelection(
         oldSelStart: Int,
         oldSelEnd: Int,
@@ -225,13 +243,6 @@ class OpenMoaIME : InputMethodService() {
         ) {
             finishComposing()
         }
-    }
-
-    override fun updateInputViewShown() {
-        finishComposing()
-        returnFromPunctuationKeyboard()
-        setShiftAutomatically()
-        super.updateInputViewShown()
     }
 
     override fun onDestroy() {
