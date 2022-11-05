@@ -162,6 +162,14 @@ class OpenMoaIME : InputMethodService() {
         }
     }
 
+    private fun returnFromPunctuationKeyboard() {
+        when (imeMode) {
+            IMEMode.IME_KO_PUNCTUATION -> setKeyboard(IMEMode.IME_KO)
+            IMEMode.IME_EN_PUNCTUATION -> setKeyboard(IMEMode.IME_EN)
+            else -> Unit
+        }
+    }
+
     @SuppressLint("InflateParams")
     override fun onCreateInputView(): View {
         window.window?.apply {
@@ -213,6 +221,7 @@ class OpenMoaIME : InputMethodService() {
 
     override fun updateInputViewShown() {
         finishComposing()
+        returnFromPunctuationKeyboard()
         setShiftAutomatically()
         super.updateInputViewShown()
     }
