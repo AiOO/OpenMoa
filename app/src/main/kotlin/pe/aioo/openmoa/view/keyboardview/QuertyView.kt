@@ -49,7 +49,7 @@ class QuertyView : ConstraintLayout {
         }
         val prevShiftEnabled = shiftKeyStatus != ShiftKeyStatus.DISABLED
         val isShiftEnabled = status != ShiftKeyStatus.DISABLED
-        if (prevShiftEnabled != isShiftEnabled) {
+        if (prevShiftEnabled != isShiftEnabled || isInitialize) {
             listOf(
                 binding.qKey, binding.wKey, binding.eKey, binding.rKey, binding.tKey, binding.yKey,
                 binding.uKey, binding.iKey, binding.oKey, binding.pKey, binding.aKey, binding.sKey,
