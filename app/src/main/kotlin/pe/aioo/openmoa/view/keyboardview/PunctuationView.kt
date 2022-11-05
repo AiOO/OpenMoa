@@ -91,9 +91,7 @@ class PunctuationView : ConstraintLayout {
             SimpleKeyTouchListener(context, SpecialKey.HANJA_NUMBER_PUNCTUATION.value)
         )
         binding.spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, " "))
-        binding.commaQuestionDotExclamationKey.setOnTouchListener(
-            CrossKeyTouchListener(context, listOf(",", "!", ".", "?"))
-        )
+        binding.arrowKey.setOnTouchListener(SimpleKeyTouchListener(context, SpecialKey.ARROW.value))
         binding.enterKey.setOnTouchListener(
             SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
         )

@@ -1,9 +1,10 @@
 package pe.aioo.openmoa.view.misc
 
 enum class SpecialKey(val value: String) {
-    EMOJI("EM"),
+    ARROW("AR"),
     BACKSPACE("BA"),
-    LANGUAGE("LA"),
-    HANJA_NUMBER_PUNCTUATION("HNP"),
+    EMOJI("EM"),
     ENTER("EN"),
+    HANJA_NUMBER_PUNCTUATION("HNP"),
+    LANGUAGE("LA"),
 }

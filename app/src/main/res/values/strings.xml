@@ -2,6 +2,7 @@
 
     <string name="app_name">오픈모아</string>
     <string name="key_araea">ㆍ</string>
+    <string name="key_arrow">방향키</string>
     <string name="key_asterisk">*</string>
     <string name="key_backspace">⇦</string>
     <string name="key_bieup">ㅂ</string>
