@@ -22,6 +22,7 @@ import pe.aioo.openmoa.view.keyboardview.OpenMoaView
 import pe.aioo.openmoa.view.keyboardview.PunctuationView
 import pe.aioo.openmoa.view.keyboardview.qwerty.QuertyView
 import pe.aioo.openmoa.view.message.SpecialKey
+import java.io.Serializable
 
 class OpenMoaIME : InputMethodService() {
 
@@ -38,23 +39,22 @@ class OpenMoaIME : InputMethodService() {
         composingText = ""
     }
 
-    private fun getSpecialKeyFromIntent(intent: Intent): SpecialKey? {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return intent.getSerializableExtra(EXTRA_NAME, SpecialKey::class.java)
+    private inline fun <reified T : Serializable> getKeyFromIntent(intent: Intent): T? {
+        val extra = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(EXTRA_NAME, Serializable::class.java)
         } else {
             @Suppress("DEPRECATION")
-            intent.getSerializableExtra(EXTRA_NAME).let {
-                return if (it is SpecialKey) it else null
-            }
+            intent.getSerializableExtra(EXTRA_NAME)
         }
+        return if (extra is T) extra else null
     }
 
     override fun onCreate() {
         super.onCreate()
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val key = intent.getStringExtra(EXTRA_NAME)
-                    ?: getSpecialKeyFromIntent(intent)
+                val key = getKeyFromIntent<String>(intent)
+                    ?: getKeyFromIntent<SpecialKey>(intent)
                     ?: return
                 when (key) {
                     is SpecialKey -> {
