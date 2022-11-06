@@ -138,16 +138,6 @@ class OpenMoaIME : InputMethodService() {
         LocalBroadcastManager.getInstance(this).registerReceiver(
             broadcastReceiver, IntentFilter(INTENT_ACTION)
         )
-        val punctuationView = PunctuationView(this)
-        val numberView = NumberView(this)
-        keyboardViews = mapOf(
-            IMEMode.IME_KO to OpenMoaView(this),
-            IMEMode.IME_EN to QuertyView(this),
-            IMEMode.IME_KO_PUNCTUATION to punctuationView,
-            IMEMode.IME_EN_PUNCTUATION to punctuationView,
-            IMEMode.IME_KO_NUMBER to numberView,
-            IMEMode.IME_EN_NUMBER to numberView,
-        )
     }
 
     private fun setKeyboard(mode: IMEMode) {
@@ -181,6 +171,7 @@ class OpenMoaIME : InputMethodService() {
 
     @SuppressLint("InflateParams")
     override fun onCreateInputView(): View {
+        super.onCreateInputView()
         window.window?.apply {
             navigationBarColor =
                 ContextCompat.getColor(this@OpenMoaIME, R.color.keyboard_background)
@@ -199,6 +190,16 @@ class OpenMoaIME : InputMethodService() {
                 }
             }
         }
+        val punctuationView = PunctuationView(this)
+        val numberView = NumberView(this)
+        keyboardViews = mapOf(
+            IMEMode.IME_KO to OpenMoaView(this),
+            IMEMode.IME_EN to QuertyView(this),
+            IMEMode.IME_KO_PUNCTUATION to punctuationView,
+            IMEMode.IME_EN_PUNCTUATION to punctuationView,
+            IMEMode.IME_KO_NUMBER to numberView,
+            IMEMode.IME_EN_NUMBER to numberView,
+        )
         val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
         binding = OpenMoaImeBinding.bind(view)
         setKeyboard(imeMode)

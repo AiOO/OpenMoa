@@ -6,7 +6,7 @@ import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -20,16 +20,8 @@ open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinCompone
 
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
     private val backgrounds = listOf(
-        ResourcesCompat.getDrawable(
-            context.resources,
-            R.drawable.key_background_pressed,
-            context.theme,
-        ),
-        ResourcesCompat.getDrawable(
-            context.resources,
-            R.drawable.key_background,
-            context.theme,
-        ),
+        ContextCompat.getDrawable(context, R.drawable.key_background_pressed),
+        ContextCompat.getDrawable(context, R.drawable.key_background),
     )
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
