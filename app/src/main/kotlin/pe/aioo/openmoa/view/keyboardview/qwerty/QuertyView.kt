@@ -91,13 +91,14 @@ class QuertyView : ConstraintLayout {
         ).map {
             it.apply {
                 setOnTouchListener(FunctionalKeyTouchListener(context) {
+                    val key = text.toString()
                     setShiftStatus(
                         when (shiftKeyStatus) {
                             ShiftKeyStatus.ENABLED -> ShiftKeyStatus.DISABLED
                             else -> shiftKeyStatus
                         }
                     )
-                    StringKeyMessage(text.toString())
+                    StringKeyMessage(key)
                 })
             }
         }
