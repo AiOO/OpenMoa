@@ -175,11 +175,13 @@ class OpenMoaIME : InputMethodService() {
     }
 
     private fun setShiftAutomatically() {
-        keyboardViews[imeMode].let {
-            if (it is QuertyView) {
-                it.setShiftEnabledAutomatically(
-                    currentInputConnection.getCursorCapsMode(currentInputEditorInfo.inputType) != 0
-                )
+        keyboardViews[imeMode]?.let { view ->
+            if (view is QuertyView) {
+                currentInputConnection?.let { inputConnection ->
+                    view.setShiftEnabledAutomatically(
+                        inputConnection.getCursorCapsMode(currentInputEditorInfo.inputType) != 0
+                    )
+                }
             }
         }
     }
