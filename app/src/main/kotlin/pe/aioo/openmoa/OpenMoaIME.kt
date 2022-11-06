@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
+import android.os.Build
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.View
@@ -19,8 +20,8 @@ import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.keyboardview.NumberView
 import pe.aioo.openmoa.view.keyboardview.OpenMoaView
 import pe.aioo.openmoa.view.keyboardview.PunctuationView
-import pe.aioo.openmoa.view.keyboardview.QuertyView
-import pe.aioo.openmoa.view.misc.SpecialKey
+import pe.aioo.openmoa.view.keyboardview.qwerty.QuertyView
+import pe.aioo.openmoa.view.message.SpecialKey
 
 class OpenMoaIME : InputMethodService() {
 
@@ -37,99 +38,121 @@ class OpenMoaIME : InputMethodService() {
         composingText = ""
     }
 
+    private fun getSpecialKeyFromIntent(intent: Intent): SpecialKey? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            return intent.getSerializableExtra(EXTRA_NAME, SpecialKey::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getSerializableExtra(EXTRA_NAME).let {
+                return if (it is SpecialKey) it else null
+            }
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         broadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
-                val key = intent.getStringExtra(EXTRA_NAME) ?: return
-                if (key.length > 1) {
-                    // Process for special key
-                    when (key) {
-                        SpecialKey.BACKSPACE.value -> {
-                            val unresolved = hangulAssembler.getUnresolved()
-                            if (unresolved != null) {
-                                composingText = composingText.substring(
-                                    0, composingText.length - unresolved.length
-                                )
-                                hangulAssembler.removeLastJamo()
-                                hangulAssembler.getUnresolved()?.let {
-                                    composingText += it
-                                }
-                            } else {
-                                if (composingText.isEmpty()) {
-                                    currentInputConnection.deleteSurroundingText(1, 0)
-                                } else {
+                val key = intent.getStringExtra(EXTRA_NAME)
+                    ?: getSpecialKeyFromIntent(intent)
+                    ?: return
+                when (key) {
+                    is SpecialKey -> {
+                        // Process for special key
+                        when (key) {
+                            SpecialKey.BACKSPACE -> {
+                                val unresolved = hangulAssembler.getUnresolved()
+                                if (unresolved != null) {
                                     composingText = composingText.substring(
-                                        0, composingText.lastIndex
+                                        0, composingText.length - unresolved.length
                                     )
+                                    hangulAssembler.removeLastJamo()
+                                    hangulAssembler.getUnresolved()?.let {
+                                        composingText += it
+                                    }
+                                } else {
+                                    if (composingText.isEmpty()) {
+                                        currentInputConnection.deleteSurroundingText(
+                                            1, 0
+                                        )
+                                    } else {
+                                        composingText = composingText.substring(
+                                            0, composingText.lastIndex
+                                        )
+                                    }
                                 }
                             }
+                            SpecialKey.ENTER -> {
+                                finishComposing()
+                                val action = currentInputEditorInfo.imeOptions and (
+                                    EditorInfo.IME_MASK_ACTION or
+                                    EditorInfo.IME_FLAG_NO_ENTER_ACTION
+                                )
+                                when (action) {
+                                    EditorInfo.IME_ACTION_GO,
+                                    EditorInfo.IME_ACTION_NEXT,
+                                    EditorInfo.IME_ACTION_SEARCH,
+                                    EditorInfo.IME_ACTION_SEND,
+                                    EditorInfo.IME_ACTION_DONE -> {
+                                        currentInputConnection.performEditorAction(action)
+                                    }
+                                    else -> {
+                                        currentInputConnection.sendKeyEvent(
+                                            KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)
+                                        )
+                                    }
+                                }
+                            }
+                            SpecialKey.LANGUAGE -> {
+                                setKeyboard(
+                                    when (imeMode) {
+                                        IMEMode.IME_KO -> IMEMode.IME_EN
+                                        IMEMode.IME_EN -> IMEMode.IME_KO
+                                        IMEMode.IME_KO_PUNCTUATION, IMEMode.IME_KO_NUMBER ->
+                                            IMEMode.IME_KO
+                                        IMEMode.IME_EN_PUNCTUATION, IMEMode.IME_EN_NUMBER ->
+                                            IMEMode.IME_EN
+                                    }
+                                )
+                            }
+                            SpecialKey.HANJA_NUMBER_PUNCTUATION -> {
+                                setKeyboard(
+                                    when (imeMode) {
+                                        IMEMode.IME_KO -> IMEMode.IME_KO_PUNCTUATION
+                                        IMEMode.IME_EN -> IMEMode.IME_EN_PUNCTUATION
+                                        IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
+                                        IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
+                                        IMEMode.IME_KO_NUMBER -> IMEMode.IME_KO
+                                        IMEMode.IME_EN_NUMBER -> IMEMode.IME_EN
+                                    }
+                                )
+                            }
+                            SpecialKey.ARROW, SpecialKey.EMOJI -> Unit
                         }
-                        SpecialKey.ENTER.value -> {
+                    }
+                    is String -> {
+                        if (key.matches(Regex("^[A-Za-z]$"))) {
+                            // Process for Alphabet key
+                            composingText += key
+                        } else if (key.matches(HangulAssembler.JAMO_REGEX)) {
+                            // Process for Jamo key
+                            hangulAssembler.getUnresolved()?.let {
+                                composingText = composingText.substring(
+                                    0, composingText.length - it.length
+                                )
+                            }
+                            hangulAssembler.appendJamo(key)?.let {
+                                composingText += it
+                            }
+                            hangulAssembler.getUnresolved()?.let {
+                                composingText += it
+                            }
+                        } else {
+                            // Process for another key
                             finishComposing()
-                            val action = currentInputEditorInfo.imeOptions and (
-                                EditorInfo.IME_MASK_ACTION or EditorInfo.IME_FLAG_NO_ENTER_ACTION
-                            )
-                            when (action) {
-                                EditorInfo.IME_ACTION_GO,
-                                EditorInfo.IME_ACTION_NEXT,
-                                EditorInfo.IME_ACTION_SEARCH,
-                                EditorInfo.IME_ACTION_SEND,
-                                EditorInfo.IME_ACTION_DONE -> {
-                                    currentInputConnection.performEditorAction(action)
-                                }
-                                else -> {
-                                    currentInputConnection.sendKeyEvent(
-                                        KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)
-                                    )
-                                }
-                            }
-                        }
-                        SpecialKey.LANGUAGE.value -> {
-                            setKeyboard(
-                                when (imeMode) {
-                                    IMEMode.IME_KO -> IMEMode.IME_EN
-                                    IMEMode.IME_EN -> IMEMode.IME_KO
-                                    IMEMode.IME_KO_PUNCTUATION, IMEMode.IME_KO_NUMBER ->
-                                        IMEMode.IME_KO
-                                    IMEMode.IME_EN_PUNCTUATION, IMEMode.IME_EN_NUMBER ->
-                                        IMEMode.IME_EN
-                                }
-                            )
-                        }
-                        SpecialKey.HANJA_NUMBER_PUNCTUATION.value -> {
-                            setKeyboard(
-                                when (imeMode) {
-                                    IMEMode.IME_KO -> IMEMode.IME_KO_PUNCTUATION
-                                    IMEMode.IME_EN -> IMEMode.IME_EN_PUNCTUATION
-                                    IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
-                                    IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
-                                    IMEMode.IME_KO_NUMBER -> IMEMode.IME_KO
-                                    IMEMode.IME_EN_NUMBER -> IMEMode.IME_EN
-                                }
-                            )
+                            currentInputConnection.commitText(key, 1)
                         }
                     }
-                } else if (key.matches(Regex("^[A-Za-z]$"))) {
-                    // Process for Alphabet key
-                    composingText += key
-                } else if (key.matches(HangulAssembler.JAMO_REGEX)) {
-                    // Process for Jamo key
-                    hangulAssembler.getUnresolved()?.let {
-                        composingText = composingText.substring(
-                            0, composingText.length - it.length
-                        )
-                    }
-                    hangulAssembler.appendJamo(key)?.let {
-                        composingText += it
-                    }
-                    hangulAssembler.getUnresolved()?.let {
-                        composingText += it
-                    }
-                } else {
-                    // Process for another key
-                    finishComposing()
-                    currentInputConnection.commitText(key, 1)
                 }
                 currentInputConnection.setComposingText(composingText, 1)
                 setShiftAutomatically()

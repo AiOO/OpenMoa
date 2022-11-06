@@ -6,9 +6,11 @@ import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.NumberViewBinding
-import pe.aioo.openmoa.view.misc.SpecialKey
+import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
+import pe.aioo.openmoa.view.message.SpecialKeyMessage
+import pe.aioo.openmoa.view.message.StringKeyMessage
 
 class NumberView : ConstraintLayout {
 
@@ -36,34 +38,40 @@ class NumberView : ConstraintLayout {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners() {
-        binding.plusKey.setOnTouchListener(SimpleKeyTouchListener(context, "+"))
-        binding.oneKey.setOnTouchListener(SimpleKeyTouchListener(context, "1"))
-        binding.twoKey.setOnTouchListener(SimpleKeyTouchListener(context, "2"))
-        binding.threeKey.setOnTouchListener(SimpleKeyTouchListener(context, "3"))
-        binding.minusKey.setOnTouchListener(SimpleKeyTouchListener(context, "-"))
-        binding.asteriskKey.setOnTouchListener(SimpleKeyTouchListener(context, "*"))
-        binding.fourKey.setOnTouchListener(SimpleKeyTouchListener(context, "4"))
-        binding.fiveKey.setOnTouchListener(SimpleKeyTouchListener(context, "5"))
-        binding.sixKey.setOnTouchListener(SimpleKeyTouchListener(context, "6"))
-        binding.dotKey.setOnTouchListener(SimpleKeyTouchListener(context, "."))
-        binding.slashKey.setOnTouchListener(SimpleKeyTouchListener(context, "/"))
-        binding.sevenKey.setOnTouchListener(SimpleKeyTouchListener(context, "7"))
-        binding.eightKey.setOnTouchListener(SimpleKeyTouchListener(context, "8"))
-        binding.nineKey.setOnTouchListener(SimpleKeyTouchListener(context, "9"))
-        binding.backspaceKey.setOnTouchListener(
-            RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
-        )
-        binding.languageKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.LANGUAGE.value)
-        )
-        binding.hanjaNumberPunctuationKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.HANJA_NUMBER_PUNCTUATION.value)
-        )
-        binding.zeroKey.setOnTouchListener(SimpleKeyTouchListener(context, "0"))
-        binding.spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, " "))
-        binding.enterKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
-        )
+        binding.apply {
+            plusKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("+")))
+            oneKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("1")))
+            twoKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("2")))
+            threeKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("3")))
+            minusKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("-")))
+            asteriskKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, StringKeyMessage("*"))
+            )
+            fourKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("4")))
+            fiveKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("5")))
+            sixKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("6")))
+            dotKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(".")))
+            slashKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("/")))
+            sevenKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("7")))
+            eightKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("8")))
+            nineKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("9")))
+            backspaceKey.setOnTouchListener(
+                RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
+            )
+            languageKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.LANGUAGE))
+            )
+            hanjaNumberPunctuationKey.setOnTouchListener(
+                SimpleKeyTouchListener(
+                    context, SpecialKeyMessage(SpecialKey.HANJA_NUMBER_PUNCTUATION)
+                )
+            )
+            zeroKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("0")))
+            spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(" ")))
+            enterKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
+            )
+        }
     }
 
 }

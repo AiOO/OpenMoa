@@ -1,20 +1,19 @@
-package pe.aioo.openmoa.view.keyboardview
+package pe.aioo.openmoa.view.keyboardview.qwerty
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
-import pe.aioo.openmoa.view.misc.SpecialKey
+import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.databinding.QuertyViewBinding
 import pe.aioo.openmoa.view.keytouchlistener.CrossKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
+import pe.aioo.openmoa.view.message.SpecialKeyMessage
+import pe.aioo.openmoa.view.message.StringKeyMessage
 
 class QuertyView : ConstraintLayout {
 
@@ -34,7 +33,6 @@ class QuertyView : ConstraintLayout {
 
     private var shiftKeyStatus = ShiftKeyStatus.DISABLED
     private lateinit var binding: QuertyViewBinding
-    private val broadcastManager = LocalBroadcastManager.getInstance(context)
 
     private fun init() {
         inflate(context, R.layout.querty_view, this)
@@ -93,52 +91,57 @@ class QuertyView : ConstraintLayout {
         ).map {
             it.apply {
                 setOnTouchListener(FunctionalKeyTouchListener(context) {
-                    sendKey(text.toString())
                     setShiftStatus(
                         when (shiftKeyStatus) {
                             ShiftKeyStatus.ENABLED -> ShiftKeyStatus.DISABLED
                             else -> shiftKeyStatus
                         }
                     )
+                    StringKeyMessage(text.toString())
                 })
             }
         }
-        binding.shiftKey.setOnTouchListener(
-            FunctionalKeyTouchListener(context, false) {
-                setShiftStatus(
-                    when (shiftKeyStatus) {
-                        ShiftKeyStatus.DISABLED -> ShiftKeyStatus.ENABLED
-                        ShiftKeyStatus.ENABLED -> ShiftKeyStatus.LOCKED
-                        ShiftKeyStatus.AUTO_ENABLED,
-                        ShiftKeyStatus.LOCKED -> ShiftKeyStatus.DISABLED
-                    }
+        binding.apply {
+            shiftKey.setOnTouchListener(
+                FunctionalKeyTouchListener(context, false) {
+                    setShiftStatus(
+                        when (shiftKeyStatus) {
+                            ShiftKeyStatus.DISABLED -> ShiftKeyStatus.ENABLED
+                            ShiftKeyStatus.ENABLED -> ShiftKeyStatus.LOCKED
+                            ShiftKeyStatus.AUTO_ENABLED,
+                            ShiftKeyStatus.LOCKED -> ShiftKeyStatus.DISABLED
+                        }
+                    )
+                    null
+                }
+            )
+            backspaceKey.setOnTouchListener(
+                RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
+            )
+            languageKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.LANGUAGE))
+            )
+            hanjaNumberPunctuationKey.setOnTouchListener(
+                SimpleKeyTouchListener(
+                    context, SpecialKeyMessage(SpecialKey.HANJA_NUMBER_PUNCTUATION)
                 )
-            }
-        )
-        binding.backspaceKey.setOnTouchListener(
-            RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
-        )
-        binding.languageKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.LANGUAGE.value)
-        )
-        binding.hanjaNumberPunctuationKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.HANJA_NUMBER_PUNCTUATION.value)
-        )
-        binding.spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, " "))
-        binding.commaQuestionDotExclamationKey.setOnTouchListener(
-            CrossKeyTouchListener(context, listOf(",", "!", ".", "?"))
-        )
-        binding.enterKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
-        )
-    }
-
-    private fun sendKey(key: String) {
-        broadcastManager.sendBroadcast(
-            Intent(OpenMoaIME.INTENT_ACTION).apply {
-                putExtra(OpenMoaIME.EXTRA_NAME, key)
-            }
-        )
+            )
+            spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(" ")))
+            commaQuestionDotExclamationKey.setOnTouchListener(
+                CrossKeyTouchListener(
+                    context,
+                    listOf(
+                        StringKeyMessage(","),
+                        StringKeyMessage("!"),
+                        StringKeyMessage("."),
+                        StringKeyMessage("?"),
+                    ),
+                )
+            )
+            enterKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
+            )
+        }
     }
 
     companion object {

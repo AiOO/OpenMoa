@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.MotionEvent
 import android.view.View
 import pe.aioo.openmoa.hangul.MoeumGestureProcessor
+import pe.aioo.openmoa.view.message.StringKeyMessage
 import kotlin.math.*
 
 class JaumKeyTouchListener(
@@ -48,9 +49,9 @@ class JaumKeyTouchListener(
                 }
             }
             MotionEvent.ACTION_UP -> {
-                sendKey(key)
+                sendKeyMessage(StringKeyMessage(key))
                 moeumGestureProcessor.resolveMoeumList()?.let {
-                    sendKey(it)
+                    sendKeyMessage(StringKeyMessage(it))
                 }
             }
         }

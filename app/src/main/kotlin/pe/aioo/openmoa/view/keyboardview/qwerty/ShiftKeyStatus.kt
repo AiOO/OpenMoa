@@ -1,4 +1,4 @@
-package pe.aioo.openmoa.view.keyboardview
+package pe.aioo.openmoa.view.keyboardview.qwerty
 
 enum class ShiftKeyStatus {
     DISABLED,

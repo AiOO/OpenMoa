@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
+import pe.aioo.openmoa.view.message.BaseKeyMessage
 import java.util.Timer
 
 class RepeatKeyTouchListener(
     context: Context,
-    private val key: String,
+    private val key: BaseKeyMessage,
 ) : BaseKeyTouchListener(context) {
 
     private var elapsed = 0L
@@ -16,11 +17,11 @@ class RepeatKeyTouchListener(
 
     private fun startTimer() {
         elapsed = 0L
-        sendKey(key)
+        sendKeyMessage(key)
         timer = kotlin.concurrent.timer(period = config.longPressRepeatTime) {
             elapsed += config.longPressRepeatTime
             if (elapsed >= config.longPressThresholdTime) {
-                sendKey(key)
+                sendKeyMessage(key)
             }
         }
     }

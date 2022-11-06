@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MotionEvent
 import android.view.View
+import pe.aioo.openmoa.view.message.BaseKeyMessage
 import kotlin.math.*
 
 class CrossKeyTouchListener(
     context: Context,
-    private val keyList: List<String>,
+    private val keyList: List<BaseKeyMessage>,
 ) : BaseKeyTouchListener(context) {
 
     private var startX: Float = 0f
@@ -32,14 +33,14 @@ class CrossKeyTouchListener(
                     startX = currentX
                     startY = currentY
                     if (abs(degree) < 45f) {
-                        sendKey(keyList[1])
+                        sendKeyMessage(keyList[1])
                     } else if (abs(degree) < 135f) {
-                        sendKey(if (degree > 0) keyList[2] else keyList[0])
+                        sendKeyMessage(if (degree > 0) keyList[2] else keyList[0])
                     } else {
-                        sendKey(keyList[3])
+                        sendKeyMessage(keyList[3])
                     }
                 } else {
-                    sendKey(keyList[2])
+                    sendKeyMessage(keyList[2])
                 }
             }
         }

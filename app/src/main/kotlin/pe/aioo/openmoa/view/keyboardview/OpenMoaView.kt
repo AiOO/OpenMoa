@@ -5,12 +5,14 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import pe.aioo.openmoa.R
-import pe.aioo.openmoa.view.misc.SpecialKey
+import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.databinding.OpenMoaViewBinding
 import pe.aioo.openmoa.view.keytouchlistener.CrossKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.JaumKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
+import pe.aioo.openmoa.view.message.SpecialKeyMessage
+import pe.aioo.openmoa.view.message.StringKeyMessage
 
 class OpenMoaView : ConstraintLayout {
 
@@ -35,51 +37,67 @@ class OpenMoaView : ConstraintLayout {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners(binding: OpenMoaViewBinding) {
-        binding.tildeKey.setOnTouchListener(SimpleKeyTouchListener(context, "~"))
-        binding.ssangbieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅃ"))
-        binding.ssangjieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅉ"))
-        binding.ssangdigeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄸ"))
-        binding.ssanggiyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄲ"))
-        binding.ssangsiotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅆ"))
-        binding.emojiKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.EMOJI.value)
-        )
-        binding.caretKey.setOnTouchListener(SimpleKeyTouchListener(context, "^"))
-        binding.bieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅂ"))
-        binding.jieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅈ"))
-        binding.digeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄷ"))
-        binding.giyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄱ"))
-        binding.siotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅅ"))
-        binding.backspaceKey.setOnTouchListener(
-            RepeatKeyTouchListener(context, SpecialKey.BACKSPACE.value)
-        )
-        binding.semicolonKey.setOnTouchListener(SimpleKeyTouchListener(context, ";"))
-        binding.mieumKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅁ"))
-        binding.nieunKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄴ"))
-        binding.ieungKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅇ"))
-        binding.rieulKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄹ"))
-        binding.hieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅎ"))
-        binding.iKey.setOnTouchListener(SimpleKeyTouchListener(context, "ㅣ"))
-        binding.asteriskKey.setOnTouchListener(SimpleKeyTouchListener(context, "*"))
-        binding.kieukKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅋ"))
-        binding.tieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅌ"))
-        binding.chieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅊ"))
-        binding.pieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅍ"))
-        binding.euKey.setOnTouchListener(SimpleKeyTouchListener(context, "ㅡ"))
-        binding.araeaKey.setOnTouchListener(SimpleKeyTouchListener(context, "ㆍ"))
-        binding.languageKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.LANGUAGE.value)
-        )
-        binding.hanjaNumberPunctuationKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.HANJA_NUMBER_PUNCTUATION.value)
-        )
-        binding.spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, " "))
-        binding.commaQuestionDotExclamationKey.setOnTouchListener(
-            CrossKeyTouchListener(context, listOf(",", "!", ".", "?"))
-        )
-        binding.enterKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKey.ENTER.value)
-        )
+        binding.apply {
+            tildeKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("~")))
+            ssangbieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅃ"))
+            ssangjieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅉ"))
+            ssangdigeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄸ"))
+            ssanggiyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄲ"))
+            ssangsiotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅆ"))
+            emojiKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.EMOJI))
+            )
+            caretKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("^")))
+            bieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅂ"))
+            jieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅈ"))
+            digeutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄷ"))
+            giyeokKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄱ"))
+            siotKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅅ"))
+            backspaceKey.setOnTouchListener(
+                RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
+            )
+            semicolonKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, StringKeyMessage(";"))
+            )
+            mieumKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅁ"))
+            nieunKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄴ"))
+            ieungKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅇ"))
+            rieulKey.setOnTouchListener(JaumKeyTouchListener(context, "ㄹ"))
+            hieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅎ"))
+            iKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("ㅣ")))
+            asteriskKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, StringKeyMessage("*"))
+            )
+            kieukKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅋ"))
+            tieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅌ"))
+            chieutKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅊ"))
+            pieupKey.setOnTouchListener(JaumKeyTouchListener(context, "ㅍ"))
+            euKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("ㅡ")))
+            araeaKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage("ㆍ")))
+            languageKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.LANGUAGE))
+            )
+            hanjaNumberPunctuationKey.setOnTouchListener(
+                SimpleKeyTouchListener(
+                    context, SpecialKeyMessage(SpecialKey.HANJA_NUMBER_PUNCTUATION)
+                )
+            )
+            spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(" ")))
+            commaQuestionDotExclamationKey.setOnTouchListener(
+                CrossKeyTouchListener(
+                    context,
+                    listOf(
+                        StringKeyMessage(","),
+                        StringKeyMessage("!"),
+                        StringKeyMessage("."),
+                        StringKeyMessage("?"),
+                    ),
+                )
+            )
+            enterKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
+            )
+        }
     }
 
 }

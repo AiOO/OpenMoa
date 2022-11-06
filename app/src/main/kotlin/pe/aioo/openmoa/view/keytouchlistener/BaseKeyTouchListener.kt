@@ -13,6 +13,9 @@ import org.koin.core.component.inject
 import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.config.Config
+import pe.aioo.openmoa.view.message.BaseKeyMessage
+import pe.aioo.openmoa.view.message.SpecialKeyMessage
+import pe.aioo.openmoa.view.message.StringKeyMessage
 
 open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinComponent {
 
@@ -40,10 +43,14 @@ open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinCompone
         return true
     }
 
-    protected fun sendKey(key: String) {
+    protected fun sendKeyMessage(keyMessage: BaseKeyMessage) {
         broadcastManager.sendBroadcast(
             Intent(OpenMoaIME.INTENT_ACTION).apply {
-                putExtra(OpenMoaIME.EXTRA_NAME, key)
+                putExtra(OpenMoaIME.EXTRA_NAME, when (keyMessage) {
+                    is StringKeyMessage -> keyMessage.key
+                    is SpecialKeyMessage -> keyMessage.key
+                    else -> ""
+                })
             }
         )
     }
