@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- First Line -->
+
+    <TextView
+        android:id="@+id/copyAllKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_copy_all"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/homeKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/copyKey"/>
+
+    <TextView
+        android:id="@+id/copyKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_copy"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/copyAllKey"
+        app:layout_constraintBottom_toBottomOf="@+id/copyAllKey"
+        app:layout_constraintLeft_toRightOf="@+id/copyAllKey"
+        app:layout_constraintRight_toLeftOf="@+id/upKey" />
+
+    <TextView
+        android:id="@+id/upKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_up"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/copyAllKey"
+        app:layout_constraintBottom_toBottomOf="@+id/copyAllKey"
+        app:layout_constraintLeft_toRightOf="@+id/copyKey"
+        app:layout_constraintRight_toLeftOf="@+id/cutKey" />
+
+    <TextView
+        android:id="@+id/cutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_cut"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/copyAllKey"
+        app:layout_constraintBottom_toBottomOf="@+id/copyAllKey"
+        app:layout_constraintLeft_toRightOf="@+id/upKey"
+        app:layout_constraintRight_toLeftOf="@+id/cutAllKey" />
+
+    <TextView
+        android:id="@+id/cutAllKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_cut_all"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/copyAllKey"
+        app:layout_constraintBottom_toBottomOf="@+id/copyAllKey"
+        app:layout_constraintLeft_toRightOf="@+id/cutKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Second Line -->
+
+    <TextView
+        android:id="@+id/homeKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_home"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/copyAllKey"
+        app:layout_constraintBottom_toTopOf="@+id/endKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/leftKey" />
+
+    <TextView
+        android:id="@+id/leftKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_left"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/homeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/homeKey"
+        app:layout_constraintLeft_toRightOf="@+id/homeKey"
+        app:layout_constraintRight_toLeftOf="@+id/areaSelectKey" />
+
+    <TextView
+        android:id="@+id/areaSelectKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_area_select"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/homeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/homeKey"
+        app:layout_constraintLeft_toRightOf="@+id/leftKey"
+        app:layout_constraintRight_toLeftOf="@+id/rightKey" />
+
+    <TextView
+        android:id="@+id/rightKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_right"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/homeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/homeKey"
+        app:layout_constraintLeft_toRightOf="@+id/areaSelectKey"
+        app:layout_constraintRight_toLeftOf="@+id/clipboardKey" />
+
+    <TextView
+        android:id="@+id/clipboardKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_clipboard"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/homeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/homeKey"
+        app:layout_constraintLeft_toRightOf="@+id/rightKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Third Line -->
+
+    <TextView
+        android:id="@+id/endKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_end"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/homeKey"
+        app:layout_constraintBottom_toTopOf="@+id/languageKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/deleteKey" />
+
+    <TextView
+        android:id="@+id/deleteKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_delete"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/endKey"
+        app:layout_constraintBottom_toBottomOf="@+id/endKey"
+        app:layout_constraintLeft_toRightOf="@+id/endKey"
+        app:layout_constraintRight_toLeftOf="@+id/downKey" />
+
+    <TextView
+        android:id="@+id/downKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_down"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/endKey"
+        app:layout_constraintBottom_toBottomOf="@+id/endKey"
+        app:layout_constraintLeft_toRightOf="@+id/deleteKey"
+        app:layout_constraintRight_toLeftOf="@+id/pasteKey" />
+
+    <TextView
+        android:id="@+id/pasteKey"
+        style="@style/KeyStyle"
+        android:text='@string/key_paste'
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/endKey"
+        app:layout_constraintBottom_toBottomOf="@+id/endKey"
+        app:layout_constraintLeft_toRightOf="@+id/downKey"
+        app:layout_constraintRight_toLeftOf="@+id/backspaceKey" />
+
+    <TextView
+        android:id="@+id/backspaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_backspace"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/endKey"
+        app:layout_constraintBottom_toBottomOf="@+id/endKey"
+        app:layout_constraintLeft_toRightOf="@+id/pasteKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Fourth Line -->
+
+    <TextView
+        android:id="@+id/languageKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_language"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/endKey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey" />
+
+    <TextView
+        android:id="@+id/hanjaNumberPunctuationKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_hanja_number_punctuation"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/languageKey"
+        app:layout_constraintRight_toLeftOf="@+id/spaceKey" />
+
+    <TextView
+        android:id="@+id/spaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_space"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/hanjaNumberPunctuationKey"
+        app:layout_constraintRight_toLeftOf="@+id/enterKey" />
+
+    <TextView
+        android:id="@+id/enterKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_enter"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/languageKey"
+        app:layout_constraintBottom_toBottomOf="@+id/languageKey"
+        app:layout_constraintLeft_toRightOf="@+id/spaceKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
