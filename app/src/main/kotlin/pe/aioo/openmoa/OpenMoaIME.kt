@@ -146,6 +146,18 @@ class OpenMoaIME : InputMethodService() {
                                     }
                                 )
                             }
+                            SpecialKey.ARROW_UP -> currentInputConnection.sendKeyEvent(
+                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_UP)
+                            )
+                            SpecialKey.ARROW_LEFT -> currentInputConnection.sendKeyEvent(
+                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_LEFT)
+                            )
+                            SpecialKey.ARROW_RIGHT -> currentInputConnection.sendKeyEvent(
+                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_RIGHT)
+                            )
+                            SpecialKey.ARROW_DOWN -> currentInputConnection.sendKeyEvent(
+                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)
+                            )
                             SpecialKey.EMOJI -> Unit
                         }
                     }

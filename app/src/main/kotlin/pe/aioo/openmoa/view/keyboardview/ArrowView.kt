@@ -39,6 +39,18 @@ class ArrowView : ConstraintLayout {
     @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners() {
         binding.apply {
+            upKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_UP))
+            )
+            leftKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_LEFT))
+            )
+            rightKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_RIGHT))
+            )
+            downKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_DOWN))
+            )
             backspaceKey.setOnTouchListener(
                 RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
             )
