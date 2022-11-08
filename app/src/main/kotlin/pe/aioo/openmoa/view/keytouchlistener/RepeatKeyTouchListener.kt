@@ -37,7 +37,7 @@ class RepeatKeyTouchListener(
             MotionEvent.ACTION_DOWN -> {
                 startTimer()
             }
-            MotionEvent.ACTION_UP -> {
+            MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 endTimer()
             }
         }

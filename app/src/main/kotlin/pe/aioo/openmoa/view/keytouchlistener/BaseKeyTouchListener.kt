@@ -35,6 +35,9 @@ open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinCompone
                     view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_PRESS)
                 }
             }
+            MotionEvent.ACTION_CANCEL -> {
+                view.background = backgrounds[1]
+            }
             MotionEvent.ACTION_UP -> {
                 view.background = backgrounds[1]
                 view.performClick()
