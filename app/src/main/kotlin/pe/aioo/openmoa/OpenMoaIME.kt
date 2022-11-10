@@ -17,10 +17,7 @@ import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
-import pe.aioo.openmoa.view.keyboardview.ArrowView
-import pe.aioo.openmoa.view.keyboardview.NumberView
-import pe.aioo.openmoa.view.keyboardview.OpenMoaView
-import pe.aioo.openmoa.view.keyboardview.PunctuationView
+import pe.aioo.openmoa.view.keyboardview.*
 import pe.aioo.openmoa.view.keyboardview.qwerty.QuertyView
 import pe.aioo.openmoa.view.message.SpecialKey
 import java.io.Serializable
@@ -111,10 +108,12 @@ class OpenMoaIME : InputMethodService() {
                                         IMEMode.IME_EN -> IMEMode.IME_KO
                                         IMEMode.IME_KO_PUNCTUATION,
                                         IMEMode.IME_KO_NUMBER,
-                                        IMEMode.IME_KO_ARROW -> IMEMode.IME_KO
+                                        IMEMode.IME_KO_ARROW,
+                                        IMEMode.IME_KO_PHONE -> IMEMode.IME_KO
                                         IMEMode.IME_EN_PUNCTUATION,
                                         IMEMode.IME_EN_NUMBER,
-                                        IMEMode.IME_EN_ARROW -> IMEMode.IME_EN
+                                        IMEMode.IME_EN_ARROW,
+                                        IMEMode.IME_EN_PHONE -> IMEMode.IME_EN
                                     }
                                 )
                             }
@@ -123,10 +122,12 @@ class OpenMoaIME : InputMethodService() {
                                     when (imeMode) {
                                         IMEMode.IME_KO,
                                         IMEMode.IME_KO_NUMBER,
-                                        IMEMode.IME_KO_ARROW-> IMEMode.IME_KO_PUNCTUATION
+                                        IMEMode.IME_KO_ARROW,
+                                        IMEMode.IME_KO_PHONE -> IMEMode.IME_KO_PUNCTUATION
                                         IMEMode.IME_EN,
                                         IMEMode.IME_EN_NUMBER,
-                                        IMEMode.IME_EN_ARROW -> IMEMode.IME_EN_PUNCTUATION
+                                        IMEMode.IME_EN_ARROW,
+                                        IMEMode.IME_EN_PHONE -> IMEMode.IME_EN_PUNCTUATION
                                         IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
                                         IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
                                     }
@@ -138,11 +139,13 @@ class OpenMoaIME : InputMethodService() {
                                         IMEMode.IME_KO,
                                         IMEMode.IME_KO_NUMBER,
                                         IMEMode.IME_KO_PUNCTUATION,
-                                        IMEMode.IME_KO_ARROW -> IMEMode.IME_KO_ARROW
+                                        IMEMode.IME_KO_ARROW,
+                                        IMEMode.IME_KO_PHONE -> IMEMode.IME_KO_ARROW
                                         IMEMode.IME_EN,
                                         IMEMode.IME_EN_NUMBER,
                                         IMEMode.IME_EN_PUNCTUATION,
-                                        IMEMode.IME_EN_ARROW -> IMEMode.IME_EN_ARROW
+                                        IMEMode.IME_EN_ARROW,
+                                        IMEMode.IME_EN_PHONE -> IMEMode.IME_EN_ARROW
                                     }
                                 )
                             }
@@ -197,8 +200,9 @@ class OpenMoaIME : InputMethodService() {
     private fun setKeyboard(mode: IMEMode) {
         finishComposing()
         keyboardViews[mode]?.let {
-            if (it is PunctuationView) {
-                it.setPageOrNextPage(0)
+            when (it) {
+                is PunctuationView -> it.setPageOrNextPage(0)
+                is PhoneView -> it.setPageOrNextPage(0)
             }
             binding.keyboardFrameLayout.setKeyboardView(it)
         }
@@ -219,13 +223,16 @@ class OpenMoaIME : InputMethodService() {
 
     private fun returnFromNonStringKeyboard() {
         when (imeMode) {
+            IMEMode.IME_KO,
             IMEMode.IME_KO_PUNCTUATION,
             IMEMode.IME_KO_NUMBER,
-            IMEMode.IME_KO_ARROW -> setKeyboard(IMEMode.IME_KO)
+            IMEMode.IME_KO_ARROW,
+            IMEMode.IME_KO_PHONE -> setKeyboard(IMEMode.IME_KO)
+            IMEMode.IME_EN,
             IMEMode.IME_EN_PUNCTUATION,
             IMEMode.IME_EN_NUMBER,
-            IMEMode.IME_EN_ARROW -> setKeyboard(IMEMode.IME_EN)
-            else -> Unit
+            IMEMode.IME_EN_ARROW,
+            IMEMode.IME_EN_PHONE -> setKeyboard(IMEMode.IME_EN)
         }
     }
 
@@ -253,6 +260,7 @@ class OpenMoaIME : InputMethodService() {
         val punctuationView = PunctuationView(this)
         val numberView = NumberView(this)
         val arrowView = ArrowView(this)
+        val phoneView = PhoneView(this)
         keyboardViews = mapOf(
             IMEMode.IME_KO to OpenMoaView(this),
             IMEMode.IME_EN to QuertyView(this),
@@ -262,6 +270,8 @@ class OpenMoaIME : InputMethodService() {
             IMEMode.IME_EN_NUMBER to numberView,
             IMEMode.IME_KO_ARROW to arrowView,
             IMEMode.IME_EN_ARROW to arrowView,
+            IMEMode.IME_KO_PHONE to phoneView,
+            IMEMode.IME_EN_PHONE to phoneView,
         )
         val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
         binding = OpenMoaImeBinding.bind(view)
@@ -272,17 +282,43 @@ class OpenMoaIME : InputMethodService() {
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         finishComposing()
-        if (info != null && info.inputType and InputType.TYPE_CLASS_NUMBER != 0) {
-            setKeyboard(
-                when(imeMode) {
-                    IMEMode.IME_KO, IMEMode.IME_KO_PUNCTUATION -> IMEMode.IME_KO_NUMBER
-                    IMEMode.IME_EN, IMEMode.IME_EN_PUNCTUATION -> IMEMode.IME_EN_NUMBER
-                    else -> imeMode
-                }
-            )
-        } else {
-            setShiftAutomatically()
-            returnFromNonStringKeyboard()
+        when ((info?.inputType ?: 0) and InputType.TYPE_MASK_CLASS) {
+            InputType.TYPE_CLASS_NUMBER -> {
+                setKeyboard(
+                    when(imeMode) {
+                        IMEMode.IME_KO,
+                        IMEMode.IME_KO_PUNCTUATION,
+                        IMEMode.IME_KO_NUMBER,
+                        IMEMode.IME_KO_ARROW,
+                        IMEMode.IME_KO_PHONE -> IMEMode.IME_KO_NUMBER
+                        IMEMode.IME_EN,
+                        IMEMode.IME_EN_PUNCTUATION,
+                        IMEMode.IME_EN_NUMBER,
+                        IMEMode.IME_EN_ARROW,
+                        IMEMode.IME_EN_PHONE -> IMEMode.IME_EN_NUMBER
+                    }
+                )
+            }
+            InputType.TYPE_CLASS_PHONE -> {
+                setKeyboard(
+                    when(imeMode) {
+                        IMEMode.IME_KO,
+                        IMEMode.IME_KO_PUNCTUATION,
+                        IMEMode.IME_KO_NUMBER,
+                        IMEMode.IME_KO_ARROW,
+                        IMEMode.IME_KO_PHONE -> IMEMode.IME_KO_PHONE
+                        IMEMode.IME_EN,
+                        IMEMode.IME_EN_PUNCTUATION,
+                        IMEMode.IME_EN_NUMBER,
+                        IMEMode.IME_EN_ARROW,
+                        IMEMode.IME_EN_PHONE -> IMEMode.IME_EN_PHONE
+                    }
+                )
+            }
+            else -> {
+                setShiftAutomatically()
+                returnFromNonStringKeyboard()
+            }
         }
     }
 

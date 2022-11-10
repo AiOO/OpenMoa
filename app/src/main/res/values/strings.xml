@@ -42,9 +42,11 @@
     <string name="key_nieun">ㄴ</string>
     <string name="key_nine">9</string>
     <string name="key_one">1</string>
+    <string name="key_one_two_three">123</string>
     <string name="key_paste">붙이기</string>
     <string name="key_pieup">ㅍ</string>
     <string name="key_plus">+</string>
+    <string name="key_punctuation">기호</string>
     <string name="key_rieul">ㄹ</string>
     <string name="key_right">▶</string>
     <string name="key_semicolon">;</string>

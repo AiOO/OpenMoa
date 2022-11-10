@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- First Line -->
+
+    <TextView
+        android:id="@+id/oneKey"
+        style="@style/KeyStyle"
+        tools:text="1"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fourKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/twoKey" />
+
+    <TextView
+        android:id="@+id/twoKey"
+        style="@style/KeyStyle"
+        tools:text="2"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/oneKey"
+        app:layout_constraintBottom_toBottomOf="@+id/oneKey"
+        app:layout_constraintLeft_toRightOf="@+id/oneKey"
+        app:layout_constraintRight_toLeftOf="@+id/threeKey" />
+
+    <TextView
+        android:id="@+id/threeKey"
+        style="@style/KeyStyle"
+        tools:text="3"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/oneKey"
+        app:layout_constraintBottom_toBottomOf="@+id/oneKey"
+        app:layout_constraintLeft_toRightOf="@+id/twoKey"
+        app:layout_constraintRight_toLeftOf="@+id/backspaceKey" />
+
+    <TextView
+        android:id="@+id/backspaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_backspace"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/oneKey"
+        app:layout_constraintBottom_toBottomOf="@+id/oneKey"
+        app:layout_constraintLeft_toRightOf="@+id/threeKey"
+        app:layout_constraintRight_toRightOf="parent"  />
+
+    <!-- Second Line -->
+
+    <TextView
+        android:id="@+id/fourKey"
+        style="@style/KeyStyle"
+        tools:text="4"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/oneKey"
+        app:layout_constraintBottom_toTopOf="@+id/sevenKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/fiveKey" />
+
+    <TextView
+        android:id="@+id/fiveKey"
+        style="@style/KeyStyle"
+        tools:text="5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/fourKey"
+        app:layout_constraintBottom_toBottomOf="@+id/fourKey"
+        app:layout_constraintLeft_toRightOf="@+id/fourKey"
+        app:layout_constraintRight_toLeftOf="@+id/sixKey" />
+
+    <TextView
+        android:id="@+id/sixKey"
+        style="@style/KeyStyle"
+        tools:text="6"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/fourKey"
+        app:layout_constraintBottom_toBottomOf="@+id/fourKey"
+        app:layout_constraintLeft_toRightOf="@+id/fiveKey"
+        app:layout_constraintRight_toLeftOf="@+id/minusKey" />
+
+    <TextView
+        android:id="@+id/minusKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_minus"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/fourKey"
+        app:layout_constraintBottom_toBottomOf="@+id/fourKey"
+        app:layout_constraintLeft_toRightOf="@+id/sixKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Third Line -->
+
+    <TextView
+        android:id="@+id/sevenKey"
+        style="@style/KeyStyle"
+        tools:text="7"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/fourKey"
+        app:layout_constraintBottom_toTopOf="@+id/punctuationKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/eightKey" />
+
+    <TextView
+        android:id="@+id/eightKey"
+        style="@style/KeyStyle"
+        tools:text="8"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/sevenKey"
+        app:layout_constraintBottom_toBottomOf="@+id/sevenKey"
+        app:layout_constraintLeft_toRightOf="@+id/sevenKey"
+        app:layout_constraintRight_toLeftOf="@+id/nineKey" />
+
+    <TextView
+        android:id="@+id/nineKey"
+        style="@style/KeyStyle"
+        tools:text='9'
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/sevenKey"
+        app:layout_constraintBottom_toBottomOf="@+id/sevenKey"
+        app:layout_constraintLeft_toRightOf="@+id/eightKey"
+        app:layout_constraintRight_toLeftOf="@+id/dotKey" />
+
+    <TextView
+        android:id="@+id/dotKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_dot"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/sevenKey"
+        app:layout_constraintBottom_toBottomOf="@+id/sevenKey"
+        app:layout_constraintLeft_toRightOf="@+id/nineKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Fourth Line -->
+
+    <TextView
+        android:id="@+id/punctuationKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_punctuation"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/sevenKey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/zeroKey"  />
+
+    <TextView
+        android:id="@+id/zeroKey"
+        style="@style/KeyStyle"
+        tools:text="0"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/punctuationKey"
+        app:layout_constraintBottom_toBottomOf="@+id/punctuationKey"
+        app:layout_constraintLeft_toRightOf="@+id/punctuationKey"
+        app:layout_constraintRight_toLeftOf="@+id/spaceKey" />
+
+    <TextView
+        android:id="@+id/spaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_space"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/punctuationKey"
+        app:layout_constraintBottom_toBottomOf="@+id/punctuationKey"
+        app:layout_constraintLeft_toRightOf="@+id/zeroKey"
+        app:layout_constraintRight_toLeftOf="@+id/enterKey" />
+
+    <TextView
+        android:id="@+id/enterKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_enter"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/punctuationKey"
+        app:layout_constraintBottom_toBottomOf="@+id/punctuationKey"
+        app:layout_constraintLeft_toRightOf="@+id/spaceKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
