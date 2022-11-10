@@ -49,8 +49,13 @@ class OpenMoaIME : InputMethodService() {
         return if (extra is T) extra else null
     }
 
-    private fun sendKeyDownUpEvent(keyCode: Int, metaState: Int = 0) {
+    private fun sendKeyDownUpEvent(keyCode: Int, metaState: Int = 0, withShift: Boolean = false) {
         var eventTime = SystemClock.uptimeMillis()
+        if (withShift) {
+            currentInputConnection.sendKeyEvent(
+                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_SHIFT_LEFT)
+            )
+        }
         currentInputConnection.sendKeyEvent(
             KeyEvent(
                 eventTime,
@@ -78,6 +83,11 @@ class OpenMoaIME : InputMethodService() {
                 KeyEvent.FLAG_SOFT_KEYBOARD or KeyEvent.FLAG_KEEP_TOUCH_MODE,
             )
         )
+        if (withShift) {
+            currentInputConnection.sendKeyEvent(
+                KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_SHIFT_LEFT)
+            )
+        }
     }
 
     private fun isTextEmpty(): Boolean {
@@ -233,6 +243,38 @@ class OpenMoaIME : InputMethodService() {
                             SpecialKey.PASTE -> {
                                 sendKeyDownUpEvent(KeyEvent.KEYCODE_V, KeyEvent.META_CTRL_ON)
                             }
+                            SpecialKey.SELECT_ARROW_UP -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_UP, withShift = true)
+                                }
+                            }
+                            SpecialKey.SELECT_ARROW_LEFT -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_LEFT, withShift = true)
+                                }
+                            }
+                            SpecialKey.SELECT_ARROW_RIGHT -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(
+                                        KeyEvent.KEYCODE_DPAD_RIGHT, withShift = true
+                                    )
+                                }
+                            }
+                            SpecialKey.SELECT_ARROW_DOWN -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_DOWN, withShift = true)
+                                }
+                            }
+                            SpecialKey.SELECT_END -> {
+                                sendKeyDownUpEvent(
+                                    KeyEvent.KEYCODE_MOVE_END, KeyEvent.META_CTRL_ON, true
+                                )
+                            }
+                            SpecialKey.SELECT_HOME -> {
+                                sendKeyDownUpEvent(
+                                    KeyEvent.KEYCODE_MOVE_HOME, KeyEvent.META_CTRL_ON, true
+                                )
+                            }
                             SpecialKey.EMOJI -> Unit
                         }
                     }
@@ -277,6 +319,7 @@ class OpenMoaIME : InputMethodService() {
             when (it) {
                 is PunctuationView -> it.setPageOrNextPage(0)
                 is PhoneView -> it.setPageOrNextPage(0)
+                is ArrowView -> it.setSelectingOrToggleSelecting(false)
             }
             binding.keyboardFrameLayout.setKeyboardView(it)
         }

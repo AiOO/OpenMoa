@@ -5,6 +5,6 @@
     <color name="key_background">#333333</color>
     <color name="key_background_pressed">#222222</color>
     <color name="key_foreground">#FFFFFF</color>
-    <color name="shift_key_foreground_locked">#5E97EE</color>
+    <color name="key_foreground_locked">#5E97EE</color>
 
 </resources>

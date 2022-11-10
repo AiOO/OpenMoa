@@ -19,4 +19,10 @@ enum class SpecialKey {
     HOME,
     LANGUAGE,
     PASTE,
+    SELECT_ARROW_UP,
+    SELECT_ARROW_LEFT,
+    SELECT_ARROW_RIGHT,
+    SELECT_ARROW_DOWN,
+    SELECT_END,
+    SELECT_HOME,
 }

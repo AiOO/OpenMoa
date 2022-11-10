@@ -61,7 +61,7 @@ class QuertyView : ConstraintLayout {
                 ContextCompat.getColor(
                     context,
                     if (isShiftEnabled) {
-                        R.color.shift_key_foreground_locked
+                        R.color.key_foreground_locked
                     } else {
                         R.color.key_foreground
                     },

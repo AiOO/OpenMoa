@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.ArrowViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
@@ -29,11 +31,27 @@ class ArrowView : ConstraintLayout {
     }
 
     private lateinit var binding: ArrowViewBinding
+    private var isSelecting = false
 
     private fun init() {
         inflate(context, R.layout.arrow_view, this)
         binding = ArrowViewBinding.bind(this)
         setOnTouchListeners()
+    }
+
+    fun setSelectingOrToggleSelecting(selecting: Boolean? = null) {
+        isSelecting = selecting ?: !isSelecting
+        listOf(
+            binding.areaSelectKey, binding.homeKey, binding.endKey,
+            binding.upKey, binding.downKey, binding.leftKey, binding.rightKey,
+        ).map {
+            it.setTextColor(
+                ContextCompat.getColor(
+                    context,
+                    if (isSelecting) R.color.key_foreground_locked else R.color.key_foreground
+                )
+            )
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -46,7 +64,11 @@ class ArrowView : ConstraintLayout {
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.COPY))
             )
             upKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_UP))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_ARROW_UP else SpecialKey.ARROW_UP
+                    )
+                }
             )
             cutKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.CUT))
@@ -55,22 +77,48 @@ class ArrowView : ConstraintLayout {
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.CUT_ALL))
             )
             homeKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.HOME))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_HOME else SpecialKey.HOME
+                    )
+                }
             )
             leftKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_LEFT))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_ARROW_LEFT else SpecialKey.ARROW_LEFT
+                    )
+                }
+            )
+            areaSelectKey.setOnTouchListener(
+                FunctionalKeyTouchListener(context) {
+                    setSelectingOrToggleSelecting()
+                    null
+                }
             )
             rightKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_RIGHT))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_ARROW_RIGHT else SpecialKey.ARROW_RIGHT
+                    )
+                }
             )
             endKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.END))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_END else SpecialKey.END
+                    )
+                }
             )
             deleteKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.DELETE))
             )
             downKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_DOWN))
+                FunctionalKeyTouchListener(context) {
+                    SpecialKeyMessage(
+                        if (isSelecting) SpecialKey.SELECT_ARROW_DOWN else SpecialKey.ARROW_DOWN
+                    )
+                }
             )
             pasteKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.PASTE))
