@@ -102,6 +102,7 @@ class OpenMoaIME : InputMethodService() {
                 val key = getKeyFromIntent<String>(intent)
                     ?: getKeyFromIntent<SpecialKey>(intent)
                     ?: return
+                val beforeComposingText = composingText
                 when (key) {
                     is SpecialKey -> {
                         // Process for special key
@@ -305,7 +306,7 @@ class OpenMoaIME : InputMethodService() {
                         }
                     }
                 }
-                if (composingText != "") {
+                if (beforeComposingText != composingText) {
                     currentInputConnection.setComposingText(composingText, 1)
                 }
                 setShiftAutomatically()
