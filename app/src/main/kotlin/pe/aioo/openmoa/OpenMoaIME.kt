@@ -216,7 +216,9 @@ class OpenMoaIME : InputMethodService() {
                         }
                     }
                 }
-                currentInputConnection.setComposingText(composingText, 1)
+                if (composingText != "") {
+                    currentInputConnection.setComposingText(composingText, 1)
+                }
                 setShiftAutomatically()
             }
         }
