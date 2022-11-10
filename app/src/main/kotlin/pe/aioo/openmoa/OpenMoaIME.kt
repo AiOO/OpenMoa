@@ -14,6 +14,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.ExtractedTextRequest
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
@@ -77,6 +78,11 @@ class OpenMoaIME : InputMethodService() {
                 KeyEvent.FLAG_SOFT_KEYBOARD or KeyEvent.FLAG_KEEP_TOUCH_MODE,
             )
         )
+    }
+
+    private fun isTextEmpty(): Boolean {
+        val text = currentInputConnection.getExtractedText(ExtractedTextRequest(), 0)
+        return (text?.text ?: "") == ""
     }
 
     override fun onCreate() {
@@ -177,18 +183,56 @@ class OpenMoaIME : InputMethodService() {
                                     }
                                 )
                             }
-                            SpecialKey.ARROW_UP -> currentInputConnection.sendKeyEvent(
-                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_UP)
-                            )
-                            SpecialKey.ARROW_LEFT -> currentInputConnection.sendKeyEvent(
-                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_LEFT)
-                            )
-                            SpecialKey.ARROW_RIGHT -> currentInputConnection.sendKeyEvent(
-                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_RIGHT)
-                            )
-                            SpecialKey.ARROW_DOWN -> currentInputConnection.sendKeyEvent(
-                                KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_DPAD_DOWN)
-                            )
+                            SpecialKey.ARROW_UP -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_UP)
+                                }
+                            }
+                            SpecialKey.ARROW_LEFT -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_LEFT)
+                                }
+                            }
+                            SpecialKey.ARROW_RIGHT -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_RIGHT)
+                                }
+                            }
+                            SpecialKey.ARROW_DOWN -> {
+                                if (!isTextEmpty()) {
+                                    sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_DOWN)
+                                }
+                            }
+                            SpecialKey.COPY_ALL -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON)
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_C, KeyEvent.META_CTRL_ON)
+                            }
+                            SpecialKey.COPY -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_C, KeyEvent.META_CTRL_ON)
+                            }
+                            SpecialKey.CUT_ALL -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON)
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_X, KeyEvent.META_CTRL_ON)
+                            }
+                            SpecialKey.CUT -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_X, KeyEvent.META_CTRL_ON)
+                            }
+                            SpecialKey.HOME -> {
+                                sendKeyDownUpEvent(
+                                    KeyEvent.KEYCODE_MOVE_HOME, KeyEvent.META_CTRL_ON
+                                )
+                            }
+                            SpecialKey.END -> {
+                                sendKeyDownUpEvent(
+                                    KeyEvent.KEYCODE_MOVE_END, KeyEvent.META_CTRL_ON
+                                )
+                            }
+                            SpecialKey.DELETE -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_DEL)
+                            }
+                            SpecialKey.PASTE -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_V, KeyEvent.META_CTRL_ON)
+                            }
                             SpecialKey.EMOJI -> Unit
                         }
                     }

@@ -39,8 +39,23 @@ class ArrowView : ConstraintLayout {
     @SuppressLint("ClickableViewAccessibility")
     private fun setOnTouchListeners() {
         binding.apply {
+            copyAllKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.COPY_ALL))
+            )
+            copyKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.COPY))
+            )
             upKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_UP))
+            )
+            cutKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.CUT))
+            )
+            cutAllKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.CUT_ALL))
+            )
+            homeKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.HOME))
             )
             leftKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_LEFT))
@@ -48,8 +63,17 @@ class ArrowView : ConstraintLayout {
             rightKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_RIGHT))
             )
+            endKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.END))
+            )
+            deleteKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.DELETE))
+            )
             downKey.setOnTouchListener(
                 SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ARROW_DOWN))
+            )
+            pasteKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.PASTE))
             )
             backspaceKey.setOnTouchListener(
                 RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
