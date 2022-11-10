@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.os.Build
+import android.os.SystemClock
 import android.text.InputType
 import android.view.KeyEvent
 import android.view.View
@@ -47,6 +48,37 @@ class OpenMoaIME : InputMethodService() {
         return if (extra is T) extra else null
     }
 
+    private fun sendKeyDownUpEvent(keyCode: Int, metaState: Int = 0) {
+        var eventTime = SystemClock.uptimeMillis()
+        currentInputConnection.sendKeyEvent(
+            KeyEvent(
+                eventTime,
+                eventTime,
+                KeyEvent.ACTION_DOWN,
+                keyCode,
+                0,
+                metaState,
+                0,
+                0,
+                KeyEvent.FLAG_SOFT_KEYBOARD or KeyEvent.FLAG_KEEP_TOUCH_MODE,
+            )
+        )
+        eventTime = SystemClock.uptimeMillis()
+        currentInputConnection.sendKeyEvent(
+            KeyEvent(
+                eventTime,
+                eventTime,
+                KeyEvent.ACTION_UP,
+                keyCode,
+                0,
+                0,
+                0,
+                0,
+                KeyEvent.FLAG_SOFT_KEYBOARD or KeyEvent.FLAG_KEEP_TOUCH_MODE,
+            )
+        )
+    }
+
     override fun onCreate() {
         super.onCreate()
         broadcastReceiver = object : BroadcastReceiver() {
@@ -70,9 +102,7 @@ class OpenMoaIME : InputMethodService() {
                                     }
                                 } else {
                                     if (composingText.isEmpty()) {
-                                        currentInputConnection.deleteSurroundingText(
-                                            1, 0
-                                        )
+                                        sendKeyDownUpEvent(KeyEvent.KEYCODE_DEL)
                                     } else {
                                         composingText = composingText.substring(
                                             0, composingText.lastIndex
@@ -95,9 +125,7 @@ class OpenMoaIME : InputMethodService() {
                                         currentInputConnection.performEditorAction(action)
                                     }
                                     else -> {
-                                        currentInputConnection.sendKeyEvent(
-                                            KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER)
-                                        )
+                                        sendKeyDownUpEvent(KeyEvent.KEYCODE_ENTER)
                                     }
                                 }
                             }
