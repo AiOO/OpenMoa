@@ -127,12 +127,12 @@
         app:layout_constraintTop_toTopOf="@+id/homeKey"
         app:layout_constraintBottom_toBottomOf="@+id/homeKey"
         app:layout_constraintLeft_toRightOf="@+id/areaSelectKey"
-        app:layout_constraintRight_toLeftOf="@+id/clipboardKey" />
+        app:layout_constraintRight_toLeftOf="@+id/selectAllKey" />
 
     <TextView
-        android:id="@+id/clipboardKey"
+        android:id="@+id/selectAllKey"
         style="@style/KeyStyle"
-        android:text="@string/key_clipboard"
+        android:text="@string/key_select_all"
         android:textSize="12sp"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"

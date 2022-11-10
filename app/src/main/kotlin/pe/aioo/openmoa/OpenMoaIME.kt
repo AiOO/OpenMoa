@@ -243,6 +243,9 @@ class OpenMoaIME : InputMethodService() {
                             SpecialKey.PASTE -> {
                                 sendKeyDownUpEvent(KeyEvent.KEYCODE_V, KeyEvent.META_CTRL_ON)
                             }
+                            SpecialKey.SELECT_ALL -> {
+                                sendKeyDownUpEvent(KeyEvent.KEYCODE_A, KeyEvent.META_CTRL_ON)
+                            }
                             SpecialKey.SELECT_ARROW_UP -> {
                                 if (!isTextEmpty()) {
                                     sendKeyDownUpEvent(KeyEvent.KEYCODE_DPAD_UP, withShift = true)

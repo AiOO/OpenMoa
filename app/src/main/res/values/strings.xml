@@ -9,7 +9,6 @@
     <string name="key_bieup">ㅂ</string>
     <string name="key_caret">^</string>
     <string name="key_chieut">ㅊ</string>
-    <string name="key_clipboard">클립보드</string>
     <string name="key_comma_question_dot_exclamation">,\n? . !</string>
     <string name="key_copy">복사</string>
     <string name="key_copy_all">전체 복사</string>
@@ -49,6 +48,7 @@
     <string name="key_punctuation">기호</string>
     <string name="key_rieul">ㄹ</string>
     <string name="key_right">▶</string>
+    <string name="key_select_all">전체 선택</string>
     <string name="key_semicolon">;</string>
     <string name="key_seven">7</string>
     <string name="key_siot">ㅅ</string>

@@ -83,6 +83,9 @@ class ArrowView : ConstraintLayout {
                     )
                 }
             )
+            selectAllKey.setOnTouchListener(
+                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.SELECT_ALL))
+            )
             leftKey.setOnTouchListener(
                 FunctionalKeyTouchListener(context) {
                     SpecialKeyMessage(
