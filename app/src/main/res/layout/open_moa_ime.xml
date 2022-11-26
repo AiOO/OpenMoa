@@ -1,13 +1,52 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:paddingHorizontal="4dp"
     style="@style/KeyboardStyle">
 
+    <LinearLayout
+        android:id="@+id/suggestionStripLayout"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <FrameLayout
+            android:id="@+id/suggestionStripStartLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <HorizontalScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:clipChildren="true"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:id="@+id/suggestionStripScrollableLayout"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical" />
+
+        </HorizontalScrollView>
+
+        <FrameLayout
+            android:id="@+id/suggestionStripEndLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
     <pe.aioo.openmoa.view.KeyboardFrameLayout
         android:id="@+id/keyboardFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="240dp" />
 
-</FrameLayout>
+</LinearLayout>
