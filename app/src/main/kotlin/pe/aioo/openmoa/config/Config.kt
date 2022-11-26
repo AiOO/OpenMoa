@@ -5,4 +5,5 @@ data class Config (
     val longPressThresholdTime: Long = 500L,
     val gestureThreshold: Float = 50f,
     val hapticFeedback: Boolean = true,
+    val maxSuggestionCount: Int = 10,
 )

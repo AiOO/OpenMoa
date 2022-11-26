@@ -30,6 +30,9 @@ import androidx.autofill.inline.common.ViewStyle
 import androidx.autofill.inline.v1.InlineSuggestionUi
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pe.aioo.openmoa.config.Config
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.keyboardview.*
@@ -38,11 +41,12 @@ import pe.aioo.openmoa.view.message.SpecialKey
 import java.io.Serializable
 import kotlin.math.roundToInt
 
-class OpenMoaIME : InputMethodService() {
+class OpenMoaIME : InputMethodService(), KoinComponent {
 
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var keyboardViews: Map<IMEMode, View>
+    private val config: Config by inject()
     private val hangulAssembler = HangulAssembler()
     private var imeMode = IMEMode.IME_KO
     private var composingText = ""
@@ -550,13 +554,13 @@ class OpenMoaIME : InputMethodService() {
         // the first element should be used repeatedly. But it doesn't work that way on 1Password.
         // So I decide on the size of this list as the number of suggestions.
         // https://developer.android.com/reference/android/view/inputmethod/InlineSuggestionsRequest.Builder#public-constructors_1
-        val presentationSpecs = List(10) {
+        val presentationSpecs = List(config.maxSuggestionCount) {
             InlinePresentationSpec.Builder(
                 Size(toDp(32), getHeight()), Size(toDp(640), getHeight())
             ).setStyle(styleBundle).build()
         }
         return InlineSuggestionsRequest.Builder(presentationSpecs)
-            .setMaxSuggestionCount(10)
+            .setMaxSuggestionCount(config.maxSuggestionCount)
             .build()
     }
 
