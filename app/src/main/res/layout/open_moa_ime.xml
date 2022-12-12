@@ -1,13 +1,54 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="4dp"
     android:paddingHorizontal="4dp"
     style="@style/KeyboardStyle">
 
+    <LinearLayout
+        android:id="@+id/suggestionStripLayout"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginBottom="4dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/suggestionStripStartChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.MaterialComponents" />
+
+        <HorizontalScrollView
+            android:id="@+id/suggestionStripScrollView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/suggestionStripScrollableChipGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:theme="@style/Theme.MaterialComponents"
+                app:chipSpacingHorizontal="0dp" />
+
+        </HorizontalScrollView>
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/suggestionStripEndChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.MaterialComponents" />
+
+    </LinearLayout>
+
     <pe.aioo.openmoa.view.KeyboardFrameLayout
         android:id="@+id/keyboardFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="240dp" />
 
-</FrameLayout>
+</LinearLayout>

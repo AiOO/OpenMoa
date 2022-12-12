@@ -6,29 +6,47 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.Configuration
+import android.graphics.Color
+import android.graphics.drawable.Icon
 import android.inputmethodservice.InputMethodService
 import android.os.Build
+import android.os.Bundle
 import android.os.SystemClock
 import android.text.InputType
+import android.util.Size
 import android.view.KeyEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.ExtractedTextRequest
+import android.view.inputmethod.InlineSuggestionsRequest
+import android.view.inputmethod.InlineSuggestionsResponse
+import android.widget.inline.InlinePresentationSpec
+import androidx.autofill.inline.UiVersions
+import androidx.autofill.inline.common.ImageViewStyle
+import androidx.autofill.inline.common.TextViewStyle
+import androidx.autofill.inline.common.ViewStyle
+import androidx.autofill.inline.v1.InlineSuggestionUi
 import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import pe.aioo.openmoa.config.Config
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
 import pe.aioo.openmoa.view.keyboardview.*
 import pe.aioo.openmoa.view.keyboardview.qwerty.QuertyView
 import pe.aioo.openmoa.view.message.SpecialKey
 import java.io.Serializable
+import kotlin.math.roundToInt
 
-class OpenMoaIME : InputMethodService() {
+class OpenMoaIME : InputMethodService(), KoinComponent {
 
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var keyboardViews: Map<IMEMode, View>
+    private val config: Config by inject()
     private val hangulAssembler = HangulAssembler()
     private var imeMode = IMEMode.IME_KO
     private var composingText = ""
@@ -471,6 +489,115 @@ class OpenMoaIME : InputMethodService() {
             LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
         }
         super.onDestroy()
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onCreateInlineSuggestionsRequest(uiExtras: Bundle): InlineSuggestionsRequest {
+        val styleBuilder = UiVersions.newStylesBuilder()
+        val foregroundColor = ContextCompat.getColor(this@OpenMoaIME, R.color.key_foreground)
+        val style = InlineSuggestionUi.newStyleBuilder()
+            .setSingleIconChipStyle(
+                ViewStyle.Builder()
+                    .setBackground(
+                        Icon.createWithResource(this, R.drawable.selector_key_background)
+                    )
+                    .setPadding(toDp(4), toDp(4), toDp(4), toDp(4))
+                    .build()
+            )
+            .setChipStyle(
+                ViewStyle.Builder()
+                    .setBackground(
+                        Icon.createWithResource(this, R.drawable.selector_key_background)
+                    )
+                    .setPadding(toDp(4), toDp(4), toDp(4), toDp(4))
+                    .build()
+            )
+            .setStartIconStyle(
+                ImageViewStyle.Builder()
+                    .setPadding(0, 0, 0, 0)
+                    .setLayoutMargin(toDp(4), 0, toDp(4), 0)
+                    .build()
+            )
+            .setEndIconStyle(
+                ImageViewStyle.Builder()
+                    .setPadding(0, 0, 0, 0)
+                    .setLayoutMargin(toDp(4), 0, toDp(4), 0)
+                    .build()
+            )
+            .setTitleStyle(
+                TextViewStyle.Builder()
+                    .setTextColor(foregroundColor)
+                    .setPadding(0, 0, 0, 0)
+                    .setLayoutMargin(toDp(4), 0, toDp(4), 0)
+                    .setTextSize(14F)
+                    .build()
+            )
+            .setSubtitleStyle(
+                TextViewStyle.Builder()
+                    .setTextColor(
+                        Color.argb(
+                            127,
+                            Color.red(foregroundColor),
+                            Color.green(foregroundColor),
+                            Color.blue(foregroundColor),
+                        )
+                    )
+                    .setPadding(0, 0, 0, 0)
+                    .setLayoutMargin(toDp(4), 0, toDp(4), 0)
+                    .setTextSize(14F)
+                    .build()
+            )
+            .build()
+        styleBuilder.addStyle(style)
+        val styleBundle = styleBuilder.build()
+        // According to the document, when this list has only one element,
+        // the first element should be used repeatedly. But it doesn't work that way on 1Password.
+        // So I decide on the size of this list as the number of suggestions.
+        // https://developer.android.com/reference/android/view/inputmethod/InlineSuggestionsRequest.Builder#public-constructors_1
+        val presentationSpecs = List(config.maxSuggestionCount) {
+            InlinePresentationSpec.Builder(
+                Size(toDp(32), getHeight()), Size(toDp(640), getHeight())
+            ).setStyle(styleBundle).build()
+        }
+        return InlineSuggestionsRequest.Builder(presentationSpecs)
+            .setMaxSuggestionCount(config.maxSuggestionCount)
+            .build()
+    }
+
+    private fun getHeight(): Int {
+        return toDp(32)
+    }
+
+    private fun toDp(pixel: Int): Int {
+        return (pixel * resources.displayMetrics.density).roundToInt()
+    }
+
+    override fun onInlineSuggestionsResponse(response: InlineSuggestionsResponse): Boolean {
+        if (!this::binding.isInitialized) {
+            return false
+        }
+        binding.suggestionStripStartChipGroup.removeAllViews()
+        binding.suggestionStripScrollableChipGroup.removeAllViews()
+        binding.suggestionStripEndChipGroup.removeAllViews()
+        binding.suggestionStripLayout.visibility =
+            if (response.inlineSuggestions.isEmpty()) View.GONE else View.VISIBLE
+        response.inlineSuggestions.map { inlineSuggestion ->
+            val size = Size(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            inlineSuggestion.inflate(this, size, mainExecutor) { view ->
+                if (inlineSuggestion.info.isPinned) {
+                    if (binding.suggestionStripStartChipGroup.childCount == 0) {
+                        binding.suggestionStripStartChipGroup.addView(view)
+                    } else {
+                        binding.suggestionStripEndChipGroup.addView(view)
+                    }
+                } else {
+                    binding.suggestionStripScrollableChipGroup.addView(view)
+                }
+            }
+        }
+        return true
     }
 
     companion object {
