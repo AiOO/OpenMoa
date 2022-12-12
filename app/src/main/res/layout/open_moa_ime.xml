@@ -1,5 +1,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,32 +16,33 @@
         android:orientation="horizontal"
         android:visibility="gone">
 
-        <FrameLayout
-            android:id="@+id/suggestionStripStartLayout"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/suggestionStripStartChipGroup"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.MaterialComponents" />
 
         <HorizontalScrollView
+            android:id="@+id/suggestionStripScrollView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:scrollbars="none"
-            android:clipChildren="true"
-            android:overScrollMode="never">
+            android:scrollbars="none">
 
-            <LinearLayout
-                android:id="@+id/suggestionStripScrollableLayout"
-                android:orientation="horizontal"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/suggestionStripScrollableChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical" />
+                android:theme="@style/Theme.MaterialComponents"
+                app:chipSpacingHorizontal="0dp" />
 
         </HorizontalScrollView>
 
-        <FrameLayout
-            android:id="@+id/suggestionStripEndLayout"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/suggestionStripEndChipGroup"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:theme="@style/Theme.MaterialComponents" />
 
     </LinearLayout>
 

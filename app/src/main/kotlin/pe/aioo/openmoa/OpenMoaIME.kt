@@ -576,9 +576,9 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
         if (!this::binding.isInitialized) {
             return false
         }
-        binding.suggestionStripStartLayout.removeAllViews()
-        binding.suggestionStripScrollableLayout.removeAllViews()
-        binding.suggestionStripEndLayout.removeAllViews()
+        binding.suggestionStripStartChipGroup.removeAllViews()
+        binding.suggestionStripScrollableChipGroup.removeAllViews()
+        binding.suggestionStripEndChipGroup.removeAllViews()
         binding.suggestionStripLayout.visibility =
             if (response.inlineSuggestions.isEmpty()) View.GONE else View.VISIBLE
         response.inlineSuggestions.map { inlineSuggestion ->
@@ -587,13 +587,13 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
             )
             inlineSuggestion.inflate(this, size, mainExecutor) { view ->
                 if (inlineSuggestion.info.isPinned) {
-                    if (binding.suggestionStripStartLayout.childCount == 0) {
-                        binding.suggestionStripStartLayout.addView(view)
+                    if (binding.suggestionStripStartChipGroup.childCount == 0) {
+                        binding.suggestionStripStartChipGroup.addView(view)
                     } else {
-                        binding.suggestionStripEndLayout.addView(view)
+                        binding.suggestionStripEndChipGroup.addView(view)
                     }
                 } else {
-                    binding.suggestionStripScrollableLayout.addView(view)
+                    binding.suggestionStripScrollableChipGroup.addView(view)
                 }
             }
         }
