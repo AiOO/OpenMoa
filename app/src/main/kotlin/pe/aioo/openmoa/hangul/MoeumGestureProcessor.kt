@@ -17,27 +17,27 @@ class MoeumGestureProcessor {
         for (nextMoeum in moeumList) {
             moeum = when (moeum) {
                 "ㅏ" -> when (nextMoeum) {
-                    "ㅓ", "ㅗ", "ㅜ" -> "ㅐ"
+                    "ㅓ", "ㅗ", "ㅜ", "ㅡL", "ㅣL" -> "ㅐ"
                     else -> moeum
                 }
                 "ㅐ" -> when (nextMoeum) {
-                    "ㅏ" -> "ㅑ"
+                    "ㅏ", "ㅡR", "ㅣR" -> "ㅑ"
                     else -> moeum
                 }
                 "ㅑ" -> when (nextMoeum) {
-                    "ㅓ" -> "ㅒ"
+                    "ㅓ", "ㅡL", "ㅣL" -> "ㅒ"
                     else -> moeum
                 }
                 "ㅓ" -> when (nextMoeum) {
-                    "ㅏ", "ㅗ", "ㅜ" -> "ㅔ"
+                    "ㅏ", "ㅗ", "ㅜ", "ㅡR", "ㅣR" -> "ㅔ"
                     else -> moeum
                 }
                 "ㅔ" -> when (nextMoeum) {
-                    "ㅓ" -> "ㅕ"
+                    "ㅓ", "ㅡL", "ㅣL" -> "ㅕ"
                     else -> moeum
                 }
                 "ㅕ" -> when (nextMoeum) {
-                    "ㅏ" -> "ㅖ"
+                    "ㅏ", "ㅡR", "ㅣR" -> "ㅖ"
                     else -> moeum
                 }
                 "ㅗ" -> when (nextMoeum) {
