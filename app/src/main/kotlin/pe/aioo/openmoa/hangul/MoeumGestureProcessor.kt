@@ -17,7 +17,7 @@ class MoeumGestureProcessor {
         for (nextMoeum in moeumList) {
             moeum = when (moeum) {
                 "ㅏ" -> when (nextMoeum) {
-                    "ㅓ" -> "ㅐ"
+                    "ㅓ", "ㅗ", "ㅜ" -> "ㅐ"
                     else -> moeum
                 }
                 "ㅐ" -> when (nextMoeum) {
@@ -29,7 +29,7 @@ class MoeumGestureProcessor {
                     else -> moeum
                 }
                 "ㅓ" -> when (nextMoeum) {
-                    "ㅏ" -> "ㅔ"
+                    "ㅏ", "ㅗ", "ㅜ" -> "ㅔ"
                     else -> moeum
                 }
                 "ㅔ" -> when (nextMoeum) {
