@@ -61,11 +61,16 @@ class MoeumGestureProcessor {
                 }
                 "ㅘ" -> when (nextMoeum) {
                     "ㅓ" -> "ㅙ"
+                    // non-strict
+                    "ㅗ" -> "ㅛ"
+                    "ㅜ", "ㅡL", "ㅡR" -> "ㅙ"
                     else -> moeum
                 }
                 "ㅚ" -> when (nextMoeum) {
+                    "ㅏ" -> "ㅘ"
                     "ㅗ" -> "ㅛ"
                     // non-strict
+                    "ㅓ" -> "ㅕ"
                     "ㅣL", "ㅣR" -> "ㅛ"
                     else -> moeum
                 }
@@ -78,11 +83,16 @@ class MoeumGestureProcessor {
                 }
                 "ㅝ" -> when (nextMoeum) {
                     "ㅏ" -> "ㅞ"
+                    // non-strict
+                    "ㅜ" -> "ㅠ"
+                    "ㅗ", "ㅡR", "ㅣR" -> "ㅞ"
                     else -> moeum
                 }
                 "ㅟ" -> when (nextMoeum) {
+                    "ㅓ" -> "ㅝ"
                     "ㅜ" -> "ㅠ"
                     // non-strict
+                    "ㅏ" -> "ㅑ"
                     "ㅡL", "ㅡR" -> "ㅠ"
                     else -> moeum
                 }
