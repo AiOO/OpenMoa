@@ -132,7 +132,7 @@
 
     <!-- Second Line -->
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/qKey"
         style="@style/KeyStyle"
         tools:text="q"
@@ -145,7 +145,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/wKey"/>
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/wKey"
         style="@style/KeyStyle"
         tools:text="w"
@@ -157,7 +157,7 @@
         app:layout_constraintLeft_toRightOf="@+id/qKey"
         app:layout_constraintRight_toLeftOf="@+id/eKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/eKey"
         style="@style/KeyStyle"
         tools:text="e"
@@ -169,7 +169,7 @@
         app:layout_constraintLeft_toRightOf="@+id/wKey"
         app:layout_constraintRight_toLeftOf="@+id/rKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/rKey"
         style="@style/KeyStyle"
         tools:text="r"
@@ -181,7 +181,7 @@
         app:layout_constraintLeft_toRightOf="@+id/eKey"
         app:layout_constraintRight_toLeftOf="@+id/tKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/tKey"
         style="@style/KeyStyle"
         tools:text="t"
@@ -193,7 +193,7 @@
         app:layout_constraintLeft_toRightOf="@+id/rKey"
         app:layout_constraintRight_toLeftOf="@+id/yKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/yKey"
         style="@style/KeyStyle"
         tools:text="y"
@@ -205,7 +205,7 @@
         app:layout_constraintLeft_toRightOf="@+id/tKey"
         app:layout_constraintRight_toLeftOf="@+id/uKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/uKey"
         style="@style/KeyStyle"
         tools:text="u"
@@ -217,7 +217,7 @@
         app:layout_constraintLeft_toRightOf="@+id/yKey"
         app:layout_constraintRight_toLeftOf="@+id/iKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/iKey"
         style="@style/KeyStyle"
         tools:text="i"
@@ -229,7 +229,7 @@
         app:layout_constraintLeft_toRightOf="@+id/uKey"
         app:layout_constraintRight_toLeftOf="@+id/oKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/oKey"
         style="@style/KeyStyle"
         tools:text="o"
@@ -241,7 +241,7 @@
         app:layout_constraintLeft_toRightOf="@+id/iKey"
         app:layout_constraintRight_toLeftOf="@+id/pKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/pKey"
         style="@style/KeyStyle"
         tools:text="p"
@@ -269,7 +269,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/aKey"/>
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/aKey"
         style="@style/KeyStyle"
         tools:text="a"
@@ -281,7 +281,7 @@
         app:layout_constraintLeft_toRightOf="@+id/beforeASpace"
         app:layout_constraintRight_toLeftOf="@+id/sKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/sKey"
         style="@style/KeyStyle"
         tools:text="s"
@@ -293,7 +293,7 @@
         app:layout_constraintLeft_toRightOf="@+id/aKey"
         app:layout_constraintRight_toLeftOf="@+id/dKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/dKey"
         style="@style/KeyStyle"
         tools:text="d"
@@ -305,7 +305,7 @@
         app:layout_constraintLeft_toRightOf="@+id/sKey"
         app:layout_constraintRight_toLeftOf="@+id/fKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/fKey"
         style="@style/KeyStyle"
         tools:text="f"
@@ -317,7 +317,7 @@
         app:layout_constraintLeft_toRightOf="@+id/dKey"
         app:layout_constraintRight_toLeftOf="@+id/gKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/gKey"
         style="@style/KeyStyle"
         tools:text="g"
@@ -329,7 +329,7 @@
         app:layout_constraintLeft_toRightOf="@+id/fKey"
         app:layout_constraintRight_toLeftOf="@+id/hKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/hKey"
         style="@style/KeyStyle"
         tools:text="h"
@@ -341,7 +341,7 @@
         app:layout_constraintLeft_toRightOf="@+id/gKey"
         app:layout_constraintRight_toLeftOf="@+id/jKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/jKey"
         style="@style/KeyStyle"
         tools:text="j"
@@ -353,7 +353,7 @@
         app:layout_constraintLeft_toRightOf="@+id/hKey"
         app:layout_constraintRight_toLeftOf="@+id/kKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/kKey"
         style="@style/KeyStyle"
         tools:text="k"
@@ -365,7 +365,7 @@
         app:layout_constraintLeft_toRightOf="@+id/jKey"
         app:layout_constraintRight_toLeftOf="@+id/lKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/lKey"
         style="@style/KeyStyle"
         tools:text="l"
@@ -404,7 +404,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/zKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/zKey"
         style="@style/KeyStyle"
         tools:text="z"
@@ -416,7 +416,7 @@
         app:layout_constraintLeft_toRightOf="@+id/shiftKey"
         app:layout_constraintRight_toLeftOf="@+id/xKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/xKey"
         style="@style/KeyStyle"
         tools:text="x"
@@ -428,7 +428,7 @@
         app:layout_constraintLeft_toRightOf="@+id/zKey"
         app:layout_constraintRight_toLeftOf="@+id/cKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/cKey"
         style="@style/KeyStyle"
         tools:text="c"
@@ -440,7 +440,7 @@
         app:layout_constraintLeft_toRightOf="@+id/xKey"
         app:layout_constraintRight_toLeftOf="@+id/vKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/vKey"
         style="@style/KeyStyle"
         tools:text="v"
@@ -452,7 +452,7 @@
         app:layout_constraintLeft_toRightOf="@+id/cKey"
         app:layout_constraintRight_toLeftOf="@+id/bKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/bKey"
         style="@style/KeyStyle"
         tools:text="b"
@@ -464,7 +464,7 @@
         app:layout_constraintLeft_toRightOf="@+id/vKey"
         app:layout_constraintRight_toLeftOf="@+id/nKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/nKey"
         style="@style/KeyStyle"
         tools:text="n"
@@ -476,7 +476,7 @@
         app:layout_constraintLeft_toRightOf="@+id/bKey"
         app:layout_constraintRight_toLeftOf="@+id/mKey" />
 
-    <TextView
+    <pe.aioo.openmoa.view.keyboardview.qwerty.HintKeyView
         android:id="@+id/mKey"
         style="@style/KeyStyle"
         tools:text="m"
@@ -502,11 +502,15 @@
 
     <!-- Fifth Line -->
 
-    <TextView
+    <LinearLayout
         android:id="@+id/languageKey"
-        style="@style/KeyStyle"
-        android:text="@string/key_language"
-        android:textSize="14sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/key_background"
+        android:clickable="true"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -514,7 +518,24 @@
         app:layout_constraintTop_toBottomOf="@+id/shiftKey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey" />
+        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language_settings_hint"
+            android:textSize="9sp"
+            android:textColor="@color/key_foreground_muted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/key_foreground" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/hanjaNumberPunctuationKey"

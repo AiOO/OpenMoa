@@ -378,11 +378,15 @@
 
     <!-- Fourth Line -->
 
-    <TextView
+    <LinearLayout
         android:id="@+id/languageKey"
-        style="@style/KeyStyle"
-        android:text="@string/key_language"
-        android:textSize="14sp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/key_background"
+        android:clickable="true"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintHorizontal_weight="1"
@@ -390,7 +394,24 @@
         app:layout_constraintTop_toBottomOf="@+id/nextKey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey" />
+        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language_settings_hint"
+            android:textSize="9sp"
+            android:textColor="@color/key_foreground_muted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/key_foreground" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/hanjaNumberPunctuationKey"

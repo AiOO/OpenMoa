@@ -9,6 +9,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import pe.aioo.openmoa.OpenMoaIME
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.EmojiViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.EnterKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKey
@@ -31,6 +32,7 @@ class EmojiView : ConstraintLayout {
     }
 
     private lateinit var binding: EmojiViewBinding
+    private var enterKeyListener: EnterKeyTouchListener? = null
 
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
@@ -52,9 +54,13 @@ class EmojiView : ConstraintLayout {
         binding.backspaceKey.setOnTouchListener(
             RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
         )
-        binding.enterKey.setOnTouchListener(
-            SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
-        )
+        enterKeyListener = EnterKeyTouchListener(context)
+        binding.enterKey.setOnTouchListener(enterKeyListener)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        enterKeyListener?.cancel()
     }
 
 }

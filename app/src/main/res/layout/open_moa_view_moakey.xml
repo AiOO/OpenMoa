@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- First Line -->
+
+    <TextView
+        android:id="@+id/tildeKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_tilde"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintVertical_weight="0.7"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/caretKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ssangbieupKey" />
+
+    <TextView
+        android:id="@+id/ssangbieupKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ssangbieup"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/tildeKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangjieutKey" />
+
+    <TextView
+        android:id="@+id/ssangjieutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ssangjieut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangbieupKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangdigeutKey" />
+
+    <TextView
+        android:id="@+id/ssangdigeutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ssangdigeut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangjieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssanggiyeokKey" />
+
+    <TextView
+        android:id="@+id/ssanggiyeokKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ssanggiyeok"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangdigeutKey"
+        app:layout_constraintRight_toLeftOf="@+id/ssangsiotKey" />
+
+    <TextView
+        android:id="@+id/ssangsiotKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ssangsiot"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssanggiyeokKey"
+        app:layout_constraintRight_toLeftOf="@+id/exclamationKey" />
+
+    <TextView
+        android:id="@+id/exclamationKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_exclamation"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintTop_toTopOf="@+id/tildeKey"
+        app:layout_constraintBottom_toBottomOf="@+id/tildeKey"
+        app:layout_constraintLeft_toRightOf="@+id/ssangsiotKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Second Line -->
+
+    <TextView
+        android:id="@+id/caretKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_caret"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/tildeKey"
+        app:layout_constraintBottom_toTopOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/bieupKey" />
+
+    <TextView
+        android:id="@+id/bieupKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_bieup"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/caretKey"
+        app:layout_constraintRight_toLeftOf="@+id/jieutKey" />
+
+    <TextView
+        android:id="@+id/jieutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_jieut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/bieupKey"
+        app:layout_constraintRight_toLeftOf="@+id/digeutKey" />
+
+    <TextView
+        android:id="@+id/digeutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_digeut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/jieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/giyeokKey" />
+
+    <TextView
+        android:id="@+id/giyeokKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_giyeok"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/digeutKey"
+        app:layout_constraintRight_toLeftOf="@+id/siotKey" />
+
+    <TextView
+        android:id="@+id/siotKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_siot"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/giyeokKey"
+        app:layout_constraintRight_toLeftOf="@+id/questionKey" />
+
+    <TextView
+        android:id="@+id/questionKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_question"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintTop_toTopOf="@+id/caretKey"
+        app:layout_constraintBottom_toBottomOf="@+id/caretKey"
+        app:layout_constraintLeft_toRightOf="@+id/siotKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Third Line -->
+
+    <TextView
+        android:id="@+id/semicolonKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_semicolon"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/caretKey"
+        app:layout_constraintBottom_toTopOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/mieumKey" />
+
+    <TextView
+        android:id="@+id/mieumKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_mieum"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/semicolonKey"
+        app:layout_constraintRight_toLeftOf="@+id/nieunKey" />
+
+    <TextView
+        android:id="@+id/nieunKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_nieun"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/mieumKey"
+        app:layout_constraintRight_toLeftOf="@+id/ieungKey" />
+
+    <TextView
+        android:id="@+id/ieungKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_ieung"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/nieunKey"
+        app:layout_constraintRight_toLeftOf="@+id/rieulKey" />
+
+    <TextView
+        android:id="@+id/rieulKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_rieul"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/ieungKey"
+        app:layout_constraintRight_toLeftOf="@+id/hieutKey" />
+
+    <TextView
+        android:id="@+id/hieutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_hieut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/rieulKey"
+        app:layout_constraintRight_toLeftOf="@+id/dotKey" />
+
+    <TextView
+        android:id="@+id/dotKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_dot"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintTop_toTopOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintLeft_toRightOf="@+id/hieutKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Fourth Line -->
+
+    <TextView
+        android:id="@+id/asteriskKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_asterisk"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/semicolonKey"
+        app:layout_constraintBottom_toTopOf="@+id/emojiKey"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/kieukKey" />
+
+    <TextView
+        android:id="@+id/kieukKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_kieuk"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/asteriskKey"
+        app:layout_constraintRight_toLeftOf="@+id/tieutKey" />
+
+    <TextView
+        android:id="@+id/tieutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_tieut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/kieukKey"
+        app:layout_constraintRight_toLeftOf="@+id/chieutKey" />
+
+    <TextView
+        android:id="@+id/chieutKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_chieut"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/tieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/pieupKey" />
+
+    <TextView
+        android:id="@+id/pieupKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_pieup"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/chieutKey"
+        app:layout_constraintRight_toLeftOf="@+id/backspaceKey" />
+
+    <TextView
+        android:id="@+id/backspaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_backspace"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintTop_toTopOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintLeft_toRightOf="@+id/pieupKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <!-- Quick phrase badges for first line keys -->
+
+    <TextView
+        android:id="@+id/ssangbieupBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ssangbieupKey"
+        app:layout_constraintEnd_toEndOf="@id/ssangbieupKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/ssangjieutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ssangjieutKey"
+        app:layout_constraintEnd_toEndOf="@id/ssangjieutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/ssangdigeutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ssangdigeutKey"
+        app:layout_constraintEnd_toEndOf="@id/ssangdigeutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/ssanggiyeokBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ssanggiyeokKey"
+        app:layout_constraintEnd_toEndOf="@id/ssanggiyeokKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/ssangsiotBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ssangsiotKey"
+        app:layout_constraintEnd_toEndOf="@id/ssangsiotKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <!-- Quick phrase badges for fourth line keys -->
+
+    <TextView
+        android:id="@+id/kieukBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/kieukKey"
+        app:layout_constraintEnd_toEndOf="@id/kieukKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/tieutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/tieutKey"
+        app:layout_constraintEnd_toEndOf="@id/tieutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/chieutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/chieutKey"
+        app:layout_constraintEnd_toEndOf="@id/chieutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/pieupBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/pieupKey"
+        app:layout_constraintEnd_toEndOf="@id/pieupKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <!-- Number key badges for second and third line keys -->
+
+    <TextView
+        android:id="@+id/bieupBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/bieupKey"
+        app:layout_constraintEnd_toEndOf="@id/bieupKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/jieutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/jieutKey"
+        app:layout_constraintEnd_toEndOf="@id/jieutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/digeutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/digeutKey"
+        app:layout_constraintEnd_toEndOf="@id/digeutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/giyeokBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/giyeokKey"
+        app:layout_constraintEnd_toEndOf="@id/giyeokKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/siotBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/siotKey"
+        app:layout_constraintEnd_toEndOf="@id/siotKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/mieumBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/mieumKey"
+        app:layout_constraintEnd_toEndOf="@id/mieumKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/nieunBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/nieunKey"
+        app:layout_constraintEnd_toEndOf="@id/nieunKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/ieungBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/ieungKey"
+        app:layout_constraintEnd_toEndOf="@id/ieungKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/rieulBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/rieulKey"
+        app:layout_constraintEnd_toEndOf="@id/rieulKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <TextView
+        android:id="@+id/hieutBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="9sp"
+        android:textColor="@color/key_foreground"
+        android:alpha="0.6"
+        android:clickable="false"
+        android:focusable="false"
+        android:importantForAccessibility="no"
+        app:layout_constraintTop_toTopOf="@id/hieutKey"
+        app:layout_constraintEnd_toEndOf="@id/hieutKey"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="3dp" />
+
+    <!-- Fifth Line -->
+
+    <TextView
+        android:id="@+id/emojiKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_emoji"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="0.583"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/asteriskKey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/languageKey" />
+
+    <LinearLayout
+        android:id="@+id/languageKey"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/key_background"
+        android:clickable="true"
+        android:hapticFeedbackEnabled="true"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/emojiKey"
+        app:layout_constraintBottom_toBottomOf="@+id/emojiKey"
+        app:layout_constraintLeft_toRightOf="@+id/emojiKey"
+        app:layout_constraintRight_toLeftOf="@+id/hanjaNumberPunctuationKey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language_settings_hint"
+            android:textSize="9sp"
+            android:textColor="@color/key_foreground_muted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_language"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/key_foreground" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hanjaNumberPunctuationKey"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/key_background"
+        android:clickable="true"
+        android:hapticFeedbackEnabled="true"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/emojiKey"
+        app:layout_constraintBottom_toBottomOf="@+id/emojiKey"
+        app:layout_constraintLeft_toRightOf="@+id/languageKey"
+        app:layout_constraintRight_toLeftOf="@+id/spaceKey">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_hanja_hint"
+            android:textSize="9sp"
+            android:textColor="@color/key_foreground_muted" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/key_hanja_number_punctuation"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/key_foreground" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/spaceKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_space"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="2.417"
+        app:layout_constraintTop_toTopOf="@+id/emojiKey"
+        app:layout_constraintBottom_toBottomOf="@+id/emojiKey"
+        app:layout_constraintLeft_toRightOf="@+id/hanjaNumberPunctuationKey"
+        app:layout_constraintRight_toLeftOf="@+id/moeumKey" />
+
+    <TextView
+        android:id="@+id/moeumKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_moeum"
+        android:textSize="12sp"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/emojiKey"
+        app:layout_constraintBottom_toBottomOf="@+id/emojiKey"
+        app:layout_constraintLeft_toRightOf="@+id/spaceKey"
+        app:layout_constraintRight_toLeftOf="@+id/enterKey" />
+
+    <TextView
+        android:id="@+id/enterKey"
+        style="@style/KeyStyle"
+        android:text="@string/key_enter"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintTop_toTopOf="@+id/emojiKey"
+        app:layout_constraintBottom_toBottomOf="@+id/emojiKey"
+        app:layout_constraintLeft_toRightOf="@+id/moeumKey"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

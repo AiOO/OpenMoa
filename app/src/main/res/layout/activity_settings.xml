@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_title"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_hangul_section"
+            android:textSize="14sp"
+            android:textColor="@color/key_foreground_locked"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/keyboard_background"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/hangulInputModeItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_hangul_input_mode_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/hangulInputModeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_keyboard_section"
+            android:textSize="14sp"
+            android:textColor="@color/key_foreground_locked"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/keyboard_background"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/keyboardSkinItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_keyboard_skin_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/keyboardSkinValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keypadHeightItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_keypad_height_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/keypadHeightValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/oneHandModeItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_one_hand_mode_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/oneHandModeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/longPressTimeItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_long_press_time_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/longPressTimeValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/spaceLongPressActionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_space_long_press_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/spaceLongPressActionValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/enterLongPressActionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_enter_long_press_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/enterLongPressActionValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/keyPreviewItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/settings_key_preview_title"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/keyPreviewSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/autoSpacePeriodItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_auto_space_period_title"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_auto_space_period_description"
+                    android:textSize="12sp"
+                    android:textColor="@color/key_foreground_muted"
+                    android:paddingTop="2dp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/autoSpacePeriodSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/autoCapitalizeEnglishItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:gravity="center_vertical"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_auto_capitalize_english_title"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_auto_capitalize_english_description"
+                    android:textSize="12sp"
+                    android:textColor="@color/key_foreground_muted"
+                    android:paddingTop="2dp" />
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/autoCapitalizeEnglishSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_quick_phrase_section"
+            android:textSize="14sp"
+            android:textColor="@color/key_foreground_locked"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/keyboard_background"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/quickPhraseKieukItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_kieuk_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseKieukValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseTieutItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_tieut_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseTieutValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseChieutItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_chieut_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseChieutValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhrasePieupItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_pieup_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhrasePieupValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseSsangbieupItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_ssangbieup_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseSsangbieupValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseSsangjieutItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_ssangjieut_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseSsangjieutValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseSsangdigeutItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_ssangdigeut_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseSsangdigeutValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseSsanggiyeokItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_ssanggiyeok_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseSsanggiyeokValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/quickPhraseSsangsiotItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_quick_phrase_ssangsiot_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/quickPhraseSsangsiotValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_qwerty_long_key_section"
+            android:textSize="14sp"
+            android:textColor="@color/key_foreground_locked"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/keyboard_background"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyZItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_z_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyZValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyXItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_x_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyXValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyCItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_c_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyCValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyVItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_v_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyVValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyBItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_b_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyBValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyNItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_n_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyNValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/qwertyLongKeyMItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_qwerty_long_key_m_label"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/qwertyLongKeyMValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_data_section"
+            android:textSize="14sp"
+            android:textColor="@color/key_foreground_locked"
+            android:paddingTop="16dp"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/keyboard_background"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:id="@+id/settingsDataExportItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_export_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_export_description"
+                android:textSize="12sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settingsDataImportItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_import_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_import_description"
+                android:textSize="12sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/settingsDataResetItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_reset_title"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_data_reset_description"
+                android:textSize="12sp"
+                android:textColor="@color/key_foreground_muted"
+                android:paddingTop="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -12,6 +12,7 @@ import android.inputmethodservice.InputMethodService
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.inputmethod.InputMethodManager
 import android.text.InputType
 import android.util.Size
 import android.view.KeyEvent
@@ -34,11 +35,17 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pe.aioo.openmoa.config.Config
+import pe.aioo.openmoa.config.HangulInputMode
+import pe.aioo.openmoa.config.KeyboardSkin
+import pe.aioo.openmoa.config.OneHandMode
 import pe.aioo.openmoa.databinding.OpenMoaImeBinding
 import pe.aioo.openmoa.hangul.HangulAssembler
+import pe.aioo.openmoa.settings.SettingsActivity
+import pe.aioo.openmoa.settings.SettingsPreferences
 import pe.aioo.openmoa.view.keyboardview.*
 import pe.aioo.openmoa.view.keyboardview.qwerty.QuertyView
 import pe.aioo.openmoa.view.message.SpecialKey
+import pe.aioo.openmoa.view.skin.SkinApplier
 import java.io.Serializable
 import kotlin.math.roundToInt
 
@@ -46,12 +53,14 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
 
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
-    private lateinit var keyboardViews: Map<IMEMode, View>
+    private lateinit var keyboardViews: MutableMap<IMEMode, View>
     private val config: Config by inject()
     private val hangulAssembler = HangulAssembler()
     private var imeMode = IMEMode.IME_KO
     private var previousImeMode = IMEMode.IME_KO
     private var composingText = ""
+    private var lastSpaceTime = 0L
+    private var lastAppliedSkin: KeyboardSkin = KeyboardSkin.DEFAULT
 
     private fun finishComposing() {
         currentInputConnection?.finishComposingText()
@@ -310,6 +319,18 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
                                     setKeyboard(IMEMode.IME_EMOJI)
                                 }
                             }
+                            SpecialKey.OPEN_SETTINGS -> {
+                                startActivity(
+                                    Intent(this@OpenMoaIME, SettingsActivity::class.java).apply {
+                                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    }
+                                )
+                            }
+                            SpecialKey.SHOW_IME_PICKER -> {
+                                finishComposing()
+                                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                                imm?.showInputMethodPicker()
+                            }
                         }
                     }
                     is String -> {
@@ -332,7 +353,22 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
                         } else {
                             // Process for another key
                             finishComposing()
-                            currentInputConnection.commitText(key, 1)
+                            if (key == " ") {
+                                val autoEnabled = SettingsPreferences.getAutoSpacePeriod(this@OpenMoaIME)
+                                val now = SystemClock.elapsedRealtime()
+                                if (autoEnabled && now - lastSpaceTime < 1000L &&
+                                    currentInputConnection.getTextBeforeCursor(1, 0) == " ") {
+                                    currentInputConnection.deleteSurroundingText(1, 0)
+                                    currentInputConnection.commitText(". ", 1)
+                                    lastSpaceTime = 0L
+                                } else {
+                                    currentInputConnection.commitText(key, 1)
+                                    lastSpaceTime = if (autoEnabled) now else 0L
+                                }
+                            } else {
+                                currentInputConnection.commitText(key, 1)
+                                lastSpaceTime = 0L
+                            }
                         }
                     }
                 }
@@ -353,7 +389,10 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
             when (it) {
                 is PunctuationView -> it.setPageOrNextPage(0)
                 is PhoneView -> it.setPageOrNextPage(0)
-                is ArrowView -> it.setSelectingOrToggleSelecting(false)
+                is ArrowView -> {
+                    it.setSelectingOrToggleSelecting(false)
+                    it.refreshOneHandMode()
+                }
             }
             binding.keyboardFrameLayout.setKeyboardView(it)
         }
@@ -361,6 +400,7 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
     }
 
     private fun setShiftAutomatically() {
+        if (!config.autoCapitalizeEnglish) return
         keyboardViews[imeMode]?.let { view ->
             if (view is QuertyView) {
                 currentInputConnection?.let { inputConnection ->
@@ -391,30 +431,22 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
     @SuppressLint("InflateParams")
     override fun onCreateInputView(): View {
         super.onCreateInputView()
-        window.window?.apply {
-            navigationBarColor =
-                ContextCompat.getColor(this@OpenMoaIME, R.color.keyboard_background)
-            when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-                Configuration.UI_MODE_NIGHT_YES -> {
-                    insetsController?.apply {
-                        setSystemBarsAppearance(0, APPEARANCE_LIGHT_NAVIGATION_BARS)
-                    }
-                }
-                Configuration.UI_MODE_NIGHT_NO, Configuration.UI_MODE_NIGHT_UNDEFINED -> {
-                    insetsController?.apply {
-                        setSystemBarsAppearance(
-                            APPEARANCE_LIGHT_NAVIGATION_BARS, APPEARANCE_LIGHT_NAVIGATION_BARS
-                        )
-                    }
-                }
-            }
-        }
+        lastAppliedSkin = SettingsPreferences.getKeyboardSkin(this)
+        keyboardViews = buildKeyboardViews()
+        val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
+        binding = OpenMoaImeBinding.bind(view)
+        applyKeyboardLayout()
+        setKeyboard(imeMode)
+        return view
+    }
+
+    private fun buildKeyboardViews(): MutableMap<IMEMode, View> {
         val punctuationView = PunctuationView(this)
         val numberView = NumberView(this)
         val arrowView = ArrowView(this)
         val phoneView = PhoneView(this)
         val emojiView = EmojiView(this)
-        keyboardViews = mapOf(
+        return mutableMapOf(
             IMEMode.IME_KO to OpenMoaView(this),
             IMEMode.IME_EN to QuertyView(this),
             IMEMode.IME_KO_PUNCTUATION to punctuationView,
@@ -427,15 +459,31 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
             IMEMode.IME_EN_PHONE to phoneView,
             IMEMode.IME_EMOJI to emojiView,
         )
-        val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
-        binding = OpenMoaImeBinding.bind(view)
-        setKeyboard(imeMode)
-        return view
+    }
+
+    private fun refreshSkinIfNeeded() {
+        val currentSkin = SettingsPreferences.getKeyboardSkin(this)
+        if (currentSkin == lastAppliedSkin) return
+        lastAppliedSkin = currentSkin
+        keyboardViews = buildKeyboardViews()
+    }
+
+    private fun refreshOpenMoaViewIfNeeded() {
+        val savedIsMoakey = SettingsPreferences.getHangulInputMode(this) == HangulInputMode.MOAKEY
+        val currentView = keyboardViews[IMEMode.IME_KO] as? OpenMoaView ?: return
+        if (currentView.isMoakeyMode != savedIsMoakey) {
+            keyboardViews[IMEMode.IME_KO] = OpenMoaView(this)
+        }
     }
 
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         finishComposing()
+        refreshSkinIfNeeded()
+        refreshOpenMoaViewIfNeeded()
+        (keyboardViews[IMEMode.IME_KO] as? OpenMoaView)?.refreshQuickPhraseBadges()
+        (keyboardViews[IMEMode.IME_KO] as? OpenMoaView)?.refreshUserCharLabels()
+        applyKeyboardLayout()
         when ((info?.inputType ?: 0) and InputType.TYPE_MASK_CLASS) {
             InputType.TYPE_CLASS_NUMBER -> {
                 setKeyboard(
@@ -579,6 +627,40 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
         return InlineSuggestionsRequest.Builder(presentationSpecs)
             .setMaxSuggestionCount(config.maxSuggestionCount)
             .build()
+    }
+
+    private fun applyKeyboardLayout() {
+        val skin = SettingsPreferences.getKeyboardSkin(this)
+        val bgColor = SkinApplier.keyboardBgColor(this, skin)
+        binding.root.setBackgroundColor(bgColor)
+        binding.keyboardContainer.setBackgroundColor(bgColor)
+        window.window?.apply {
+            navigationBarColor = bgColor
+            val isLightBg = Color.luminance(bgColor) > 0.5f
+            insetsController?.setSystemBarsAppearance(
+                if (isLightBg) APPEARANCE_LIGHT_NAVIGATION_BARS else 0,
+                APPEARANCE_LIGHT_NAVIGATION_BARS,
+            )
+        }
+        val oneHandMode = SettingsPreferences.getOneHandMode(this)
+        val displayWidth = resources.displayMetrics.widthPixels
+        val keyboardWidth = if (oneHandMode.isReduced) {
+            (displayWidth * 0.80f).toInt()
+        } else {
+            android.view.ViewGroup.LayoutParams.MATCH_PARENT
+        }
+        val params = android.widget.FrameLayout.LayoutParams(keyboardWidth, calculateKeyboardHeight()).apply {
+            gravity = oneHandMode.gravity
+        }
+        binding.keyboardFrameLayout.layoutParams = params
+    }
+
+    private fun calculateKeyboardHeight(): Int {
+        val displayHeight = resources.displayMetrics.heightPixels
+        val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+        val baseScale = if (isLandscape) 0.50f else 0.35f
+        val heightScale = SettingsPreferences.getKeypadHeight(this).heightScale
+        return (displayHeight * baseScale * heightScale).toInt()
     }
 
     private fun getHeight(): Int {

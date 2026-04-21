@@ -4,15 +4,20 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import pe.aioo.openmoa.R
+import pe.aioo.openmoa.config.KeyboardSkin
 import pe.aioo.openmoa.databinding.ArrowViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.EnterKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
+import pe.aioo.openmoa.view.keytouchlistener.LanguageKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
+import pe.aioo.openmoa.settings.SettingsPreferences
+import pe.aioo.openmoa.view.keytouchlistener.SpaceKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKeyMessage
 import pe.aioo.openmoa.view.message.StringKeyMessage
+import pe.aioo.openmoa.view.skin.SkinApplier
 
 class ArrowView : ConstraintLayout {
 
@@ -32,26 +37,42 @@ class ArrowView : ConstraintLayout {
 
     private lateinit var binding: ArrowViewBinding
     private var isSelecting = false
+    private var currentSkin: KeyboardSkin = KeyboardSkin.DEFAULT
+    private var enterKeyListener: EnterKeyTouchListener? = null
+    private var languageKeyListener: LanguageKeyTouchListener? = null
 
     private fun init() {
         inflate(context, R.layout.arrow_view, this)
         binding = ArrowViewBinding.bind(this)
         setOnTouchListeners()
+        currentSkin = SettingsPreferences.getKeyboardSkin(context)
+        SkinApplier.apply(this, currentSkin)
+    }
+
+    fun refreshOneHandMode() {
+        val isReduced = SettingsPreferences.getOneHandMode(context).isReduced
+        binding.copyAllKey.setText(
+            if (isReduced) R.string.key_copy_all_two_line else R.string.key_copy_all
+        )
+        binding.selectAllKey.setText(
+            if (isReduced) R.string.key_select_all_two_line else R.string.key_select_all
+        )
+        binding.cutAllKey.setText(
+            if (isReduced) R.string.key_cut_all_two_line else R.string.key_cut_all
+        )
     }
 
     fun setSelectingOrToggleSelecting(selecting: Boolean? = null) {
         isSelecting = selecting ?: !isSelecting
+        val color = if (isSelecting) {
+            SkinApplier.fgAccentColor(context, currentSkin)
+        } else {
+            SkinApplier.fgColor(context, currentSkin)
+        }
         listOf(
             binding.areaSelectKey, binding.homeKey, binding.endKey,
             binding.upKey, binding.downKey, binding.leftKey, binding.rightKey,
-        ).map {
-            it.setTextColor(
-                ContextCompat.getColor(
-                    context,
-                    if (isSelecting) R.color.key_foreground_locked else R.color.key_foreground
-                )
-            )
-        }
+        ).forEach { it.setTextColor(color) }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -129,19 +150,25 @@ class ArrowView : ConstraintLayout {
             backspaceKey.setOnTouchListener(
                 RepeatKeyTouchListener(context, SpecialKeyMessage(SpecialKey.BACKSPACE))
             )
-            languageKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.LANGUAGE))
-            )
+            languageKeyListener?.cancel()
+            languageKeyListener = LanguageKeyTouchListener(context)
+            languageKey.setOnTouchListener(languageKeyListener)
             hanjaNumberPunctuationKey.setOnTouchListener(
                 SimpleKeyTouchListener(
                     context, SpecialKeyMessage(SpecialKey.HANJA_NUMBER_PUNCTUATION)
                 )
             )
-            spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(" ")))
-            enterKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
-            )
+            spaceKey.setOnTouchListener(SpaceKeyTouchListener(context))
+            enterKeyListener?.cancel()
+            enterKeyListener = EnterKeyTouchListener(context)
+            enterKey.setOnTouchListener(enterKeyListener)
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        enterKeyListener?.cancel()
+        languageKeyListener?.cancel()
     }
 
 }

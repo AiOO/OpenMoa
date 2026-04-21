@@ -38,7 +38,7 @@ class KeyboardFrameLayout : FrameLayout {
             }
         }
         binding.keyboardLayout.removeAllViews()
-        binding.keyboardLayout.addView(view)
+        binding.keyboardLayout.addView(view, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
 
 }

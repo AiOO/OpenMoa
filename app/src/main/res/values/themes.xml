@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.OpenMoa.Settings" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/key_foreground_locked</item>
+        <item name="colorPrimaryDark">@color/key_foreground_locked</item>
+        <item name="colorAccent">@color/key_foreground_locked</item>
+    </style>
+
+    <style name="Theme.OpenMoa.QuickPhraseEdit" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/key_foreground_locked</item>
+        <item name="colorAccent">@color/key_foreground_locked</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>

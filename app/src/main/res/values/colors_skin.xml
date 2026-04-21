@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 화이트 -->
+    <color name="skin_white_keyboard_bg">#DDDDDD</color>
+    <color name="skin_white_key_bg">#FFFFFF</color>
+    <color name="skin_white_key_bg_pressed">#EEEEEE</color>
+    <color name="skin_white_key_fg">#000000</color>
+    <color name="skin_white_key_fg_muted">#444444</color>
+    <color name="skin_white_key_fg_accent">#5E97EE</color>
+
+    <!-- 다크그레이 (기본) -->
+    <color name="skin_dark_gray_keyboard_bg">#1C1C1E</color>
+    <color name="skin_dark_gray_key_bg">#3A3A3C</color>
+    <color name="skin_dark_gray_key_bg_pressed">#48484A</color>
+    <color name="skin_dark_gray_key_fg">#FFFFFF</color>
+    <color name="skin_dark_gray_key_fg_muted">#AEAEB2</color>
+    <color name="skin_dark_gray_key_fg_accent">#64D2FF</color>
+
+    <!-- 블랙 -->
+    <color name="skin_black_keyboard_bg">#000000</color>
+    <color name="skin_black_key_bg">#1C1C1E</color>
+    <color name="skin_black_key_bg_pressed">#2C2C2E</color>
+    <color name="skin_black_key_fg">#FFFFFF</color>
+    <color name="skin_black_key_fg_muted">#8E8E93</color>
+    <color name="skin_black_key_fg_accent">#64D2FF</color>
+
+    <!-- 블루 -->
+    <color name="skin_blue_keyboard_bg">#1A237E</color>
+    <color name="skin_blue_key_bg">#283593</color>
+    <color name="skin_blue_key_bg_pressed">#3949AB</color>
+    <color name="skin_blue_key_fg">#FFFFFF</color>
+    <color name="skin_blue_key_fg_muted">#90CAF9</color>
+    <color name="skin_blue_key_fg_accent">#FFD740</color>
+
+    <!-- 그린 -->
+    <color name="skin_green_keyboard_bg">#1B5E20</color>
+    <color name="skin_green_key_bg">#2E7D32</color>
+    <color name="skin_green_key_bg_pressed">#388E3C</color>
+    <color name="skin_green_key_fg">#FFFFFF</color>
+    <color name="skin_green_key_fg_muted">#A5D6A7</color>
+    <color name="skin_green_key_fg_accent">#FFEB3B</color>
+
+</resources>

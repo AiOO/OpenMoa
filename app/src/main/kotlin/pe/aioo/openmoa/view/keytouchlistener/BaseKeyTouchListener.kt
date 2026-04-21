@@ -6,25 +6,26 @@ import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
-import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pe.aioo.openmoa.OpenMoaIME
-import pe.aioo.openmoa.R
 import pe.aioo.openmoa.config.Config
+import pe.aioo.openmoa.settings.SettingsPreferences
 import pe.aioo.openmoa.view.message.BaseKeyMessage
 import pe.aioo.openmoa.view.message.SpecialKeyMessage
 import pe.aioo.openmoa.view.message.StringKeyMessage
+import pe.aioo.openmoa.view.skin.SkinApplier
 
 open class BaseKeyTouchListener(context: Context) : OnTouchListener, KoinComponent {
 
     protected val config: Config by inject()
 
     private val broadcastManager = LocalBroadcastManager.getInstance(context)
+    private val skin = SettingsPreferences.getKeyboardSkin(context)
     private val backgrounds = listOf(
-        ContextCompat.getDrawable(context, R.drawable.key_background_pressed),
-        ContextCompat.getDrawable(context, R.drawable.key_background),
+        SkinApplier.buildKeyDrawable(context, skin, pressed = true),
+        SkinApplier.buildKeyDrawable(context, skin, pressed = false),
     )
 
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {

@@ -6,12 +6,16 @@ import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.PhoneViewBinding
+import pe.aioo.openmoa.view.keytouchlistener.EnterKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.view.keytouchlistener.RepeatKeyTouchListener
 import pe.aioo.openmoa.view.keytouchlistener.SimpleKeyTouchListener
+import pe.aioo.openmoa.settings.SettingsPreferences
+import pe.aioo.openmoa.view.keytouchlistener.SpaceKeyTouchListener
 import pe.aioo.openmoa.view.message.SpecialKeyMessage
 import pe.aioo.openmoa.view.message.StringKeyMessage
+import pe.aioo.openmoa.view.skin.SkinApplier
 
 class PhoneView : ConstraintLayout {
 
@@ -31,12 +35,14 @@ class PhoneView : ConstraintLayout {
 
     private lateinit var binding: PhoneViewBinding
     private var page = 0
+    private var enterKeyListener: EnterKeyTouchListener? = null
 
     private fun init() {
         inflate(context, R.layout.phone_view, this)
         binding = PhoneViewBinding.bind(this)
         setPageOrNextPage(0, true)
         setOnTouchListeners()
+        SkinApplier.apply(this, SettingsPreferences.getKeyboardSkin(context))
     }
 
     fun setPageOrNextPage(newPage: Int? = null, isInitialize: Boolean = false) {
@@ -80,11 +86,15 @@ class PhoneView : ConstraintLayout {
                     null
                 }
             )
-            spaceKey.setOnTouchListener(SimpleKeyTouchListener(context, StringKeyMessage(" ")))
-            enterKey.setOnTouchListener(
-                SimpleKeyTouchListener(context, SpecialKeyMessage(SpecialKey.ENTER))
-            )
+            spaceKey.setOnTouchListener(SpaceKeyTouchListener(context))
+            enterKeyListener = EnterKeyTouchListener(context)
+            enterKey.setOnTouchListener(enterKeyListener)
         }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        enterKeyListener?.cancel()
     }
 
     companion object {
