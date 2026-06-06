@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- API 31+ 공통 베이스 (라이트/다크 공유 속성) -->
+    <style name="Theme.OpenMoa.Base" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="keyBackgroundPressed">?attr/colorSurfaceContainer</item>
+        <item name="keyForeground">?attr/colorOnSurface</item>
+        <item name="keyForegroundMuted">?attr/colorOnSurfaceVariant</item>
+        <item name="keyForegroundLocked">@color/key_foreground_locked</item>
+        <item name="keyboardBackground">?attr/colorSurfaceContainer</item>
+    </style>
+
+    <!-- API 31+ 라이트 모드 -->
+    <style name="Theme.OpenMoa" parent="Theme.OpenMoa.Base">
+        <item name="keyBackground">?attr/colorSurface</item>
+    </style>
+
+</resources>

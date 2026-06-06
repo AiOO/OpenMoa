@@ -20,7 +20,7 @@
             android:id="@+id/suggestionStripStartChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:theme="@style/Theme.MaterialComponents" />
+            />
 
         <HorizontalScrollView
             android:id="@+id/suggestionStripScrollView"
@@ -33,7 +33,6 @@
                 android:id="@+id/suggestionStripScrollableChipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:theme="@style/Theme.MaterialComponents"
                 app:chipSpacingHorizontal="0dp" />
 
         </HorizontalScrollView>
@@ -42,7 +41,7 @@
             android:id="@+id/suggestionStripEndChipGroup"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:theme="@style/Theme.MaterialComponents" />
+            />
 
     </LinearLayout>
 

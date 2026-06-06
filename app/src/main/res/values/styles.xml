@@ -6,7 +6,7 @@
         <item name="android:layout_height">0dp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/key_foreground</item>
+        <item name="android:textColor">?attr/keyForeground</item>
         <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/key_background</item>
@@ -15,16 +15,16 @@
     </style>
 
     <style name="KeyboardStyle">
-        <item name="android:background">@color/keyboard_background</item>
+        <item name="android:background">?attr/keyboardBackground</item>
     </style>
 
-    <style name="EmojiPickerViewStyle" >
+    <style name="EmojiPickerViewStyle">
         <!-- Category tab icon text color -->
-        <item name="android:colorControlNormal">@color/key_foreground</item>
+        <item name="android:colorControlNormal">?attr/keyForeground</item>
         <!-- Category name text color -->
-        <item name="android:textColorPrimary">@color/key_foreground_muted</item>
+        <item name="android:textColorPrimary">?attr/keyForegroundMuted</item>
         <!-- Active color -->
-        <item name="android:colorAccent">@color/key_foreground_locked</item>
+        <item name="android:colorAccent">?attr/keyForegroundLocked</item>
     </style>
 
 </resources>

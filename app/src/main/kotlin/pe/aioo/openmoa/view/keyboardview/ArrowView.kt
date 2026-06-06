@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import com.google.android.material.color.MaterialColors
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.databinding.ArrowViewBinding
 import pe.aioo.openmoa.view.keytouchlistener.FunctionalKeyTouchListener
@@ -46,9 +46,10 @@ class ArrowView : ConstraintLayout {
             binding.upKey, binding.downKey, binding.leftKey, binding.rightKey,
         ).map {
             it.setTextColor(
-                ContextCompat.getColor(
+                MaterialColors.getColor(
                     context,
-                    if (isSelecting) R.color.key_foreground_locked else R.color.key_foreground
+                    if (isSelecting) R.attr.keyForegroundLocked else R.attr.keyForeground,
+                    0
                 )
             )
         }

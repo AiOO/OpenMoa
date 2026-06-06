@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="keyBackground" format="color|reference" />
+    <attr name="keyBackgroundPressed" format="color|reference" />
+    <attr name="keyForeground" format="color|reference" />
+    <attr name="keyForegroundMuted" format="color|reference" />
+    <attr name="keyForegroundLocked" format="color|reference" />
+    <attr name="keyboardBackground" format="color|reference" />
+
+</resources>

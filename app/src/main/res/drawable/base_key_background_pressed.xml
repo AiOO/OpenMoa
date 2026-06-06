@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/key_background_pressed" />
+    <solid android:color="?attr/keyBackgroundPressed" />
 
     <corners android:radius="4dp" />
 

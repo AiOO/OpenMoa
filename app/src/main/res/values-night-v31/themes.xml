@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- API 31+ 다크 모드 -->
+    <style name="Theme.OpenMoa" parent="Theme.OpenMoa.Base">
+        <item name="keyBackground">?attr/colorSurfaceVariant</item>
+    </style>
+
+</resources>

@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import com.google.android.material.color.MaterialColors
 import pe.aioo.openmoa.R
 import pe.aioo.openmoa.view.message.SpecialKey
 import pe.aioo.openmoa.databinding.QuertyViewBinding
@@ -58,13 +58,10 @@ class QuertyView : ConstraintLayout {
                 view.text = KEY_LIST[if (isShiftEnabled) 1 else 0][index]
             }
             binding.shiftKey.setTextColor(
-                ContextCompat.getColor(
+                MaterialColors.getColor(
                     context,
-                    if (isShiftEnabled) {
-                        R.color.key_foreground_locked
-                    } else {
-                        R.color.key_foreground
-                    },
+                    if (isShiftEnabled) R.attr.keyForegroundLocked else R.attr.keyForeground,
+                    0
                 )
             )
         }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- API 30 폴백: 기존 colors.xml의 색상을 커스텀 속성에 매핑 -->
+    <style name="Theme.OpenMoa" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="keyBackground">@color/key_background</item>
+        <item name="keyBackgroundPressed">@color/key_background_pressed</item>
+        <item name="keyForeground">@color/key_foreground</item>
+        <item name="keyForegroundMuted">@color/key_foreground_muted</item>
+        <item name="keyForegroundLocked">@color/key_foreground_locked</item>
+        <item name="keyboardBackground">@color/keyboard_background</item>
+    </style>
+
+</resources>

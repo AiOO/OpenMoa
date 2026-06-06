@@ -14,7 +14,9 @@ import android.os.Bundle
 import android.os.SystemClock
 import android.text.InputType
 import android.util.Size
+import android.view.ContextThemeWrapper
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_NAVIGATION_BARS
@@ -31,6 +33,8 @@ import androidx.autofill.inline.v1.InlineSuggestionUi
 import androidx.core.content.ContextCompat
 import androidx.core.view.isEmpty
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import pe.aioo.openmoa.config.Config
@@ -47,6 +51,7 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
     private lateinit var binding: OpenMoaImeBinding
     private lateinit var broadcastReceiver: BroadcastReceiver
     private lateinit var keyboardViews: Map<IMEMode, View>
+    private var themedContext: Context? = null
     private val config: Config by inject()
     private val hangulAssembler = HangulAssembler()
     private var imeMode = IMEMode.IME_KO
@@ -391,9 +396,13 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
     @SuppressLint("InflateParams")
     override fun onCreateInputView(): View {
         super.onCreateInputView()
+        val ctx = DynamicColors.wrapContextIfAvailable(
+            ContextThemeWrapper(this, R.style.Theme_OpenMoa)
+        ).also { themedContext = it }
         window.window?.apply {
-            navigationBarColor =
-                ContextCompat.getColor(this@OpenMoaIME, R.color.keyboard_background)
+            navigationBarColor = MaterialColors.getColor(
+                ctx, R.attr.keyboardBackground, ContextCompat.getColor(this@OpenMoaIME, R.color.keyboard_background)
+            )
             when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                 Configuration.UI_MODE_NIGHT_YES -> {
                     insetsController?.apply {
@@ -409,14 +418,14 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
                 }
             }
         }
-        val punctuationView = PunctuationView(this)
-        val numberView = NumberView(this)
-        val arrowView = ArrowView(this)
-        val phoneView = PhoneView(this)
-        val emojiView = EmojiView(this)
+        val punctuationView = PunctuationView(ctx)
+        val numberView = NumberView(ctx)
+        val arrowView = ArrowView(ctx)
+        val phoneView = PhoneView(ctx)
+        val emojiView = EmojiView(ctx)
         keyboardViews = mapOf(
-            IMEMode.IME_KO to OpenMoaView(this),
-            IMEMode.IME_EN to QuertyView(this),
+            IMEMode.IME_KO to OpenMoaView(ctx),
+            IMEMode.IME_EN to QuertyView(ctx),
             IMEMode.IME_KO_PUNCTUATION to punctuationView,
             IMEMode.IME_EN_PUNCTUATION to punctuationView,
             IMEMode.IME_KO_NUMBER to numberView,
@@ -427,7 +436,7 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
             IMEMode.IME_EN_PHONE to phoneView,
             IMEMode.IME_EMOJI to emojiView,
         )
-        val view = layoutInflater.inflate(R.layout.open_moa_ime, null)
+        val view = LayoutInflater.from(ctx).inflate(R.layout.open_moa_ime, null)
         binding = OpenMoaImeBinding.bind(view)
         setKeyboard(imeMode)
         return view
@@ -511,7 +520,10 @@ class OpenMoaIME : InputMethodService(), KoinComponent {
     @SuppressLint("RestrictedApi")
     override fun onCreateInlineSuggestionsRequest(uiExtras: Bundle): InlineSuggestionsRequest {
         val styleBuilder = UiVersions.newStylesBuilder()
-        val foregroundColor = ContextCompat.getColor(this@OpenMoaIME, R.color.key_foreground)
+        val foregroundColor = MaterialColors.getColor(
+            themedContext ?: this, R.attr.keyForeground,
+            ContextCompat.getColor(this, R.color.key_foreground)
+        )
         val style = InlineSuggestionUi.newStyleBuilder()
             .setSingleIconChipStyle(
                 ViewStyle.Builder()
