@@ -6,6 +6,7 @@ import com.github.kimkevin.hangulparser.HangulParserException
 class HangulAssembler {
 
     private val jamoList = arrayListOf<String>()
+    private val moeumHistory = ArrayDeque<String>()
 
     private fun assembleLastJongseongIfCan(jamo: String): Boolean {
         if (!jamo.matches(JAEUM_REGEX) || jamoList.size != 3) {
@@ -153,7 +154,9 @@ class HangulAssembler {
                 else -> lastJamo
             }
         )
-        return jamoList.last() != lastJamo
+        val changed = jamoList.last() != lastJamo
+        if (changed) moeumHistory.addLast(lastJamo)
+        return changed
     }
 
     private fun resolveJamoList(forceResolve: Boolean = false): String? {
@@ -163,10 +166,12 @@ class HangulAssembler {
                 repeat(HangulParser.disassemble(assembled.substring(0, 1)).size) {
                     jamoList.removeFirst()
                 }
+                moeumHistory.clear()
                 return assembled.substring(0, 1)
             }
             if (forceResolve) {
                 jamoList.clear()
+                moeumHistory.clear()
                 return assembled
             }
             return null
@@ -180,6 +185,7 @@ class HangulAssembler {
             repeat(prevJamoList.size) {
                 jamoList.removeFirst()
             }
+            moeumHistory.clear()
             return resolved
         }
     }
@@ -231,6 +237,8 @@ class HangulAssembler {
         }
         if (leading != null) {
             jamoList[jamoList.size - 1] = leading
+        } else if (lastJamo.matches(MOEUM_REGEX) && moeumHistory.isNotEmpty()) {
+            jamoList[jamoList.size - 1] = moeumHistory.removeLast()
         } else {
             jamoList.removeLastOrNull()
         }
@@ -238,6 +246,7 @@ class HangulAssembler {
 
     fun clear() {
         jamoList.clear()
+        moeumHistory.clear()
     }
 
     companion object {

@@ -121,4 +121,46 @@ class HangulAssemblerTest {
         Assert.assertEquals("달", assembler.getUnresolved())
     }
 
+    @Test
+    fun testRemoveLastJamoMoeumHistory() {
+        // ㅜ→ㆍ→ㅠ→ㅣ→ㅝ 조합 후 백스페이스로 단계별 복원
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㅂ")
+        assembler.appendJamo("ㅜ")
+        assembler.appendJamo("ㆍ") // ㅜ+ㆍ → ㅠ
+        assembler.appendJamo("ㅣ") // ㅠ+ㅣ → ㅝ
+        Assert.assertEquals("붜", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("뷰", assembler.getUnresolved()) // ㅝ → ㅠ
+        assembler.removeLastJamo()
+        Assert.assertEquals("부", assembler.getUnresolved()) // ㅠ → ㅜ
+        assembler.removeLastJamo()
+        Assert.assertEquals("ㅂ", assembler.getUnresolved()) // ㅜ 제거
+    }
+
+    @Test
+    fun testRemoveLastJamoDirectMoeum() {
+        // 직접 입력한 ㅝ는 한 번에 제거
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㅂ")
+        assembler.appendJamo("ㅝ")
+        Assert.assertEquals("붜", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("ㅂ", assembler.getUnresolved())
+    }
+
+    @Test
+    fun testMoeumHistoryClearsOnResolution() {
+        // 음절 확정 후 모음 이력이 초기화되어야 함
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㅂ")
+        assembler.appendJamo("ㅜ")
+        assembler.appendJamo("ㆍ") // ㅜ+ㆍ → ㅠ (history: ["ㅜ"])
+        assembler.appendJamo("ㄱ") // 종성 추가 → "뷰" 유지
+        assembler.appendJamo("ㅏ") // 새 모음 → "뷰ㄱ" 음절 확정, history 초기화
+        Assert.assertEquals("가", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("ㄱ", assembler.getUnresolved()) // history 비어있으므로 ㅏ 전체 제거
+    }
+
 }
