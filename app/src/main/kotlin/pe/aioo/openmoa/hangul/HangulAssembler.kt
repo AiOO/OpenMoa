@@ -250,7 +250,7 @@ class HangulAssembler {
     }
 
     companion object {
-        val JAMO_REGEX = Regex("^[ㄱ-ㅎㅏ-ㅣㆍ]$")
+        val JAMO_REGEX = Regex("^[ㄱ-ㅎㅏ-ㅣㆍᆢ]$")
         private val JAEUM_REGEX = Regex("^[ㄱ-ㅎ]$")
         private val MOEUM_REGEX = Regex("^[ㅏ-ㅣㆍᆢ]$")
         private val ARAEA_REGEX = Regex("^[ㆍᆢ]$")
