@@ -21,13 +21,13 @@ class JaumKeyTouchListener(
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         when (motionEvent.action) {
             MotionEvent.ACTION_DOWN -> {
-                startX = motionEvent.x
-                startY = motionEvent.y
+                startX = motionEvent.rawX
+                startY = motionEvent.rawY
                 moeumGestureProcessor.clear()
             }
             MotionEvent.ACTION_MOVE -> {
-                val currentX = motionEvent.x
-                val currentY = motionEvent.y
+                val currentX = motionEvent.rawX
+                val currentY = motionEvent.rawY
                 val distance = sqrt(
                     (currentX - startX).pow(2) + (currentY - startY).pow(2)
                 )
