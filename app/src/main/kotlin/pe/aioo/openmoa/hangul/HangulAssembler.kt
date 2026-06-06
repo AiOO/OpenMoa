@@ -160,7 +160,7 @@ class HangulAssembler {
         try {
             val assembled = HangulParser.assemble(jamoList)
             if (assembled.length > 1) {
-                for (i in 0 until HangulParser.disassemble(assembled.substring(0, 1)).size) {
+                repeat(HangulParser.disassemble(assembled.substring(0, 1)).size) {
                     jamoList.removeFirst()
                 }
                 return assembled.substring(0, 1)
@@ -177,7 +177,7 @@ class HangulAssembler {
             } catch (_: HangulParserException) {
                 prevJamoList.joinToString("")
             }
-            for (i in 0 until prevJamoList.size) {
+            repeat(prevJamoList.size) {
                 jamoList.removeFirst()
             }
             return resolved
@@ -221,7 +221,19 @@ class HangulAssembler {
     }
 
     fun removeLastJamo() {
-        jamoList.removeLastOrNull()
+        val lastJamo = jamoList.lastOrNull() ?: return
+        val leading = when (lastJamo) {
+            "ㄳ" -> "ㄱ"
+            "ㄵ", "ㄶ" -> "ㄴ"
+            "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ" -> "ㄹ"
+            "ㅄ" -> "ㅂ"
+            else -> null
+        }
+        if (leading != null) {
+            jamoList[jamoList.size - 1] = leading
+        } else {
+            jamoList.removeLastOrNull()
+        }
     }
 
     fun clear() {

@@ -85,4 +85,40 @@ class HangulAssemblerTest {
         Assert.assertEquals("ㄱㆍ", assembler.getUnresolved())
     }
 
+    @Test
+    fun testRemoveLastJamo() {
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㄴ")
+        assembler.appendJamo("ㅏ")
+        Assert.assertEquals("나", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("ㄴ", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertNull(assembler.getUnresolved())
+    }
+
+    @Test
+    fun testRemoveLastJamoWithJongseong() {
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㄴ")
+        assembler.appendJamo("ㅏ")
+        assembler.appendJamo("ㄴ")
+        Assert.assertEquals("난", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("나", assembler.getUnresolved())
+    }
+
+    @Test
+    fun testRemoveLastJamoWithCompoundJongseong() {
+        // "닭": ㄷ+ㅏ+ㄹ+ㄱ → ㄺ 합자 → 백스페이스 → "달" (ㄹ 유지, ㄱ만 제거)
+        val assembler = HangulAssembler()
+        assembler.appendJamo("ㄷ")
+        assembler.appendJamo("ㅏ")
+        assembler.appendJamo("ㄹ")
+        assembler.appendJamo("ㄱ")
+        Assert.assertEquals("닭", assembler.getUnresolved())
+        assembler.removeLastJamo()
+        Assert.assertEquals("달", assembler.getUnresolved())
+    }
+
 }

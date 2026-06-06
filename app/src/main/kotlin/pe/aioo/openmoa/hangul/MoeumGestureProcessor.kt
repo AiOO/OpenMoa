@@ -158,6 +158,7 @@ class MoeumGestureProcessor {
                 else -> moeum
             }
         }
+        moeumList.clear()
         return moeum?.substring(0, 1)
     }
 
