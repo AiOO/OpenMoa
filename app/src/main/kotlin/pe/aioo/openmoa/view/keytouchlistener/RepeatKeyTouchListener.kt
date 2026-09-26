@@ -9,26 +9,31 @@ import java.util.Timer
 
 class RepeatKeyTouchListener(
     context: Context,
-    private val key: BaseKeyMessage,
+    private val keyProvider: () -> BaseKeyMessage?,
 ) : BaseKeyTouchListener(context) {
 
+    constructor(context: Context, key: BaseKeyMessage) : this(context, { key })
+
+    @Volatile
     private var elapsed = 0L
-    private lateinit var timer: Timer
+    private var timer: Timer? = null
 
     private fun startTimer() {
+        endTimer()
         elapsed = 0L
-        sendKeyMessage(key)
+        keyProvider()?.let { sendKeyMessage(it) }
         timer = kotlin.concurrent.timer(period = config.longPressRepeatTime) {
             elapsed += config.longPressRepeatTime
             if (elapsed >= config.longPressThresholdTime) {
-                sendKeyMessage(key)
+                keyProvider()?.let { sendKeyMessage(it) }
             }
         }
     }
 
-    private fun endTimer() {
-        timer.cancel()
-        elapsed = 0
+    fun endTimer() {
+        timer?.cancel()
+        timer = null
+        elapsed = 0L
     }
 
     @SuppressLint("ClickableViewAccessibility")
